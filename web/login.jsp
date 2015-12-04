@@ -5,34 +5,150 @@
   Time: 17:50
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html;charset=gb2312"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8"%>
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <title>Login | Unify - Responsive Website Template</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Web Fonts -->
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="static/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="static/css/headers/header-default.css">
+    <link rel="stylesheet" href="static/css/footers/footer-v1.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="static/plugins/animate.css">
+    <link rel="stylesheet" href="static/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="static/plugins/font-awesome/css/font-awesome.min.css">
+
+    <!-- CSS Page Style -->
+    <link rel="stylesheet" href="static/css/pages/page_log_reg_v1.css">
+    <link rel="stylesheet" href="static/css/pages/page_misc_sticky_footer.css">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="static/css/custom.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+    <!--=== Header ===-->
+    <%@include file="header.html"%>
+    <!--=== End Header ===-->
+
+    <!--=== Content Part ===-->
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                <form class="reg-page">
+                    <div class="reg-header">
+                        <h2>ç™»å½•</h2>
+                    </div>
+
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" placeholder="é‚®ç®±" class="form-control">
+                    </div>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" placeholder="å¯†ç " class="form-control">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 checkbox">
+                            <label><input type="checkbox"> ä¿æŒç™»å½•çŠ¶æ€</label>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn-u pull-right" type="submit">ç™»å½•</button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h4>å¿˜è®°å¯†ç ?</h4>
+                    <p>ç‚¹å‡»<a class="color-green" href="#">è¿™é‡Œ</a>é‡ç½®å¯†ç </p>
+                </form>
+            </div>
+        </div><!--/row-->
+    </div><!--/container-->
+    <!--=== End Content Part ===-->
+
+    <!--=== Footer Version 1 ===-->
+    <%@include file="footer.html"%>
+    <!--=== End Footer Version 1 ===-->
+</div><!--/wrapper-->
+
+<!-- JS Global Compulsory -->
+<script type="text/javascript" src="static/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="static/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="static/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="static/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="static/plugins/smoothScroll.js"></script>
+<!-- JS Customization -->
+<script type="text/javascript" src="static/js/custom.js"></script>
+<!-- JS Page Level -->
+<script type="text/javascript" src="static/js/app.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+    });
+</script>
+<!--[if lt IE 9]>
+<script src="static/plugins/respond.js"></script>
+<script src="static/plugins/html5shiv.js"></script>
+<script src="static/plugins/placeholder-IE-fixes.js"></script>
+<![endif]-->
+
+</body>
+</html>
+
+<%--
 <html>
 <head>
-    <title>µÇÂ½</title>
+    <title>ç™»é™†</title>
 </head>
 <body>
 <form method="POST" name="frmLogin" action="LoginServlet">
-    <h1 align="center">ÓÃ»§µÇÂ¼</h1><br />
+    <h1 align="center">ç”¨æˆ·ç™»å½•</h1><br />
     <center>
         <table border=1>
             <tr>
-                <td>ÓÃ»§Ãû£º</td>
+                <td>ç”¨æˆ·åï¼š</td>
                 <td>
                     <input type="text" name="username" value="Your name" size="20" maxlength="20" onfocus="if (this.value=='Your name')  this.value='';" />
                 </td>
             </tr>
             <tr>
-                <td>ÃÜ&nbsp;&nbsp;Âë£º</td>
+                <td>å¯†&nbsp;&nbsp;ç ï¼š</td>
                 <td>
                     <input type="password" name="password" value="Your password" size="20" maxlength="20" onfocus="if (this.value=='Your password')  this.value='';" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="submit" name="Submit" value="Ìá½»" onClick="return validateLogin()" />
+                    <input type="submit" name="Submit" value="æäº¤" onClick="return validateLogin()" />
                 </td>
                 <td>
-                    <input type="reset" name="Reset" value="ÖØÖÃ" />
+                    <input type="reset" name="Reset" value="é‡ç½®" />
                 </td>
             </tr>
         </table>
@@ -43,15 +159,16 @@
         var sUserName = document.frmLogin.username.value ;
         var sPassword = document.frmLogin.password.value ;
         if ((sUserName =="") || (sUserName=="Your name")){
-            alert("ÇëÊäÈëÓÃ»§Ãû!");
+            alert("è¯·è¾“å…¥ç”¨æˆ·å!");
             return false ;
         }
 
         if ((sPassword =="") || (sPassword=="Your password")){
-            alert("ÇëÊäÈëÃÜÂë!");
+            alert("è¯·è¾“å…¥å¯†ç !");
             return false ;
         }
     }
 </script>
 </body>
 </html>
+--%>

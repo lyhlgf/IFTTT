@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="IFTTT:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/IFTTT_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="IFTTT" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="IFTTT/web/Web" />
+    </root>
+  </artifact>
+</component>
