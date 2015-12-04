@@ -13,6 +13,8 @@
             <el-ignored>true</el-ignored>
             <page-encoding>UTF-8</page-encoding>
             <scripting-invalid>false</scripting-invalid>
+            <include-prelude></include-prelude>
+            <include-coda></include-coda>
         </jsp-property-group>
     </jsp-config>
 
@@ -21,10 +23,30 @@
     </welcome-file-list>
 
     <servlet>
+        <servlet-name>InitServlet</servlet-name>
+        <servlet-class>controller.InitServlet</servlet-class>
+        <init-param>
+            <param-name>dbDriver</param-name>
+            <param-value>com.mysql.jdbc.Driver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbUrl</param-name>
+            <param-value>jdbc:mysql://localhost:3306/mysql</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbUserName</param-name>
+            <param-value>Cloud</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbPassword</param-name>
+            <param-value>2333</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>
-            controller.RegisterServlet
-        </servlet-class>
+        <servlet-class>controller.RegisterServlet</servlet-class>
 
     </servlet>
     <servlet-mapping>

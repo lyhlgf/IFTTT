@@ -11,7 +11,7 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-    <title>Registration | Unify - Responsive Website Template</title>
+    <title>Registration | IFTTT</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
