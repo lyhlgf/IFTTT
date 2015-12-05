@@ -1,90 +1,32 @@
 package controller;
 
-import java.sql.* ;
+import model.User;
+
 import java.io.* ;
 import javax.servlet.http.* ;
 import javax.servlet.* ;
 public class LoginServlet extends HttpServlet implements Servlet {
-    public LoginServlet() {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/login.jsp");
+        dispatcher.forward(req, resp);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-        dispatcher.forward(request, response);
-    }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8") ;
+        req.setCharacterEncoding("UTF-8") ;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        response.setContentType("text/html;charset=gb2312") ;
-        request.setCharacterEncoding("gb2312") ;
-        String result = "" ;
-        //获取用户名
-        String username = request.getParameter("username") ;
-        String psw = request.getParameter("password") ;
-        if ((username == "") || (username==null) || (username.length() > 20 )){
-            try{
-                result = "请输入用户名(不能超过20个字符)!" ;
-                request.setAttribute("message" ,result) ;
-                response.sendRedirect("login.jsp") ;
-            }catch(Exception e){
-                e.printStackTrace() ;
-            }
-        }
-        if ((psw == "") || (psw==null) || (psw.length() > 20 )){
-            try{
-                result = "请输入密码(不能超过20个字符)!" ;
-                request.setAttribute("message" ,result) ;
-                response.sendRedirect("login.jsp") ;
-            }catch(Exception e){
-                e.printStackTrace() ;
-            }
-        }
-
-        //登记JDBC驱动程序
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("加载驱动成功 . ") ;
-        }catch(ClassNotFoundException e){
-            e.printStackTrace() ;
-            System.out.println("加载驱动失败. ") ;
-        }
-
-        //连接URL
-        String url ="jdbc:mysql://localhost:3306/mysql" ;
-        Connection conn = null ;
-        Statement stmt = null ;
-        ResultSet rs = null ;
-
-        try{
-            conn = DriverManager.getConnection(url, "Cloud", "2333") ;
-            stmt = conn.createStatement() ;
-            System.out.print("成功连接到数据库！");
-            //SQL语句
-            String sql ="select * from userInfo where username='"+username+"' and userpsw= '"+psw+"'" ;
-            rs = stmt.executeQuery(sql) ;//返回查询结果
-        }catch(SQLException e){
-
-            e.printStackTrace() ;
-        }
-        HttpSession session =  request.getSession() ;
-        session.setAttribute("username", username) ;
-        //System.out.println("+++++++++++++++++++++++"+ username) ;
-        try{
-            if (rs.next()){
-                System.out.println("Succeed!");
-
-                session.setAttribute("age",rs.getString("age")) ;
-                session.setAttribute("sex",rs.getString("sex")) ;
-                session.setAttribute("weight",rs.getString("weight")) ;
-                response.sendRedirect("success.jsp") ;
-            }else{
-                System.out.println("failed!");
-                session.setAttribute("message", "用户名或密码不匹配。");
-                response.sendRedirect("fail.jsp") ;
-            }
-        }catch(SQLException e){
-            e.printStackTrace() ;
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        HttpSession session =  req.getSession() ;
+        session.setAttribute("email", email) ;
+        User user = new User(email, password);
+        if (user.getUser()) {
+            resp.sendRedirect("success.jsp") ;
+        } else {
+            session.setAttribute("message", "用户名或密码不匹配。");
+            resp.sendRedirect("fail.jsp") ;
         }
     }
-
-    private static final long serialVersionUID = 1L;
 }

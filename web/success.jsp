@@ -5,47 +5,26 @@
   Time: 18:21
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding ="gb2312"%>
+<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding ="UTF-8"%>
 <html>
 <head>
-    <title>»¶Ó­</title>
+    <title>æ¬¢è¿</title>
 </head>
 <body>
 <%
-    String userName = (String)session.getAttribute("username") ;
-    String age = (String)session.getAttribute("age") ;
-    String weight = (String)session.getAttribute("weight") ;
-    String sex = (String)session.getAttribute("sex") ;
-    System.out.println("ĞÔ±ğ£ºA" + sex +"A")  ;
-    if (sex.trim().equals("M")) {
-        sex ="ÄĞ" ;
-    }else{
-        sex = "Å®" ;
-    }
+    String email = (String)session.getAttribute("email") ;
 %>
 <div align="center">
-    <%=userName %>
-    »¶Ó­Äú£¬µÇÂ½³É¹¦£¡<br />
-    <font color="blue">µÇÂ½ÓÃ»§ĞÅÏ¢£º</font>
+    <%=email %>
+    æ¬¢è¿æ‚¨ï¼Œç™»é™†æˆåŠŸï¼<br />
+    <font color="blue">ç™»é™†ç”¨æˆ·ä¿¡æ¯ï¼š</font>
     <table border =1 >
         <tr>
-            <td>&nbsp;ĞÕÃû£º&nbsp;</td>
-            <td>&nbsp;&nbsp;<%=userName %>&nbsp;&nbsp;</td>
-        </tr>
-        <tr>
-            <td>&nbsp;ÄêÁä£º&nbsp;</td>
-            <td>&nbsp;&nbsp;<%=age %>&nbsp;&nbsp;</td>
-        </tr>
-        <tr>
-            <td>&nbsp;ÌåÖØ£º&nbsp;</td>
-            <td>&nbsp;&nbsp;<%=weight %>&nbsp;kg&nbsp;</>
-        </tr>
-        <tr>
-            <td>&nbsp;ĞÔ±ğ£º&nbsp;</td>
-            <td>&nbsp;&nbsp;<%=sex %>&nbsp;&nbsp;</>
+            <td>&nbsp;é‚®ç®±ï¼š&nbsp;</td>
+            <td>&nbsp;&nbsp;<%=email %>&nbsp;&nbsp;</td>
         </tr>
     </table>
-    <a href="login.jsp">·µ»Ø</a>
+    <a href="/login">è¿”å›</a>
 </div>
 </body>
 </html>

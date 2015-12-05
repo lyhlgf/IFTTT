@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.Exception;
 import java.sql.*;
 
 public class Database {
@@ -35,5 +36,38 @@ public class Database {
 
     public Statement getStatement() {
         return statement;
+    }
+
+    public boolean executeSQL(String sql) {
+        boolean success = false;
+        try {
+            success = statement.execute(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return success;
+    }
+
+    public ResultSet query(String sql) {
+        ResultSet resultSet = null;
+        try {
+            resultSet = statement.executeQuery(sql);
+            if (!resultSet.next()) {
+                resultSet = null;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        /* TODO: Throw Exception not null */
+
+        return resultSet;
+    }
+
+    public void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

@@ -57,10 +57,10 @@
     <div class="container content">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                <form class="reg-page" action="/register" method="post">
+                <form class="reg-page" action="register" method="post">
                     <div class="reg-header">
                         <h2>注册新用户</h2>
-                        <p>已经拥有账号？<a href="/login" class="color-green">直接登录</a></p>
+                        <p>已经拥有账号？<a href="login" class="color-green">直接登录</a></p>
                     </div>
 
                     <label>邮箱 <span class="color-red">*</span></label>
