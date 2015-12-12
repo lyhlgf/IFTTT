@@ -3,8 +3,10 @@ package controller;
 import model.User;
 
 import java.io.* ;
+import java.sql.SQLException;
 import javax.servlet.http.* ;
 import javax.servlet.* ;
+
 public class LoginServlet extends HttpServlet implements Servlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -22,11 +24,19 @@ public class LoginServlet extends HttpServlet implements Servlet {
         HttpSession session =  req.getSession() ;
         session.setAttribute("email", email) ;
         User user = new User(email, password);
-        if (user.getUser()) {
-            resp.sendRedirect("success.jsp") ;
-        } else {
-            session.setAttribute("message", "用户名或密码不匹配。");
-            resp.sendRedirect("fail.jsp") ;
+
+        try {
+            if (user.getUser()) {
+                session.setAttribute("rank",String.valueOf(user.getRank()));
+                session.setAttribute("balance",String.valueOf(user.getBalance()));
+                session.setAttribute("consumption",String.valueOf(user.getConsumption()));
+                resp.sendRedirect("success.jsp") ;
+            } else {
+                session.setAttribute("message", "用户名和密码不匹配。");
+                resp.sendRedirect("fail.jsp") ;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

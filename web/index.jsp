@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>高端</title>
+    <title></title>
   </head>
   <body>
-    <h1>高</h1>
+    <h1></h1>
   </body>
 </html>

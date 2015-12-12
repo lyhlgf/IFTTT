@@ -2,8 +2,7 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="MySQL - IFTTT@localhost" uuid="8f9625fa-1073-401c-af4e-999fbdabd011">
-      <secret-storage>master_key</secret-storage>
-      <user-name>Cloud</user-name>
+      <secret-storage>memory</secret-storage>
     </data-source>
   </component>
 </project>
