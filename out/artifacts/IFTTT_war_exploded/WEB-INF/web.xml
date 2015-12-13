@@ -35,11 +35,11 @@
         </init-param>
         <init-param>
             <param-name>dbUserName</param-name>
-            <param-value>root</param-value>
+            <param-value>Cloud</param-value>
         </init-param>
         <init-param>
             <param-name>dbPassword</param-name>
-            <param-value>root</param-value>
+            <param-value>2333</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -47,7 +47,6 @@
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>controller.RegisterServlet</servlet-class>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -57,17 +56,33 @@
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>controller.LoginServlet</servlet-class>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserIndexServlet</servlet-name>
+        <servlet-class>controller.user.UserIndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserIndexServlet</servlet-name>
+        <url-pattern>/user/index</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <servlet-class>controller.user.UserLogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <url-pattern>/user/logout</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>UserInformationServlet</servlet-name>
-        <servlet-class>controller.UserInformationServlet</servlet-class>
+        <servlet-class>controller.user.UserInformationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserInformationServlet</servlet-name>

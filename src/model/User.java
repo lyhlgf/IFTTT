@@ -63,10 +63,11 @@ public class User {
         ResultSet resultSet = db.query(sql);
         if (resultSet == null) {
             success = false;
+        } else {
+            rank = resultSet.getInt("Rank");
+            balance = resultSet.getInt("Balance");
+            consumption = resultSet.getInt("Consumption");
         }
-        rank=resultSet.getInt("Rank");
-        balance= resultSet.getInt("Balance");
-        consumption=resultSet.getInt("Consumption");
         db.closeConnection();
         return success;
     }

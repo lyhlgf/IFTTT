@@ -1,13 +1,12 @@
 package controller;
 
 import model.User;
-
 import java.io.* ;
 import java.sql.SQLException;
 import javax.servlet.http.* ;
 import javax.servlet.* ;
 
-public class LoginServlet extends HttpServlet implements Servlet {
+public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         RequestDispatcher dispatcher = req.getRequestDispatcher("/login.jsp");
@@ -30,7 +29,7 @@ public class LoginServlet extends HttpServlet implements Servlet {
                 session.setAttribute("rank",String.valueOf(user.getRank()));
                 session.setAttribute("balance",String.valueOf(user.getBalance()));
                 session.setAttribute("consumption",String.valueOf(user.getConsumption()));
-                resp.sendRedirect("success.jsp") ;
+                resp.sendRedirect("/user/index") ;
             } else {
                 session.setAttribute("message", "用户名和密码不匹配。");
                 resp.sendRedirect("fail.jsp") ;

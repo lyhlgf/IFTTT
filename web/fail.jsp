@@ -28,24 +28,24 @@
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
     <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="static/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/Unify/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/Unify/css/style.css">
 
     <!-- CSS Header and Footer -->
-    <link rel="stylesheet" href="static/css/headers/header-default.css">
-    <link rel="stylesheet" href="static/css/footers/footer-v1.css">
+    <link rel="stylesheet" href="static/Unify/css/headers/header-default.css">
+    <link rel="stylesheet" href="static/Unify/css/footers/footer-v1.css">
 
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="static/plugins/animate.css">
-    <link rel="stylesheet" href="static/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="static/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/Unify/plugins/animate.css">
+    <link rel="stylesheet" href="static/Unify/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="static/Unify/plugins/font-awesome/css/font-awesome.min.css">
 
     <!-- CSS Page Style -->
-    <link rel="stylesheet" href="static/css/pages/page_log_reg_v1.css">
-    <link rel="stylesheet" href="static/css/pages/page_misc_sticky_footer.css">
+    <link rel="stylesheet" href="static/Unify/css/pages/page_log_reg_v1.css">
+    <link rel="stylesheet" href="static/Unify/css/pages/page_misc_sticky_footer.css">
 
     <!-- CSS Customization -->
-    <link rel="stylesheet" href="static/css/custom.css">
+    <link rel="stylesheet" href="static/Unify/css/custom.css">
 </head>
 <%
     String email = (String)session.getAttribute("email") ;
@@ -83,16 +83,16 @@
 </div><!--/wrapper-->
 
 <!-- JS Global Compulsory -->
-<script type="text/javascript" src="static/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="static/plugins/jquery/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="static/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/Unify/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="static/Unify/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="static/Unify/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- JS Implementing Plugins -->
-<script type="text/javascript" src="static/plugins/back-to-top.js"></script>
-<script type="text/javascript" src="static/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="static/Unify/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="static/Unify/plugins/smoothScroll.js"></script>
 <!-- JS Customization -->
-<script type="text/javascript" src="static/js/custom.js"></script>
+<script type="text/javascript" src="static/Unify/js/custom.js"></script>
 <!-- JS Page Level -->
-<script type="text/javascript" src="static/js/app.js"></script>
+<script type="text/javascript" src="static/Unify/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
@@ -106,16 +106,16 @@
             setTimeout("autoJump("+secs+")",1000);
         }
         else {
-            location.href = "/login.jsp"
+            location.href = "/login"
         }
     }
 </script>
 <script type="text/javascript">autoJump(5)</script>
 
 <!--[if lt IE 9]>
-<script src="static/plugins/respond.js"></script>
-<script src="static/plugins/html5shiv.js"></script>
-<script src="static/plugins/placeholder-IE-fixes.js"></script>
+<script src="static/Unify/plugins/respond.js"></script>
+<script src="static/Unify/plugins/html5shiv.js"></script>
+<script src="static/Unify/plugins/placeholder-IE-fixes.js"></script>
 <![endif]-->
 
 </body>

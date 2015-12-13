@@ -22,6 +22,6 @@ public class RegisterServlet extends HttpServlet {
         String password = req.getParameter("password");
         User user = new User(email, password);
         user.insert();
-        resp.sendRedirect("login.jsp") ;
+        resp.sendRedirect("/login") ;
     }
 }
