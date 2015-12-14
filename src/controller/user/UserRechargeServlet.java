@@ -17,6 +17,7 @@ import java.sql.SQLException;
 public class UserRechargeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().setAttribute("navbarActive", "accountRecharge");
         RequestDispatcher dispatcher = req.getRequestDispatcher("/user/accountRecharge.jsp");
         dispatcher.forward(req, resp);
     }
