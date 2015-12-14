@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
 
         try {
             if (user.getUser()) {
+                session.setAttribute("login", true);
                 session.setAttribute("rank",String.valueOf(user.getRank()));
                 session.setAttribute("balance",String.valueOf(user.getBalance()));
                 session.setAttribute("consumption",String.valueOf(user.getConsumption()));
