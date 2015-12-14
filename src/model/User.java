@@ -38,13 +38,25 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+        Database db = new Database();
+        String sql = "update IFTTT.User set password = '" + password + "' " +
+               "where email = '"+email+"'";
+        boolean success = db.executeSQL(sql);
+        db.closeConnection();
     }
 
     public  void setRank(int rank) { this.rank=rank; }
 
     public void setConsumption(int consumption) { this.consumption=consumption;}
 
-    public void setBalance(int balance) {this.balance=balance;}
+    public void setBalance(int balance) {
+        this.balance=balance;
+        Database db = new Database();
+        String sql = "update IFTTT.User set Balance = '" + balance + "' " +
+                "where email = '"+email+"'";
+        boolean success = db.executeSQL(sql);
+        db.closeConnection();
+    }
 
 
     public boolean insert() {
