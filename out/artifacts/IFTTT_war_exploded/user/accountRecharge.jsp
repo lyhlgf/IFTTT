@@ -31,7 +31,10 @@
 
 <body>
 <div id="wrapper">
-
+    <%
+        String email = (String)session.getAttribute("email") ;
+        Boolean isFail = (Boolean)session.getAttribute("isFail");
+    %>
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
@@ -83,6 +86,7 @@
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <%@include file="header.html"%>
+        <span id="alert"></span>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <h2>账户充值</h2>
@@ -141,6 +145,16 @@
     $(document).ready(function() {
 
     });
+</script>
+<script type="text/javascript">
+    function failMessage(n) {
+        if(n) {
+            document.getElementById("alert").innerHTML+="<div id=\"myAlert\" class=\"alert alert-warning\">\
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a> \
+            <strong>密码错误！</strong> </div>";
+        }
+    }
+    failMessage(<%=isFail%>)
 </script>
 </body>
 </html>

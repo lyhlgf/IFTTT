@@ -36,7 +36,13 @@ public class UserRechargeServlet extends HttpServlet {
                 int newBalance=user.getBalance()+money;
                 user.setBalance(newBalance);
                 session.setAttribute("balance",newBalance);             // update session value
+                session.setAttribute("isFail",false);
                 resp.sendRedirect("/user/index") ;
+            }
+            else {
+                session.setAttribute("isFail",true);
+                resp.sendRedirect("/user/accountRecharge") ;
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
