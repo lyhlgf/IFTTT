@@ -35,11 +35,11 @@
         </init-param>
         <init-param>
             <param-name>dbUserName</param-name>
-            <param-value>Cloud</param-value>
+            <param-value>root</param-value>
         </init-param>
         <init-param>
             <param-name>dbPassword</param-name>
-            <param-value>2333</param-value>
+            <param-value>root</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -80,12 +80,24 @@
         <url-pattern>/user/logout</url-pattern>
     </servlet-mapping>
 
+
     <servlet>
-        <servlet-name>UserInformationServlet</servlet-name>
-        <servlet-class>controller.user.UserInformationServlet</servlet-class>
+        <servlet-name>UserRechargeServlet</servlet-name>
+        <servlet-class>controller.user.UserRechargeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserInformationServlet</servlet-name>
-        <url-pattern>/user_information</url-pattern>
+        <servlet-name>UserRechargeServlet</servlet-name>
+        <url-pattern>/user/accountRecharge</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserModifyPasswordServlet</servlet-name>
+        <servlet-class>controller.user.UserModifyPasswordServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserModifyPasswordServlet</servlet-name>
+        <url-pattern>/user/modifyPassword</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
