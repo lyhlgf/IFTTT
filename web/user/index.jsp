@@ -32,7 +32,7 @@
 
 <body>
 <div id="wrapper">
-    <%@include file="Navbar.html"%>
+    <%@include file="navbar.html"%>
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <%@include file="header.html"%>
