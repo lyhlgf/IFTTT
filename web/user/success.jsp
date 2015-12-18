@@ -55,7 +55,7 @@
 <body>
 <div class="wrapper">
     <!--=== Header ===-->
-    <%@include file="../header.html"%>
+    <%@include file="../header.jsp"%>
     <div id="myAlert" class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>登陆成功！</strong>
@@ -82,7 +82,7 @@
     <!--=== End Content Part ===-->
 
     <!--=== Footer Version 1 ===-->
-    <%@include file="../footer.html"%>
+    <%@include file="../footer.jsp"%>
     <!--=== End Footer Version 1 ===-->
 </div><!--/wrapper-->
 

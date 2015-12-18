@@ -32,15 +32,15 @@
 
 <body>
 <div id="wrapper">
-    <%@include file="navbar.html"%>
+    <%@include file="navbar.jsp"%>
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
-        <%@include file="header.html"%>
+        <%@include file="header.jsp"%>
 
         <div class="row">
         </div>
 
-        <%@include file="footer.html"%>
+        <%@include file="footer.jsp"%>
 
     </div>
 </div>

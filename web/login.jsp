@@ -51,7 +51,7 @@
 
 <div class="wrapper">
     <!--=== Header ===-->
-    <%@include file="header.html"%>
+    <%@include file="header.jsp"%>
     <!--=== End Header ===-->
 
     <!--=== Content Part ===-->
@@ -92,7 +92,7 @@
     <!--=== End Content Part ===-->
 
     <!--=== Footer Version 1 ===-->
-    <%@include file="footer.html"%>
+    <%@include file="footer.jsp"%>
     <!--=== End Footer Version 1 ===-->
 </div><!--/wrapper-->
 

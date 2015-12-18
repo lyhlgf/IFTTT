@@ -32,60 +32,12 @@
 <body>
 <div id="wrapper">
     <%
-        String email = (String)session.getAttribute("email") ;
         Boolean isFail = (Boolean)session.getAttribute("isFail");
     %>
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../static/INSPINIA/img/profile_small.jpg" />
-                             </span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><%=email %></strong>
-                             </span> <span class="text-muted text-xs block">User Information</span> </span> </a>
-                    </div>
-                    <div class="logo-element">
-                        IN+
-                    </div>
-                </li>
-                <li>
-                    <a href="/user/index"><i class="fa fa-th-large"></i> <span class="nav-label">主页</span></a>
-                </li>
-                <li>
-                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">产品</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">任务管理</span></a>
-                </li>
-                <li class="active">
-                    <a href="userInformation.jsp"><i class="fa fa-flask"></i> <span class="nav-label">账户管理</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="userInformation.jsp">账户信息</a></li>
-                        <li><a href="consumeRecord.jsp">消费记录</a></li>
-                        <li class="active"><a href="accountRecharge.jsp">账户充值</a></li>
-                        <li><a href="modifyPassword.jsp">修改密码</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="widgets.html"><i class="fa fa-envelope"></i> <span class="nav-label">站内信</span> </a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">支持(非必须)</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="form_basic.html">联系客服</a></li>
-                        <li><a href="form_advanced.html">意见反馈</a></li>
-                        <li><a href="form_wizard.html">帮助</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+    <%@include file="navbar.jsp"%>
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
-        <%@include file="header.html"%>
+        <%@include file="header.jsp"%>
         <span id="alert"></span>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -126,7 +78,7 @@
         </div>
     </div>
     </div>
-        <%@include file="footer.html"%>
+        <%@include file="footer.jsp"%>
 
     </div>
 </div>

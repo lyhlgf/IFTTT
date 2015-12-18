@@ -17,6 +17,7 @@ import java.sql.SQLException;
 public class UserModifyPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().setAttribute("navbarActive", "modifyPassword");
         RequestDispatcher dispatcher = req.getRequestDispatcher("/user/modifyPassword.jsp");
         dispatcher.forward(req, resp);
     }
