@@ -6,7 +6,6 @@
             <img src="static/Unify/img/logo.svg" alt="Logo">
         </a>
         <!-- End Logo -->
-
         <!-- Topbar -->
         <div class="topbar">
             <ul class="loginbar pull-right">

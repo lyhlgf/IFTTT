@@ -140,14 +140,12 @@
     function myclick_send_mail() {
         send_mail_clicked=true;
         send_weibo_clicked=false;
-        document.getElementById("region2").innerHTML=" <h3 class=\"m-t-none m-b\">发送邮箱</h3> \
-                <div class=\"form-group\" id=\"data_1\"><label>Account</label> <input type=\"text\" placeholder=\"Mail Address\" class=\"form-control\" \
+        document.getElementById("region2").innerHTML=" <h3 class=\"m-t-none m-b\">发送邮件</h3> \
+                <div class=\"form-group\" id=\"data_1\"><label>From Account</label> <input type=\"text\" placeholder=\"From Mail Address\" class=\"form-control\" \
                 name=\"send_email\"></div>\
                 <div class=\"form-group\"><label>Password</label><input type=\"password\" placeholder=\"Password\" class =\"form-control\" name=\"send_mail_password\"></div>\
-                <div>\
-                </div>\
-                \<div class=\"note-editable\" contenteditable=\"true\"> \
-                </div>\
+                <div class=\"form-group\"><label>To Mail</label><input type=\"text\" placeholder=\"To Mail Address\" class =\"form-control\" name=\"send_to_mail\"></div>\
+                <div class=\"form-group\"><label>Message</label> <textarea class=\"form-control\" placeholder=\"Message\" name=\"message\"></textarea> </div>\
               ";
     }
     function myclick_send_weibo() {
@@ -157,10 +155,7 @@
                 <div class=\"form-group\" id=\"data_1\"><label>Account</label> <input type=\"text\" placeholder=\"Weibo Account\" class=\"form-control\" \
                 name=\"weibo_acount\"></div>\
                 <div class=\"form-group\"><label>Password</label><input type=\"password\" placeholder=\"Password\" class =\"form-control\" name=\"weibo_password\"></div>\
-                <div>\
-                </div>\
-              \<div class=\"note-editable\" contenteditable=\"true\"> \
-                </div>\
+              <div class=\"form-group\"><label>Message</label> <textarea class=\"form-control\" placeholder=\"Message\" name=\"message\"></textarea> </div>\
               ";
     }
     function mysubmit(fm) {

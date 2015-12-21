@@ -121,6 +121,9 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>TaskManageServlet</servlet-name>
-        <url-pattern>/task/taskManage</url-pattern>
+        <url-pattern>/user/taskManage</url-pattern>
     </servlet-mapping>
+
+
+
 </web-app>

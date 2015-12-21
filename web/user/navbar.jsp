@@ -46,7 +46,7 @@
                 <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">产品</span></a>
             </li>
             <li class=<%=taskManager%>>
-                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">任务管理</span></a>
+                <a href="/user/taskManage.jsp"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">任务管理</span></a>
             </li>
             <li class=<%=accountManager%>>
                 <a href="userInformation.jsp"><i class="fa fa-flask"></i> <span class="nav-label">账户管理</span><span class="fa arrow"></span></a>
