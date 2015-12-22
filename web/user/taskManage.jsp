@@ -52,6 +52,7 @@
             <div class="col-lg-2">
             </div>
         </div>
+
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox-content">
                 <form class="reg-page" action="taskManage" method="post">
@@ -64,16 +65,37 @@
                                     <th>This</th>
                                     <th>That</th>
                                     <th>Is Running</th>
+                                    <th>控制</th>
                                 </tr>
                                 </thead>
+
                                 <tbody  id="taskList">
+
+                                <%
+                                    String[] taskNames = (String[])session.getAttribute("taskName");
+                                    String[] taskThis = (String[])session.getAttribute("This");
+                                    String[] taskThat = (String[])session.getAttribute("That");
+                                    String[] taskRunning = (String[])session.getAttribute("isRunning");
+
+                                    for(int i=0;i<taskNames.length;i++){
+                                      //  out.print("<input type=\"hidden\" class=\"form-control\" value="+taskNames[i]+" name=\"index"+taskNames[i]+"\" >");
+                                        out.print("<tr>");
+                                        out.print("<td>"+taskNames[i]+"</td>");
+                                        out.print("<td>"+taskThis[i]+"</td>");
+                                        out.print("<td>"+taskThat[i]+"</td>");
+                                        out.print("<td>"+taskRunning[i]+"</td>");
+                                        String runtext = (taskRunning[i]=="Paused")?"Run":"Pause";
+                                        out.print("<td> <form action=\"taskManage\" method=\"post\">\n" +
+                                                "<button class=\"btn btn-primary\" type=\"button\" name=\""+taskNames[i]+"\" onclick=\"return mysubmit(this.name)\">"+runtext+"</button>\n" +
+                                                "</form></td>");
+                                        out.print("</tr>");
+                                    }
+
+                                %>
 
                                 </tbody>
                             </table>
-                            <form action="taskManage" method="post">
-                                <button class="btn btn-primary" type=""><i class="fa fa-check"></i>&nbsp;Add Task</button>
 
-                            </form>
 
                         </div>
 
@@ -104,7 +126,28 @@
     });
 </script>
 <script>
+    function mysubmit(name) {
+        var form =$('<form></form>');
+        form.attr("method","post");
+        form.attr("action","taskManage");
 
+
+        var field = $('<input></input>');
+        field.attr("type", "hidden");
+        field.attr("name", "index");
+        field.attr("value", name);
+
+        form.append(field);
+        $(document.body).append(form);
+       var elem= document.getElementsByClassName("btn btn-primary");
+        if(elem.innerText == "Run")
+            elem.innerText="Pause";
+        else {
+            elem.innerText="Run";
+        }
+        form.submit();
+
+    }
 </script>
 
 </body>

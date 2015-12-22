@@ -1,12 +1,14 @@
 
 
-package  model;
+package model;
 
 import common.ReadEmail;
 import common.SendEmail;
+import common.SendWeiBo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -17,6 +19,7 @@ import java.util.Timer;
 
 
 public class Task implements Runnable{
+    public String userEmail;
     public String taskName;		// 任务名称
     public int TimeOrMail;		// 触发事件是时间或者邮件
 
@@ -52,7 +55,8 @@ public class Task implements Runnable{
     }
 
     // 有参构造器
-    public Task(String _taskName, int _TimeOrMail,String _address,String _password, String _mailFromID,String _mailPassword,String _mailToID,String _strDate,String _strTime,int    _MailOrWeibo,String _weiboID,String _weiboPassword,String _messageContent){
+    public Task(String _userEmail, String _taskName, int _TimeOrMail,String _address,String _password, String _mailFromID,String _mailPassword,String _mailToID,String _strDate,String _strTime,int    _MailOrWeibo,String _weiboID,String _weiboPassword,String _messageContent){
+        userEmail=_userEmail;
         taskName=_taskName;
         address=_address;
         password=_password;
@@ -86,21 +90,21 @@ public class Task implements Runnable{
         Database db = new Database();
 
         String sql = "INSERT INTO IFTTT.Task (taskName,timeOrMail,receiveMail,receiveMailPassword,sendEmail," +
-                "sendEmailPassword,sendToEmail,date,mailOrWeibo,weiboAccount,weiboPassword,message,isRunning) values (" + "\""+taskName+"\","
+                "sendEmailPassword,sendToEmail,date,mailOrWeibo,weiboAccount,weiboPassword,message,isRunning,userEmail) values (" + "\""+taskName+"\","
                 + "\""+TimeOrMail+"\","  + "\""+address+"\","  + "\""+password+"\","  + "\""+mailFromID+"\","
                 + "\""+mailPassword+"\","  + "\""+mailToID+"\","  + "\""+strDate+"\","  + "\""+MailOrWeibo+"\","
-                + "\""+weiboID+"\","  + "\""+weiboPassword+"\","  + "\""+messageContent+"\",0);";
+                + "\""+weiboID+"\","  + "\""+weiboPassword+"\","  + "\""+messageContent+"\",0,"+"\""+userEmail+"\");";
 
         boolean success = db.executeSQL(sql);
         db.closeConnection();
         return success;
     }
 
-    public void getFromDatabase() throws SQLException{
+    public void getFromDatabase(int index,String userEmail) throws SQLException{
 
         Database db = new Database();
         String sql = "select taskName,timeOrMail,receiveMail,receiveMailPassword,sendEmail," +
-        "sendEmailPassword,sendToEmail,date,mailOrWeibo,weiboAccount,weiboPassword,message,isRunning from IFTTT.Task where taskName=\"1\"";
+        "sendEmailPassword,sendToEmail,date,mailOrWeibo,weiboAccount,weiboPassword,message,isRunning,userEmail from IFTTT.Task where taskName=\""+index+"\" and userEmail=\""+userEmail+"\";";
         boolean success = true;
         ResultSet resultSet = db.query(sql);
         if (resultSet == null) {
@@ -119,6 +123,7 @@ public class Task implements Runnable{
             this.weiboPassword=resultSet.getString("weiboPassword");
             this.messageContent=resultSet.getString("message");
             this.isRunning=resultSet.getBoolean("isRunning");
+            this.userEmail=resultSet.getString("userEmail");
         }
         db.closeConnection();
 
@@ -164,45 +169,51 @@ public class Task implements Runnable{
     @Override
     public void run() {
 
-        if (TimeOrMail == 0) {        // time
-            //System.out.println(currentTime);
-            System.out.println(GetCurrentTime());
-            while (equal(GetCurrentTime())) {        //
-                if (MailOrWeibo == 0) {            // send email
-                    new SendEmail(mailFromID, mailToID, mailPassword, messageContent);
-                    return;
 
-                } else if (MailOrWeibo == 1) {        // send weibo
-                    //  new MyWeibo(messageContent);
-
-                    return;
-
-                } else {
-                    System.out.println("Not equal until now!");
-                }
+        while (isRunning) {
+            try {
+                this.getFromDatabase(Integer.valueOf(this.taskName),this.userEmail);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
-        } else if (TimeOrMail == 1) {    // receive mail
-            System.out.println("Mail!");
-            new SendEmail(mailFromID, mailToID, password, messageContent);
+            if (TimeOrMail == 0) {        // time
+                //System.out.println(currentTime);
+                System.out.println(GetCurrentTime());
+                if (equal(GetCurrentTime())) {        //
+                    if (MailOrWeibo == 0) {            // send email
+                        new SendEmail(mailFromID, mailToID, mailPassword, messageContent);
+                        continue;
 
-            try {
-                while (new ReadEmail(address, password).ReceiveMail()) {
-                    if (MailOrWeibo == 0) {
-                        new SendEmail(mailFromID, mailToID, password, messageContent);
-                        return;
+                    } else if (MailOrWeibo == 1) {        // send weibo
+                        //  new MyWeibo(messageContent);
+                        new SendWeiBo(weiboID,weiboPassword,messageContent);
+                        continue;
 
-                    } else if (MailOrWeibo == 1) {
-                      //  new MyWeibo(messageContent);
-                        return;
-
+                    } else {
+                        System.out.println("Not equal until now!");
                     }
                 }
-            } catch (Exception e1) {
-                e1.printStackTrace();
+
+            } else if (TimeOrMail == 1) {    // receive mail
+                try {
+                    if (new ReadEmail(address, password).ReceiveMail()) {
+
+                        if (MailOrWeibo == 0) {
+                            new SendEmail(mailFromID, mailToID, password, messageContent);
+                            continue;
+
+                        } else if (MailOrWeibo == 1) {
+                            new SendWeiBo(weiboID,weiboPassword,messageContent);
+                            continue;
+
+                        }
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
         }
     }
-
 
 }

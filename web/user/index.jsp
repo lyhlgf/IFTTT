@@ -27,7 +27,6 @@
 
     <link href="../static/INSPINIA/css/animate.css" rel="stylesheet">
     <link href="../static/INSPINIA/css/style.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -58,7 +57,7 @@
                     <h3 class="font-bold">IF</h3>
                         <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_receive_mail()"><img src="../static/Unify/img/mail.png" width="80" height="80" ></button>
                         <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_time()"><img src="../static/Unify/img/clock.png" width="80" height="80" ></button>
-
+                        <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_listen_weibo()"><img src="../static/Unify/img/weibo.png" width="80" height="80" ></button>
                         <span id="region1">
                         </span>
 
@@ -94,6 +93,8 @@
 <script src="../static/INSPINIA/js/inspinia.js"></script>
 <script src="../static/INSPINIA/js/plugins/pace/pace.min.js"></script>
 <script src="../static/INSPINIA/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+
 <script>
     $(document).ready(function() {
 
@@ -103,11 +104,12 @@
 <script>
     var receive_mail_clicked=false;
     var time_clicked=false;
+    var listen_weibo=false;
     var send_mail_clicked=false;
     var send_weibo_clicked=false;
 
     function myclick_receive_mail() {
-        receive_mail_clicked=true;time_clicked=false;
+        receive_mail_clicked=true;time_clicked=false; listen_weibo=false;
         document.getElementById("region1").innerHTML=" <h3 class=\"m-t-none m-b\">收件邮箱信息</h3> \
                 <div class=\"form-group\" id=\"data_1\"><label>Account</label> <input type=\"text\" placeholder=\"Mail Address\" class=\"form-control\" \
                 name=\"receive_mail\"></div>\
@@ -116,18 +118,24 @@
                 </div>\
               ";
     }
+    function  myclick_listen_weibo() {
+        listen_weibo=true;receive_mail_clicked=false;time_clicked=false;
+        document.getElementById("region1").innerHTML=" <h3 class=\"m-t-none m-b\">监听微博信息</h3> \
+                <div class=\"form-group\" id=\"data_1\"><label>Weibo ID</label> <input type=\"text\" placeholder=\"Weibo ID\" class=\"form-control\" \
+                name=\"listen_weibo_id\"></div>\
+                <div class=\"form-group\"><label>Password</label><input type=\"password\" placeholder=\"Password\" class =\"form-control\" name=\"listen_weibo_password\"></div>\
+                 <div class=\"form-group\"><label>监听内容</label><input type=\"text\" placeholder=\"监听消息内容\" class =\"form-control\" name=\"listen_weibo_content\"></div>\
+              ";
+    }
     function myclick_time() {
         receive_mail_clicked=false;time_clicked=true;
         document.getElementById("region1").innerHTML= " <h3 class=\"m-t-none m-b\">时间设置</h3> \
-          <div class=\"form-group\" id=\"data_1\"> \
-            <div class=\"input-group date\"> \
-                <span class=\"input-group-addon\"> \
-                    <i class=\"fa fa-calendar\"></i>\
-                </span>\
-                <input type=\"text\" class=\"form-control\" value=\"12/18/2015\" name=\"time\"> \
-                </div>\
-                </div>\
-                ";
+       <div class=\"form-group\" id=\"data_1\">\
+        <div class=\"input-group date\">\
+                <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span><input type=\"text\" class=\"form-control\" value=\"03/04/2015\">\
+                </div></div>";
+
+
         $('#data_1 .input-group.date').datepicker({
             todayBtn: "linked",
             keyboardNavigation: false,
@@ -139,7 +147,7 @@
 
     function myclick_send_mail() {
         send_mail_clicked=true;
-        send_weibo_clicked=false;
+        send_weibo_clicked=false; listen_weibo=false;
         document.getElementById("region2").innerHTML=" <h3 class=\"m-t-none m-b\">发送邮件</h3> \
                 <div class=\"form-group\" id=\"data_1\"><label>From Account</label> <input type=\"text\" placeholder=\"From Mail Address\" class=\"form-control\" \
                 name=\"send_email\"></div>\

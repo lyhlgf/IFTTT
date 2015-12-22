@@ -18,20 +18,20 @@ public class SendEmail
 {
     // 参数表示：发送邮箱、目的邮箱、发送邮箱密码、发送邮件正文
     public SendEmail(String _from, String _to, String _password,String _emailContent) {
-        System.out.println("hit0!");
+
 
         String to = _to;
 
         String from = _from;
 
         String host = "smtp.qq.com"; 					 //QQ邮件服务器
-        System.out.println("hit1!");
+
         Properties properties = System.getProperties();
 
         properties.setProperty("mail.smtp.host", host);
 
         properties.put("mail.smtp.auth", "true");
-        System.out.println("hit2!");
+
 
         Session session = Session.getInstance(properties, new Authenticator() {
             public PasswordAuthentication getPasswordAuthentication()
@@ -39,7 +39,6 @@ public class SendEmail
                 return new PasswordAuthentication(from, _password);
             }
         });
-        System.out.println("hit3!");
 
         try{
             MimeMessage message = new MimeMessage(session);
@@ -56,8 +55,8 @@ public class SendEmail
             Transport.send(message);
 
         }catch (MessagingException mex) {
-            mex.printStackTrace();
-            System.out.println(_from+" "+_password);
+       //     mex.printStackTrace();
+       //     System.out.println(_from+" "+_password);
         }
     }
 

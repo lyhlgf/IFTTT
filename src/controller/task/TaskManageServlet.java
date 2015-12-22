@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 
 import common.MainClass;
 import common.SendEmail;
+import model.Database;
 import model.Task;
 import model.User;
 import sun.applet.Main;
@@ -22,27 +23,47 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class TaskManageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().setAttribute("navbarActive", "taskManage");
    //     int size=MainClass.tasks.size();
-        int size=1;
-       System.out.println(size);
+        Database database = new Database();
+        HttpSession session =  req.getSession() ;
+        String userEmail = (String) String.valueOf(session.getAttribute("email"));
+
+        int size= 0;
+        try {
+            size = database.getNumberOfTasks(userEmail);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println(size);
         String[] taskNames=new String[size];
         String[] taskThis=new String[size];
         String[] taskThat=new String[size];
         String[] taskRunning=new String[size];
         for(int i=0;i<size;i++) {
          //   Task temp = MainClass.tasks.get(i);
-            taskNames[i] ="1";
-            taskThis[i] = "mail";
-            taskThat[i] = "mail";
-            taskRunning[i] = "Running";
+            Task temp = new Task();
+            try {
+                temp.getFromDatabase(i,userEmail);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            taskNames[i] = temp.taskName;
+            taskThis[i] =  (temp.TimeOrMail==1)?"Receive mail from "+temp.address:"Time reach at "+temp.strDate;
+            taskThat[i] = (temp.MailOrWeibo==1)?"Send weibo to "+temp.weiboID+" with content: "+temp.messageContent:"Send mail to "+temp.mailToID+" with content: "+temp.messageContent;
+            taskRunning[i] = (temp.isRunning)?"Running":"Paused";
         }
 
-        HttpSession session =  req.getSession() ;
+
         session.setAttribute("taskName", taskNames) ;
         session.setAttribute("This", taskThis) ;
         session.setAttribute("That", taskThat) ;
@@ -54,16 +75,38 @@ public class TaskManageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().setAttribute("navbarActive", "taskManage");
         Task task=new Task();
+     //   System.out.println(req.getParameter("index"));
+        int index=Integer.valueOf(req.getParameter("index"));
+        HttpSession session =  req.getSession() ;
+        String userEmail = (String) String.valueOf(session.getAttribute("email"));
         try {
-            task.getFromDatabase();
+            task.getFromDatabase(index,userEmail);
         }catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Task"+task.toString());
-        Thread thread = new Thread(task);
-        thread.run();
 
-        resp.sendRedirect("/user/index") ;
+        Database database = new Database();
+        if(task.isRunning==false) {
+            task.isRunning=true;
+
+            String sql = "update `IFTTT`.`Task`\n" +
+                    "set isRunning = 1\n" +
+                    "where taskName=\""+index+"\"; ";
+            database.executeSQL(sql);
+            Thread thread = new Thread(task);
+            thread.start();
+        }
+        else {
+            task.isRunning=false;
+            String sql = "update `IFTTT`.`Task`\n" +
+                    "set isRunning = 0\n" +
+                    "where taskName=\""+index+"\"; ";
+            database.executeSQL(sql);
+        }
+        database.closeConnection();
+
+        resp.sendRedirect("/user/taskManage") ;
     }
 }
