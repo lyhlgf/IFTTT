@@ -7,7 +7,7 @@
 
   TODO: Add 404 page
 --%>
-<%@ page language="java" contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -72,6 +72,7 @@
                 <br/>
                 <br/>
                 <span id="num">5</span><span>秒后将返回登陆界面。</span>
+                <a href="/login">立即返回</a>
             </div>
 
         </div><!--/row-->

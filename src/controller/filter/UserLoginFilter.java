@@ -21,7 +21,7 @@ public class UserLoginFilter implements Filter{
             session.setAttribute("message", "您还没有登录! ");
             resp.sendRedirect("/fail.jsp");
         } else {
-            filterChain.doFilter(servletRequest, servletResponse);
+           filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 

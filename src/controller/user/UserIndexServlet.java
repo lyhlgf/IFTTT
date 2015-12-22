@@ -10,6 +10,7 @@ import java.io.IOException;
 public class UserIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         req.getSession().setAttribute("navbarActive", "userIndex");
         RequestDispatcher dispatcher = req.getRequestDispatcher("/user/index.jsp");
         dispatcher.forward(req, resp);
