@@ -32,8 +32,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("consumption",String.valueOf(user.getConsumption()));
                 resp.sendRedirect("/user/index") ;
             } else {
-                session.setAttribute("message", "用户名和密码不匹配。");
-                resp.sendRedirect("fail.jsp") ;
+                session.setAttribute("message", "用户名或密码错误。");
+                session.setAttribute("isFail", true);
+                resp.sendRedirect("/login") ;
             }
         } catch (SQLException e) {
             e.printStackTrace();

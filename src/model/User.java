@@ -62,7 +62,7 @@ public class User {
     public boolean insert() {
         Database db = new Database();
         String sql = "INSERT INTO IFTTT.User (Email, Password, Rank, Consumption, Balance) VALUE ('" + email + "'," +
-                " '" + password + "','"+ rank +"',,'"+ consumption +"',,'"+ balance +"');";
+                " '" + password + "', '" + rank + "', '" + consumption + "', '" + balance + "');";
         boolean success = db.executeSQL(sql);
         db.closeConnection();
         return success;

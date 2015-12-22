@@ -38,7 +38,6 @@
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <%@include file="header.jsp"%>
-        <span id="alert"></span>
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -65,6 +64,7 @@
             <form class="reg-page" action="modifyPassword" method="post">
                 <div class="row">
                     <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">修改密码</h3>
+                        <span id="alert"></span>
                         <p>修改密码需要先输入原密码</p>
                         <form role="form">
                             <div class="form-group"><label>Origin Password</label> <input type="password" placeholder="Origin Password" class="form-control" name="old password"></div>
@@ -98,20 +98,20 @@
 
 <script>
     $(document).ready(function() {
-
+        function failMessage(n) {
+            if(n) {
+                document.getElementById("alert").innerHTML+="<div id=\"myAlert\" class=\"alert alert-warning\">\
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a> \
+            <strong>原密码错误！</strong> </div>";
+            }
+            <%
+                session.setAttribute("isFail", false);
+            %>
+        }
+        failMessage(<%=isFail%>)
     });
 </script>
 
-<script type="text/javascript">
-    function failMessage(n) {
-        if(n) {
-            document.getElementById("alert").innerHTML+="<div id=\"myAlert\" class=\"alert alert-warning\">\
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a> \
-            <strong>原密码错误！</strong> </div>";
-        }
-    }
-    failMessage(<%=isFail%>)
-</script>
 </body>
 </html>
 

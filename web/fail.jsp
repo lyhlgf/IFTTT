@@ -4,8 +4,10 @@
   Date: 2015/11/27
   Time: 18:21
   To change this template use File | Settings | File Templates.
+
+  TODO: Add 404 page
 --%>
-<%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding ="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8"%>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->

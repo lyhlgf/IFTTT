@@ -50,6 +50,10 @@
 <body>
 
 <div class="wrapper">
+    <%
+        Boolean isFail = (Boolean)session.getAttribute("isFail");
+        String message = (String)session.getAttribute("message");
+    %>
     <!--=== Header ===-->
     <%@include file="header.jsp"%>
     <!--=== End Header ===-->
@@ -62,7 +66,7 @@
                     <div class="reg-header">
                         <h2>登录</h2>
                     </div>
-
+                    <span id="alert"></span>
                     <div class="input-group margin-bottom-20">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                         <input type="email" placeholder="邮箱" class="form-control" name="email">
@@ -110,6 +114,17 @@
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
+        function failMessage(n) {
+            if(n) {
+                document.getElementById("alert").innerHTML+="<div id=\"myAlert\" class=\"alert alert-danger\">\
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a> \
+            <strong><%=message%></strong> </div>";
+            }
+            <%
+                session.setAttribute("isFail", false);
+            %>
+        }
+        failMessage(<%=isFail%>)
     });
 </script>
 <!--[if lt IE 9]>

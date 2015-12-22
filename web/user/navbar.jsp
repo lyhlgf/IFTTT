@@ -10,7 +10,7 @@
     String consumeRecord = "";
     String accountRecharge = "";
     String modifyPassword = "";
-    String postMessage = "";
+    String mailbox = "";
     switch (navbarActive) {
         case "userIndex" : userIndex = "active";break;
         case "product" : product = "active";break;
@@ -19,7 +19,7 @@
         case "consumeRecord" : accountManager = "active";consumeRecord = "active";break;
         case "accountRecharge" : accountManager = "active";accountRecharge = "active";break;
         case "modifyPassword" : accountManager = "active";modifyPassword = "active";break;
-        case "postMessage" : postMessage = "active";break;
+        case "mailbox" : mailbox = "active";break;
         default:break;
     }
 
@@ -43,29 +43,29 @@
                 <a href="/user/index"><i class="fa fa-th-large"></i> <span class="nav-label">主页</span></a>
             </li>
             <li class=<%=product%>>
-                <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">产品</span></a>
+                <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">产品</span></a>
             </li>
             <li class=<%=taskManager%>>
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">任务管理</span></a>
             </li>
             <li class=<%=accountManager%>>
-                <a href="userInformation.jsp"><i class="fa fa-flask"></i> <span class="nav-label">账户管理</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">账户管理</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li class=<%=accountInfo%>><a href="/user/userInfo">账户信息</a></li>
-                    <li class=<%=consumeRecord%>><a href="consumeRecord.jsp">消费记录</a></li>
+                    <li class=<%=consumeRecord%>><a href="#">消费记录</a></li>
                     <li class=<%=accountRecharge%>><a href="/user/accountRecharge">账户充值</a></li>
                     <li class=<%=modifyPassword%>><a href="/user/modifyPassword">修改密码</a></li>
                 </ul>
             </li>
-            <li class=<%=postMessage%>>
-                <a href="widgets.html"><i class="fa fa-envelope"></i> <span class="nav-label">站内信</span> </a>
+            <li class=<%=mailbox%>>
+                <a href="/user/mailbox"><i class="fa fa-envelope"></i> <span class="nav-label">站内信</span></a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">支持(非必须)</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="form_basic.html">联系客服</a></li>
-                    <li><a href="form_advanced.html">意见反馈</a></li>
-                    <li><a href="form_wizard.html">帮助</a></li>
+                    <li><a href="#">联系客服</a></li>
+                    <li><a href="#">意见反馈</a></li>
+                    <li><a href="#">帮助</a></li>
                 </ul>
             </li>
         </ul>
