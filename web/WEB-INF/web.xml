@@ -21,11 +21,11 @@
         </init-param>
         <init-param>
             <param-name>dbUserName</param-name>
-            <param-value>Cloud</param-value>
+            <param-value>root</param-value>
         </init-param>
         <init-param>
             <param-name>dbPassword</param-name>
-            <param-value>2333</param-value>
+            <param-value>root</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -56,7 +56,11 @@
         <filter-name>UserLoginFilter</filter-name>
         <url-pattern>/user/*</url-pattern>
     </filter-mapping>
-    
+    <filter-mapping>
+        <filter-name>UserLoginFilter</filter-name>
+        <url-pattern>/task/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>UserIndexServlet</servlet-name>
         <servlet-class>controller.user.UserIndexServlet</servlet-class>
@@ -101,6 +105,25 @@
         <servlet-name>UserModifyPasswordServlet</servlet-name>
         <url-pattern>/user/modifyPassword</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>NewTaskServlet</servlet-name>
+        <servlet-class>controller.task.NewTaskServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewTaskServlet</servlet-name>
+        <url-pattern>/user/newTask</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TaskManageServlet</servlet-name>
+        <servlet-class>controller.task.TaskManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TaskManageServlet</servlet-name>
+        <url-pattern>/user/taskManage</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>

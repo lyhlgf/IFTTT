@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String navbarActive = (String)session.getAttribute("navbarActive");
-    String email = (String)session.getAttribute("email");;
+    String email = (String)session.getAttribute("email");
     String userIndex = "";
     String product = "";
-    String taskManager = "";
+    String taskManage = "";
     String accountManager = "";
     String accountInfo = "";
     String consumeRecord = "";
@@ -14,7 +14,7 @@
     switch (navbarActive) {
         case "userIndex" : userIndex = "active";break;
         case "product" : product = "active";break;
-        case "taskManager" : taskManager = "active";break;
+        case "taskManage" : taskManage = "active";break;
         case "accountInfo" : accountManager = "active";accountInfo = "active";break;
         case "consumeRecord" : accountManager = "active";consumeRecord = "active";break;
         case "accountRecharge" : accountManager = "active";accountRecharge = "active";break;
@@ -45,8 +45,8 @@
             <li class=<%=product%>>
                 <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">产品</span></a>
             </li>
-            <li class=<%=taskManager%>>
-                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">任务管理</span></a>
+            <li class=<%=taskManage%>>
+                <a href="/user/taskManage"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">任务管理</span></a>
             </li>
             <li class=<%=accountManager%>>
                 <a href="userInformation.jsp"><i class="fa fa-flask"></i> <span class="nav-label">账户管理</span><span class="fa arrow"></span></a>

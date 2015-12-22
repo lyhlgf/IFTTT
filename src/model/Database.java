@@ -70,4 +70,18 @@ public class Database {
             ex.printStackTrace();
         }
     }
+
+    public int getNumberOfTasks(String userEmail) throws SQLException {
+        Database db = new Database();
+        String sql = "select count(*) as number from IFTTT.Task where userEmail=\""+userEmail+"\";";
+        int result=0;
+        ResultSet resultSet = db.query(sql);
+        if (resultSet == null) {
+            result=0;
+        } else {
+            result=resultSet.getInt("number");
+        }
+        db.closeConnection();
+        return result;
+    }
 }
