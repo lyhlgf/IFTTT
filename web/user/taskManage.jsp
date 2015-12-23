@@ -66,6 +66,8 @@
                                     <th>That</th>
                                     <th>Is Running</th>
                                     <th>控制</th>
+                                    <th>修改</th>
+                                    <th>删除</th>
                                 </tr>
                                 </thead>
 
@@ -88,6 +90,12 @@
                                         out.print("<td> <form action=\"taskManage\" method=\"post\">\n" +
                                                 "<button class=\"btn btn-primary\" type=\"button\" name=\""+taskNames[i]+"\" onclick=\"return mysubmit(this.name)\">"+runtext+"</button>\n" +
                                                 "</form></td>");
+                                        out.print("<td>"+
+                                                "<button class=\"btn btn-primary\" type=\"button\" name=\"n"+taskNames[i]+"\" onclick=\"return mysubmit2(this.name)\">Modify</button>\n" +
+                                                "</td>");
+                                        out.print("<td>"+
+                                                "<button class=\"btn btn-primary\" type=\"button\" name=\"d"+taskNames[i]+"\" onclick=\"return mysubmit3(this.name)\">Delete</button>\n" +
+                                                "</td>");
                                         out.print("</tr>");
                                     }
 
@@ -96,7 +104,7 @@
                                 </tbody>
                             </table>
 
-
+                            <span id="modify"></span>
                         </div>
 
                     </div>
@@ -139,12 +147,47 @@
 
         form.append(field);
         $(document.body).append(form);
-       var elem= document.getElementsByClassName("btn btn-primary");
+       var elem= document.getElementsByName(name);
         if(elem.innerText == "Run")
             elem.innerText="Pause";
         else {
             elem.innerText="Run";
         }
+        form.submit();
+
+    }
+    function mysubmit2(name) {
+        var form =$('<form></form>');
+        form.attr("method","get");
+        form.attr("action","taskModify");
+
+
+        var field = $('<input></input>');
+        field.attr("type", "hidden");
+        field.attr("name", "index");
+        field.attr("value", name.substr(1));
+
+        form.append(field);
+        $(document.body).append(form);
+
+        form.submit();
+
+
+    }
+    function mysubmit3(name) {
+        var form =$('<form></form>');
+        form.attr("method","get");
+        form.attr("action","taskDelete");
+
+
+        var field = $('<input></input>');
+        field.attr("type", "hidden");
+        field.attr("name", "index");
+        field.attr("value", name.substr(1));
+
+        form.append(field);
+        $(document.body).append(form);
+
         form.submit();
 
     }

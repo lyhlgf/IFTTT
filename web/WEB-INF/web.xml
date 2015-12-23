@@ -124,6 +124,23 @@
         <url-pattern>/user/taskManage</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>TaskModifyServlet</servlet-name>
+        <servlet-class>controller.task.TaskModifyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TaskModifyServlet</servlet-name>
+        <url-pattern>/user/taskModify</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TaskDeleteServlet</servlet-name>
+        <servlet-class>controller.task.TaskDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TaskDeleteServlet</servlet-name>
+        <url-pattern>/user/taskDelete</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

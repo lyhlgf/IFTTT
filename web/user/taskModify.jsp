@@ -37,16 +37,16 @@
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <%@include file="header.jsp"%>
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-9">
-                    <h2>主页</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.jsp">Home</a>
-                        </li>
-                    </ol>
-                </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-9">
+                <h2>任务管理</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.jsp">修改任务</a>
+                    </li>
+                </ol>
             </div>
+        </div>
 
 
 
@@ -54,34 +54,34 @@
 
             <div class="box float-e-margins">
                 <div class="ibox-title">
-                    <h3>新任务</h3>
+                    <h3>修改任务</h3>
                 </div>
                 <div class="ibox-content">
-                    <form role=\"form\"  action="newTask" method="post">
-                    <h3 class="font-bold">IF</h3>
+                    <form role=\"form\"  action="taskModify" method="post">
+                        <h3 class="font-bold">IF</h3>
                         <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_receive_mail()"><img src="../static/Unify/img/mail.png" width="80" height="80" ></button>
                         <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_time()"><img src="../static/Unify/img/clock.png" width="80" height="80" ></button>
                         <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_listen_weibo()"><img src="../static/Unify/img/weibo.png" width="80" height="80" ></button>
                         <span id="region1">
                         </span>
 
-                    <h3 class="font-bold">THEN</h3>
+                        <h3 class="font-bold">THEN</h3>
                         <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_send_mail()"><img src="../static/Unify/img/sendmail.png" width="80" height="80" ></button>
                         <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_send_weibo()"><img src="../static/Unify/img/weibo.png" width="80" height="80" ></button>
                         <span id="region2">
                         </span>
                         </br>
-                    <button class="btn btn-primary " type="button" onclick="return mysubmit(this.form)"><i class="fa fa-check"></i>&nbsp;Add Task</button>
-                </form>
+                        <button class="btn btn-primary " type="button" onclick="return mysubmit(this.form)"><i class="fa fa-check"></i>&nbsp;确定修改</button>
+                    </form>
                 </div>
 
             </div>
             <div class="box float-e-margins">
                 <div class="ibox-title">
-            </div>
+                </div>
 
+            </div>
         </div>
-    </div>
         <%@include file="footer.jsp"%>
 
     </div>

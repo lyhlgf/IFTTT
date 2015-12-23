@@ -84,4 +84,23 @@ public class Database {
         db.closeConnection();
         return result;
     }
+    public int[] getIndex() {
+        Database database=new Database();
+        String sql ="select taskName from IFTTT.Task;";
+        ResultSet resultSet = database.query(sql);
+        int[] result=null;
+        int size=0;
+        try {
+            size=resultSet.getFetchSize();
+            result=new int[size];
+            for(int i=0;i<size;i++) {
+                result[i]=Integer.parseInt(resultSet.getString(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        database.closeConnection();
+        return result;
+    }
 }
