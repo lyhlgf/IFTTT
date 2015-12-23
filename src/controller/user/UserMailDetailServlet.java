@@ -1,17 +1,24 @@
 package controller.user;
 
+import model.PostMessage;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class UserIndexServlet extends HttpServlet {
+public class UserMailDetailServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().setAttribute("navbarActive", "userIndex");
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/index.jsp");
+        HttpSession session = req.getSession();
+        int id = Integer.parseInt(req.getParameter("ID"));
+        PostMessage postMessage = PostMessage.getPostMessage(id);
+        session.setAttribute("messageDetail", postMessage);
+        session.setAttribute("navbarActive", "mailbox");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/mailDetail.jsp");
         dispatcher.forward(req, resp);
     }
 

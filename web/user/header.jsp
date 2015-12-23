@@ -106,7 +106,7 @@
                 </ul>
             </li>
             <li>
-                <a href="/user/logout">
+                <a href="/logout">
                     <i class="fa fa-sign-out"></i> 退出
                 </a>
             </li>

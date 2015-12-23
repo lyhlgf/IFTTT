@@ -30,11 +30,11 @@
         </init-param>
         <init-param>
             <param-name>dbUserName</param-name>
-            <param-value>root</param-value>
+            <param-value>Cloud</param-value>
         </init-param>
         <init-param>
             <param-name>dbPassword</param-name>
-            <param-value>root</param-value>
+            <param-value>2333</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -58,21 +58,21 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <servlet-class>controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>UserIndexServlet</servlet-name>
         <servlet-class>controller.user.UserIndexServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserIndexServlet</servlet-name>
         <url-pattern>/user/index</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>UserLogoutServlet</servlet-name>
-        <servlet-class>controller.user.UserLogoutServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UserLogoutServlet</servlet-name>
-        <url-pattern>/user/logout</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -109,6 +109,15 @@
     <servlet-mapping>
         <servlet-name>UserMailboxServlet</servlet-name>
         <url-pattern>/user/mailbox</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserMailDetailServlet</servlet-name>
+        <servlet-class>controller.user.UserMailDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserMailDetailServlet</servlet-name>
+        <url-pattern>/user/mailDetail</url-pattern>
     </servlet-mapping>
 
     <servlet>

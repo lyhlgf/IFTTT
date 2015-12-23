@@ -104,10 +104,8 @@
 
             </div>
         </div>
+        <%@include file="footer.jsp"%>
     </div>
-    <%@include file="footer.jsp"%>
-
-</div>
 </div>
 
 <!-- Mainly scripts -->

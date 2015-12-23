@@ -59,27 +59,25 @@
             </div>
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="ibox-content">
-            <form class="reg-page" action="accountRecharge" method="post">
-                <div class="row">
-                    <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">账户充值</h3>
-                        <form role="form">
-                            <div class="form-group"><label>密码</label> <input type="password" placeholder="确认密码" class="form-control" name="password"></div>
-                            <div class="form-group"><label>充值金额</label><input type="number" min="0" placeholder="金额，以元为单位" class ="form-control" name="money"></div>
-                            <div>
-                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>确定充值</strong></button>
-                            </div>
-                        </form>
+            <div class="ibox-content">
+                <form class="reg-page" action="accountRecharge" method="post">
+                    <div class="row">
+                        <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">账户充值</h3>
+                            <form role="form">
+                                <div class="form-group"><label>密码</label> <input type="password" placeholder="确认密码" class="form-control" name="password"></div>
+                                <div class="form-group"><label>充值金额</label><input type="number" min="0" placeholder="金额，以元为单位" class ="form-control" name="money"></div>
+                                <div>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>确定充值</strong></button>
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
+                </form>
 
-                </div>
-            </form>
-
+            </div>
         </div>
-    </div>
-    </div>
         <%@include file="footer.jsp"%>
-
     </div>
 </div>
 

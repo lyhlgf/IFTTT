@@ -1,11 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: Cloud
-  Date: 15/12/13
-  Time: 下午7:41
+  Date: 15/12/23
+  Time: 上午7:12
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.PostMessage" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,10 +32,10 @@
 </head>
 
 <body>
+<%
+    PostMessage postMessage = (PostMessage) session.getAttribute("messageDetail");
+%>
 <div id="wrapper">
-    <%
-        Boolean isFail = (Boolean)session.getAttribute("isFail");
-    %>
     <%@include file="navbar.jsp"%>
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
@@ -41,48 +43,47 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>修改密码</h2>
+                <h2>信件内容</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.jsp">Home</a>
+                        <a href="/user/index">Home</a>
                     </li>
                     <li>
-                        <a>账户管理</a>
+                        <a href="/user/mailbox">站内信</a>
                     </li>
                     <li class="active">
-                        <strong>修改密码</strong>
+                        <strong>信件内容</strong>
                     </li>
                 </ol>
             </div>
-            <div class="col-lg-2">
-
-            </div>
         </div>
 
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="ibox-content">
-                <form class="reg-page" action="modifyPassword" method="post">
-                    <div class="row">
-                        <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">修改密码</h3>
-                            <span id="alert"></span>
-                            <p>修改密码需要先输入原密码</p>
-                            <form role="form">
-                                <div class="form-group"><label>Origin Password</label> <input type="password" placeholder="Origin Password" class="form-control" name="old password"></div>
-                                <div class="form-group"><label>New Password</label><input type="password" placeholder="New Password" class ="form-control" name="new password"></div>
-                                <div>
-                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>确定修改</strong></button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </form>
-
+        <div class="col-lg-13 animated fadeInRight">
+            <div class="mail-box-header">
+                <h2>
+                    <%=postMessage.getSubject()%>
+                </h2>
+                <div class="mail-tools tooltip-demo m-t-md">
+                    <h5>
+                        <span class="font-noraml"><%=postMessage.getTime()%></span>
+                    </h5>
+                </div>
+            </div>
+            <div class="mail-box">
+                <div class="mail-body">
+                    <%=postMessage.getContent()%>
+                </div>
+                <div class="mail-body text-right tooltip-demo">
+                    <a class="btn btn-sm btn-white" href="mail_compose.html"><i class="fa fa-reply"></i> Reply</a>
+                    <a class="btn btn-sm btn-white" href="mail_compose.html"><i class="fa fa-arrow-right"></i> Forward</a>
+                    <button title="" data-placement="top" data-toggle="tooltip" type="button" data-original-title="Print" class="btn btn-sm btn-white"><i class="fa fa-print"></i> Print</button>
+                    <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i> Remove</button>
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
         <%@include file="footer.jsp"%>
     </div>
-
 </div>
 
 <!-- Mainly scripts -->
@@ -97,20 +98,11 @@
 
 <script>
     $(document).ready(function() {
-        function failMessage(n) {
-            if(n) {
-                document.getElementById("alert").innerHTML+="<div id=\"myAlert\" class=\"alert alert-warning\">\
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a> \
-            <strong>原密码错误！</strong> </div>";
-            }
-            <%
-                session.setAttribute("isFail", false);
-            %>
-        }
-        failMessage(<%=isFail%>)
+
     });
 </script>
 
 </body>
 </html>
+
 
