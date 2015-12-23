@@ -96,7 +96,7 @@
                                         <input type="checkbox" class="i-checks">
                                     </td>
                                     <td class="mail-subject">
-                                        <a href="/user/mailDetail?ID=<%=postMessage.getId()%>">
+                                        <a href="/user/mailbox?ID=<%=postMessage.getId()%>&type=mailDetail">
                                             <%=postMessage.getSubject()%>
                                         </a>
                                     </td>
@@ -128,7 +128,7 @@
                                         <input type="checkbox" class="i-checks">
                                     </td>
                                     <td class="mail-subject">
-                                        <a href="/user/mailDetail?ID=<%=postMessage.getId()%>">
+                                        <a href="/user/mailbox?ID=<%=postMessage.getId()%>&type=mailDetail">
                                             <%=postMessage.getSubject()%>
                                         </a>
                                     </td>
@@ -169,7 +169,7 @@
                                         <input type="checkbox" class="i-checks">
                                     </td>
                                     <td class="mail-subject">
-                                        <a href="/user/mailDetail?ID=<%=postMessage.getId()%>">
+                                        <a href="/user/mailbox?ID=<%=postMessage.getId()%>&type=mailDetail">
                                             <%=postMessage.getSubject()%>
                                         </a>
                                     </td>

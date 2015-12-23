@@ -74,10 +74,8 @@
                     <%=postMessage.getContent()%>
                 </div>
                 <div class="mail-body text-right tooltip-demo">
-                    <a class="btn btn-sm btn-white" href="mail_compose.html"><i class="fa fa-reply"></i> Reply</a>
-                    <a class="btn btn-sm btn-white" href="mail_compose.html"><i class="fa fa-arrow-right"></i> Forward</a>
-                    <button title="" data-placement="top" data-toggle="tooltip" type="button" data-original-title="Print" class="btn btn-sm btn-white"><i class="fa fa-print"></i> Print</button>
-                    <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i> Remove</button>
+                    <a class="btn btn-sm btn-white" href="/user/mailbox?ID=<%=postMessage.getId()%>&type=important"><i class="fa fa-exclamation"></i> 重要</a>
+                    <a class="btn btn-sm btn-white" href="/user/mailbox?ID=<%=postMessage.getId()%>&type=delete"><i class="fa fa-trash-o"></i> 删除</a>
                 </div>
                 <div class="clearfix"></div>
             </div>

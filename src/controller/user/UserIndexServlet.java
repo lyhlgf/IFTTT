@@ -14,9 +14,4 @@ public class UserIndexServlet extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("/user/index.jsp");
         dispatcher.forward(req, resp);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
-    }
 }
