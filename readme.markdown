@@ -17,4 +17,8 @@ CREATE TABLE `IFTTT`.`Task` (
     `message` varchar(100),
     `isRunning` bit,
     PRIMARY KEY (`userEmail`,`taskName`));
+    
+alter table `IFTTT`.`Task` add `ListenWeiBoID` varchar(45);
+alter table `IFTTT`.`Task` add `ListenWeiBoPassword` varchar(45);
+alter table `IFTTT`.`Task` add `ListenWeiBoMessage` varchar(45);
 ```

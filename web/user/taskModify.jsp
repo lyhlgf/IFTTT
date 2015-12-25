@@ -49,7 +49,9 @@
         </div>
 
 
-
+        <%  int thisEvent=(Integer)session.getAttribute("thisEvent");
+            int thatEvent=(Integer)session.getAttribute("thatEvent");
+        %>
         <div class="row">
 
             <div class="box float-e-margins">
@@ -131,11 +133,30 @@
                 <div class=\"form-group\" id=\"data_1\"><label>Weibo ID</label> <input type=\"text\" placeholder=\"Weibo ID\" class=\"form-control\" \
                 name=\"listen_weibo_id\"></div>\
                 <div class=\"form-group\"><label>Password</label><input type=\"password\" placeholder=\"Password\" class =\"form-control\" name=\"listen_weibo_password\"></div>\
-                 <div class=\"form-group\"><label>监听内容</label><input type=\"text\" placeholder=\"监听消息内容\" class =\"form-control\" name=\"listen_weibo_content\"></div>\
+                 <div class=\"form-group\"><label>监听内容</label><input type=\"text\" placeholder=\"监听消息内容\" class =\"form-control\" name=\"listen_weibo_message\"></div>\
               ";
+        document.getElementById("region1").innerHTML+= " \
+         <fieldset> <div class=\"form-group\">\
+        <div class=\"input-group date form_datetime col-md-5\" data-date=\"2015-12-28T05:25:07Z\" data-date-format=\"dd/mm/yyyy-hh:ii\" data-link-field=\"dtp_input1\"> \
+                <input class=\"form-control\" size=\"16\" type=\"text\" value=\"\"  name=\"time\">\
+        <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-remove\"></span></span>\
+                <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-th\"></span></span> </div>\
+                <input type=\"hidden\" id=\"dtp_input1\" value=\"\" /><br/> </div> </fieldset>";
+
+        $('.form_datetime').datetimepicker({
+            language:  'cn',
+            minuteStep:1,
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 1,
+            showMeridian: 0
+        });
     }
     function myclick_time() {
-        receive_mail_clicked=false;time_clicked=true;
+        receive_mail_clicked=false;time_clicked=true;listen_weibo=false;
         document.getElementById("region1").innerHTML= " <h3 class=\"m-t-none m-b\">时间设置</h3> \
          <fieldset> <div class=\"form-group\">\
         <div class=\"input-group date form_datetime col-md-5\" data-date=\"2015-12-28T05:25:07Z\" data-date-format=\"dd/mm/yyyy-hh:ii\" data-link-field=\"dtp_input1\"> \
@@ -160,7 +181,7 @@
 
     function myclick_send_mail() {
         send_mail_clicked=true;
-        send_weibo_clicked=false; listen_weibo=false;
+        send_weibo_clicked=false;
         document.getElementById("region2").innerHTML=" <h3 class=\"m-t-none m-b\">发送邮件</h3> \
                 <div class=\"form-group\" id=\"data_1\"><label>From Account</label> <input type=\"text\" placeholder=\"From Mail Address\" class=\"form-control\" \
                 name=\"send_email\"></div>\
@@ -184,6 +205,24 @@
             fm.submit();
     }
 
+    function autoSelectActiveItem(a,b) {
+        if(a==0) {
+            myclick_time();
+        }
+        else if(a==1) {
+            myclick_receive_mail();
+        }
+        else if(a==2) {
+            myclick_listen_weibo();
+        }
+        if(b==0) {
+            myclick_send_mail();
+        }
+        else if(b==1) {
+            myclick_send_weibo();
+        }
+    }
+    autoSelectActiveItem(<%=thisEvent%>,<%=thatEvent%>);
 </script>
 </body>
 </html>

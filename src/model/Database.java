@@ -2,6 +2,9 @@ package model;
 
 import java.lang.Exception;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Database {
     private static String dbUrl;
@@ -84,23 +87,32 @@ public class Database {
         db.closeConnection();
         return result;
     }
-    public int[] getIndex() {
+    public int[] getIndex(String userEmail) throws SQLException {
         Database database=new Database();
-        String sql ="select taskName from IFTTT.Task;";
+
+        String sql ="select taskName from IFTTT.Task where userEmail=\""+userEmail+"\";";
         ResultSet resultSet = database.query(sql);
         int[] result=null;
-        int size=0;
+        if(resultSet==null) {
+            return result;
+        }
         try {
-            size=resultSet.getFetchSize();
-            result=new int[size];
-            for(int i=0;i<size;i++) {
-                result[i]=Integer.parseInt(resultSet.getString(i));
+            List<String> results = new ArrayList<String>();
+            resultSet.beforeFirst();
+            while(resultSet.next()) {
+                results.add(resultSet.getString("taskName"));
+            }
+            result=new int[results.size()];
+            int k=0;
+            for(String i:results) {
+                result[k++]=Integer.parseInt(i);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         database.closeConnection();
+
         return result;
     }
 }

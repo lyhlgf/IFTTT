@@ -36,8 +36,9 @@ public class TaskDeleteServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String userEmail = (String) String.valueOf(session.getAttribute("email"));
         Task.deleteTask(index,userEmail);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/taskManage.jsp");
-        dispatcher.forward(req, resp);
+       // RequestDispatcher dispatcher = req.getRequestDispatcher("/user/taskManage.jsp");
+    //    dispatcher.forward(req, resp);
+        resp.sendRedirect("/user/taskManage");
     }
 
     @Override

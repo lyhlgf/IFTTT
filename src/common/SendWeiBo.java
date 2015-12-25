@@ -50,7 +50,7 @@ public class SendWeiBo {
             e.printStackTrace();
         }
         String access_token = line;
-        System.out.println(id+" "+password+" "+line);
+
         String statuses = text;// "Test weibo by java";
         Timeline tm = new Timeline(access_token);
         try {
@@ -69,7 +69,7 @@ public class SendWeiBo {
     // 测试
     public static void main(String[] args) {
 
-       // new SendWeiBo().ListonWeibo("dddddddddddd");
+       // new SendWeiBo();
 
     }
 

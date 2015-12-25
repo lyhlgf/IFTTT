@@ -47,12 +47,14 @@ public class Task extends java.util.TimerTask{
 
     public String detailInformation;	// 详细描述
     public boolean isRunning;
+    public String listenWeiBoID;
+    public String listenWeiBoPassword;
+    public String listenWeiBoMessage;
 
     public Timer timer;
 
-
     private static Database db=new Database();
-
+    public ListenWeibo listenWeibo;
     public Task(){					// 无参构造器
         super();
         taskName="";
@@ -61,7 +63,10 @@ public class Task extends java.util.TimerTask{
     }
 
     // 有参构造器
-    public Task(String _userEmail, String _taskName, int _TimeOrMail,String _address,String _password, String _mailFromID,String _mailPassword,String _mailToID,String _strDate,String _strTime,int    _MailOrWeibo,String _weiboID,String _weiboPassword,String _messageContent){
+    public Task(String _userEmail, String _taskName, int _TimeOrMail,String _address,String _password,
+                String _mailFromID,String _mailPassword,String _mailToID,String _strDate,String _strTime,
+                int    _MailOrWeibo,String _weiboID,String _weiboPassword,String _messageContent,
+                String _listenWeiBoID,String _listenWeiBoPassword,String _listenWeiBoMessage){
         userEmail=_userEmail;
         taskName=_taskName;
         address=_address;
@@ -79,6 +84,9 @@ public class Task extends java.util.TimerTask{
         messageContent 	=_messageContent;
         detailInformation=toString();
         isRunning=false;
+        listenWeiBoID=_listenWeiBoID;
+        listenWeiBoPassword=_listenWeiBoPassword;
+        listenWeiBoMessage=_listenWeiBoMessage;
 
     }
 
@@ -100,10 +108,12 @@ public class Task extends java.util.TimerTask{
         Database db = new Database();
 
         String sql = "INSERT INTO IFTTT.Task (taskName,timeOrMail,receiveMail,receiveMailPassword,sendEmail," +
-                "sendEmailPassword,sendToEmail,date,mailOrWeibo,weiboAccount,weiboPassword,message,isRunning,userEmail) values (" + "\""+taskName+"\","
+                "sendEmailPassword,sendToEmail,date,mailOrWeibo,weiboAccount,weiboPassword,message,isRunning," +
+                "userEmail,ListenWeiBoID,ListenWeiBoPassword,listenWeiBoMessage) values (" + "\""+taskName+"\","
                 + "\""+TimeOrMail+"\","  + "\""+address+"\","  + "\""+password+"\","  + "\""+mailFromID+"\","
                 + "\""+mailPassword+"\","  + "\""+mailToID+"\","  + "\""+strDate+"\","  + "\""+MailOrWeibo+"\","
-                + "\""+weiboID+"\","  + "\""+weiboPassword+"\","  + "\""+messageContent+"\",0,"+"\""+userEmail+"\");";
+                + "\""+weiboID+"\","  + "\""+weiboPassword+"\","  + "\""+messageContent+"\",0,"+"\""+userEmail+"\","+
+                "\""+listenWeiBoID+"\",\""+listenWeiBoPassword+"\",\""+listenWeiBoMessage+"\");";
 
         boolean success = db.executeSQL(sql);
         db.closeConnection();
@@ -112,12 +122,16 @@ public class Task extends java.util.TimerTask{
     public  boolean update() {
         Database db = new Database();
         String sql = "update IFTTT.Task set timeOrMail=\""+TimeOrMail+"\",receiveMail=\""+address+
-                "\",receiveMailPassword=\""+password+"\",sendEmail=\""+mailFromID+"\",sendEmailPassword=\""+mailPassword+"\",sendToEmail=\""+mailToID+"\"," +
-                "date=\""+strDate+"\",mailOrWeibo=\""+MailOrWeibo+"\",weiboAccount=\""+weiboID+"\",weiboPassword=\""+weiboPassword+"\",message=\""+messageContent+
-                "\",isRunning=0"+",userEmail=\""+userEmail+"\"  where taskName=\""+taskName+"\" and userEmail=\""+userEmail+"\";";
+                "\",receiveMailPassword=\""+password+"\",sendEmail=\""+mailFromID+"\",sendEmailPassword=\""+
+                mailPassword+"\",sendToEmail=\""+mailToID+"\"," + "date=\""+strDate+"\",mailOrWeibo=\""+MailOrWeibo+
+                "\",weiboAccount=\""+weiboID+"\",weiboPassword=\""+weiboPassword+"\",message=\""+messageContent+
+                "\",isRunning=0"+",userEmail=\""+userEmail+"\",listenWeiBoID=\""+listenWeiBoID+"\",listenWeiBoPassword=\""
+                +listenWeiBoPassword +"\",listenWeiBoMessage=\""+listenWeiBoMessage+"\"  where taskName=\""+
+                taskName+"\" and userEmail=\""+userEmail+"\";";
         System.out.println(sql);
         boolean success = db.executeSQL(sql);
         db.closeConnection();
+
         return success;
     }
     public static boolean deleteTask(int index,String userEmail) {
@@ -131,7 +145,9 @@ public class Task extends java.util.TimerTask{
     public boolean getFromDatabase(int index,String userEmail) throws SQLException{
 
         String sql = "select taskName,timeOrMail,receiveMail,receiveMailPassword,sendEmail," +
-        "sendEmailPassword,sendToEmail,date,mailOrWeibo,weiboAccount,weiboPassword,message,isRunning,userEmail from IFTTT.Task where taskName=\""+index+"\" and userEmail=\""+userEmail+"\";";
+        "sendEmailPassword,sendToEmail,date,mailOrWeibo,weiboAccount,weiboPassword,message,isRunning,userEmail," +
+                "listenWeiBoID,listenWeiBoPassword,listenWeiBoMessage from IFTTT.Task where taskName=\""+
+                index+"\" and userEmail=\""+userEmail+"\";";
         boolean success = true;
         ResultSet resultSet = db.query(sql);
         if (resultSet == null) {
@@ -152,6 +168,10 @@ public class Task extends java.util.TimerTask{
             this.messageContent=resultSet.getString("message");
             this.isRunning=resultSet.getBoolean("isRunning");
             this.userEmail=resultSet.getString("userEmail");
+            this.listenWeiBoID=resultSet.getString("listenWeiBoID");
+            this.listenWeiBoPassword=resultSet.getString("listenWeiBoPassword");
+            this.listenWeiBoMessage=resultSet.getString("listenWeiBoMessage");
+
         }
         return success;
     }
@@ -194,6 +214,9 @@ public class Task extends java.util.TimerTask{
         }
         else if (TimeOrMail==1) {
             s+= "If receive email from " + address + "\n";
+        }
+        else if(TimeOrMail==2) {
+            s+= "If listen message "+listenWeiBoMessage+" from weibo ID "+listenWeiBoID+"\n";
         }
         if(MailOrWeibo==0) {
             s+= "Then send email from " + mailFromID +" to " + mailToID + "\n" ;
@@ -250,7 +273,7 @@ public class Task extends java.util.TimerTask{
                     if (new ReadEmail(address, password).ReceiveMail()) {
 
                         if (MailOrWeibo == 0) {
-                            new SendEmail(mailFromID, mailToID, password, messageContent);
+                            new SendEmail(mailFromID, mailToID, mailPassword, messageContent);
 
 
                         } else if (MailOrWeibo == 1) {
@@ -265,11 +288,13 @@ public class Task extends java.util.TimerTask{
             }
             else if (TimeOrMail == 2) {
                 try {
-                    if (new ListenWeibo(new Date(), "").hasThisWeibo()) {
+                    if (listenWeibo.hasThisWeibo()) {
                         if (MailOrWeibo == 0) {
-                            new SendEmail(mailFromID, mailToID, password, messageContent);
+                            new SendEmail(mailFromID, mailToID, mailPassword, messageContent);
+
+                            setTaskState(taskName,userEmail,0);
                         } else if (MailOrWeibo == 1) {
-                            new SendWeiBo(weiboID,weiboPassword,messageContent);
+                            new SendWeiBo(weiboID,weiboPassword,messageContent); setTaskState(taskName,userEmail,0);
                         }
                     }
                 } catch (Exception e1) {

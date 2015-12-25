@@ -37,6 +37,14 @@
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <%@include file="header.jsp"%>
 
+        <% int a = (Integer)session.getAttribute("balanceNotEnough");
+            if(a==1) {
+                out.print("<div id=\"myAlert\" class=\"alert alert-warning\">\n" +
+                        "        <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>\n" +
+                        "        <strong>余额不足，请充值</strong>\n" +
+                        "    </div>");
+            }
+        %>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <h2>任务管理</h2>
@@ -74,37 +82,50 @@
                                 <tbody  id="taskList">
 
                                 <%
-                                    String[] taskNames = (String[])session.getAttribute("taskName");
-                                    String[] taskThis = (String[])session.getAttribute("This");
-                                    String[] taskThat = (String[])session.getAttribute("That");
-                                    String[] taskRunning = (String[])session.getAttribute("isRunning");
+                                        try {
+                                            String[] taskNames = (String[]) session.getAttribute("taskName");
+                                            String[] taskThis = (String[]) session.getAttribute("This");
+                                            String[] taskThat = (String[]) session.getAttribute("That");
+                                            String[] taskRunning = (String[]) session.getAttribute("isRunning");
+                                            int[] taskThisEvents = (int[]) session.getAttribute("thisEvents");
+                                            int[] taskThatEvents = (int[]) session.getAttribute("thatEvents");
 
-                                    for(int i=0;i<taskNames.length;i++){
-                                      //  out.print("<input type=\"hidden\" class=\"form-control\" value="+taskNames[i]+" name=\"index"+taskNames[i]+"\" >");
-                                        out.print("<tr>");
-                                        out.print("<td>"+taskNames[i]+"</td>");
-                                        out.print("<td>"+taskThis[i]+"</td>");
-                                        out.print("<td>"+taskThat[i]+"</td>");
-                                        out.print("<td>"+taskRunning[i]+"</td>");
-                                        String runtext = (taskRunning[i]=="Paused")?"Run":"Pause";
-                                        out.print("<td> <form action=\"taskManage\" method=\"post\">\n" +
-                                                "<button class=\"btn btn-primary\" type=\"button\" name=\""+taskNames[i]+"\" onclick=\"return mysubmit(this.name)\">"+runtext+"</button>\n" +
-                                                "</form></td>");
-                                        out.print("<td>"+
-                                                "<button class=\"btn btn-primary\" type=\"button\" name=\"n"+taskNames[i]+"\" onclick=\"return mysubmit2(this.name)\">Modify</button>\n" +
-                                                "</td>");
-                                        out.print("<td>"+
-                                                "<button class=\"btn btn-primary\" type=\"button\" name=\"d"+taskNames[i]+"\" onclick=\"return mysubmit3(this.name)\">Delete</button>\n" +
-                                                "</td>");
-                                        out.print("</tr>");
-                                    }
+                                            for (int i = 0; i < taskNames.length; i++) {
+                                                out.print("<tr>");
+                                                out.print("<td>" + taskNames[i] + "</td>");
+                                                out.print("<td>" + taskThis[i] + "</td>");
+                                                out.print("<td>" + taskThat[i] + "</td>");
+                                                out.print("<td>" + taskRunning[i] + "</td>");
+                                                String runtext = (taskRunning[i] == "Paused") ? "Run" : "Pause";
+
+
+                                                String ta = String.valueOf(taskThisEvents[i]);
+                                                String tb = String.valueOf(taskThatEvents[i]);
+
+                                                out.print("<td> <form action=\"taskManage\" method=\"post\">\n" +
+                                                        "<button class=\"btn btn-primary\" type=\"button\" name=\"" + taskNames[i] + "\" onclick=\"return mysubmit(this.name)\">" + runtext + "</button>\n" +
+                                                        "</form></td>");
+
+                                                out.print("<td>" +
+                                                        "<button class=\"btn btn-primary\" type=\"button\" name=\"n" + taskNames[i] + "\" onclick=\"return mysubmit2(this.name" + "," + ta + "," + tb + ")\">Modify</button>\n" +
+                                                        "</td>");
+
+                                                out.print("<td>" +
+                                                        "<button class=\"btn btn-primary\" type=\"button\" name=\"d" + taskNames[i] + "\" onclick=\"return mysubmit3(this.name)\">Delete</button>\n" +
+                                                        "</td>");
+
+                                                out.print("</tr>");
+                                            }
+                                        }catch (Exception e) {
+                                          //  e.printStackTrace();
+                                        }
 
                                 %>
 
                                 </tbody>
                             </table>
 
-                            <span id="modify"></span>
+
                         </div>
 
                     </div>
@@ -156,7 +177,7 @@
         form.submit();
 
     }
-    function mysubmit2(name) {
+    function mysubmit2(name,thisEvent,thatEvent) {
         var form =$('<form></form>');
         form.attr("method","get");
         form.attr("action","taskModify");
@@ -166,8 +187,20 @@
         field.attr("type", "hidden");
         field.attr("name", "index");
         field.attr("value", name.substr(1));
-
         form.append(field);
+
+         var field2 = $('<input></input>');
+        field2.attr("type", "hidden");
+        field2.attr("name", "a");
+        field2.attr("value", thisEvent);
+        form.append(field2);
+
+        var field3 = $('<input></input>');
+        field3.attr("type", "hidden");
+        field3.attr("name", "b");
+
+        field3.attr("value", thatEvent);
+        form.append(field3);
         $(document.body).append(form);
 
         form.submit();

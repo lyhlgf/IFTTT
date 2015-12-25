@@ -29,10 +29,17 @@ import java.sql.SQLException;
 
 public class TaskModifyServlet extends HttpServlet {
     private int index;
+    private int thisEvent;
+    private int thatEvent;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("navbarActive", "taskManage");
         index=Integer.valueOf(req.getParameter("index"));
+        thisEvent=Integer.valueOf(req.getParameter("a"));
+        thatEvent=Integer.valueOf(req.getParameter("b"));
+        req.getSession().setAttribute("thisEvent",thisEvent);
+        req.getSession().setAttribute("thatEvent",thatEvent);
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/user/taskModify.jsp");
         dispatcher.forward(req, resp);
     }
@@ -51,13 +58,19 @@ public class TaskModifyServlet extends HttpServlet {
         String weibo_acount = req.getParameter("weibo_acount");
         String weibo_password = req.getParameter("weibo_password");
         String message = req.getParameter("message");
+        String listen_weibo_id=req.getParameter("listen_weibo_id");
+        String listen_weibo_password=req.getParameter("listen_weibo_password");
+        String listen_weibo_message=req.getParameter("listen_weibo_message");
 
-        int timeOrMail = (date != null)?0:((receive_mail==null)?2:1);      // 1: mail ; 0: date;
+        int timeOrMail = (listen_weibo_id != null)?2:((receive_mail==null)?0:1);      // 1: mail ; 0: date; 2: weibo;
         int mailOrWeibo = (weibo_acount == null)?0:1;     // 0:mail; 1: weibo;
 
+        System.out.println(receive_mail+"\n"+receive_mail_password+"\n"+date+"\n"+send_email+"\n"+send_email_password+
+                "\n"+weibo_acount+"\n"+weibo_password);
+        Task task  = new Task(userEmail,String.valueOf(index),timeOrMail,receive_mail,receive_mail_password,send_email,
+                send_email_password,send_to_email,date,"time",mailOrWeibo,weibo_acount,weibo_password,message,
+                listen_weibo_id,listen_weibo_password,listen_weibo_message);
 
-        System.out.println(receive_mail+"\n"+receive_mail_password+"\n"+date+"\n"+send_email+"\n"+send_email_password+"\n"+weibo_acount+"\n"+weibo_password);
-        Task task  = new Task(userEmail,String.valueOf(index),timeOrMail,receive_mail,receive_mail_password,send_email,send_email_password,send_to_email,date,"time",mailOrWeibo,weibo_acount,weibo_password,message);
         System.out.println(task.toString());
         task.update();
 
