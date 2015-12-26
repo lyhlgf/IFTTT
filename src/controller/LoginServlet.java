@@ -22,6 +22,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         HttpSession session =  req.getSession() ;
         session.setAttribute("email", email) ;
+        session.setAttribute("password",password);
         User user = new User(email, password);
 
         try {

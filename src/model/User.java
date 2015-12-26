@@ -10,6 +10,7 @@ public class User {
     private int consumption;
     private int balance;
 
+    public static int MAX_RANK=10;
     public User(String email, String password) {
         this.email = email;
         this.password = password;
@@ -47,7 +48,14 @@ public class User {
 
     public  void setRank(int rank) { this.rank=rank; }
 
-    public void setConsumption(int consumption) { this.consumption=consumption;}
+    public void setConsumption(int consumption) {
+        this.consumption=consumption;
+        Database db = new Database();
+        String sql = "update IFTTT.User set Consumption = '" + consumption + "' " +
+                "where email = '"+email+"'";
+        boolean success = db.executeSQL(sql);
+        db.closeConnection();
+    }
 
     public void setBalance(int balance) {
         this.balance=balance;

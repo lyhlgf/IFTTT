@@ -1,15 +1,24 @@
 package common;
 
+import weibo4j.Oauth;
 import weibo4j.Timeline;
 
+import weibo4j.Weibo;
+import weibo4j.http.AccessToken;
 import weibo4j.model.Status;
+import weibo4j.model.StatusWapper;
+import weibo4j.model.User;
 import weibo4j.model.WeiboException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+
 
 public class SendWeiBo {
+    public  SendWeiBo() {
+    }
 
     public SendWeiBo(String id,String password,String text){
         // TODO Auto-generated method stub
@@ -35,25 +44,32 @@ public class SendWeiBo {
             Process process=pp.start();
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-          line=in.readLine();
+           line=in.readLine();
             in.close();
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
         String access_token = line;
-        System.out.println(id+" "+password+" "+line);
+
         String statuses = text;// "Test weibo by java";
         Timeline tm = new Timeline(access_token);
         try {
             Status status = tm.updateStatus(statuses);
 
         } catch (WeiboException e) {
-            e.printStackTrace();
+            try {
+                tm=new Timeline("2.00bOcjMDSvnyfBb1afb703086jX15B");
+                Status status = tm.updateStatus(statuses);
+            } catch (WeiboException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
     // 测试
     public static void main(String[] args) {
+
+       // new SendWeiBo();
 
     }
 
