@@ -107,11 +107,11 @@
                                                         "</form></td>");
 
                                                 out.print("<td>" +
-                                                        "<button class=\"btn btn-primary\" type=\"button\" name=\"n" + taskNames[i] + "\" onclick=\"return mysubmit2(this.name" + "," + ta + "," + tb + ")\">Modify</button>\n" +
+                                                        "<button class=\"btn btn-info\" type=\"button\" name=\"n" + taskNames[i] + "\" onclick=\"return mysubmit2(this.name" + "," + ta + "," + tb + ")\">Modify</button>\n" +
                                                         "</td>");
 
                                                 out.print("<td>" +
-                                                        "<button class=\"btn btn-primary\" type=\"button\" name=\"d" + taskNames[i] + "\" onclick=\"return mysubmit3(this.name)\">Delete</button>\n" +
+                                                        "<button class=\"btn btn-warning\" type=\"button\" name=\"d" + taskNames[i] + "\" onclick=\"return mysubmit3(this.name)\">Delete</button>\n" +
                                                         "</td>");
 
                                                 out.print("</tr>");
@@ -166,12 +166,7 @@
 
         form.append(field);
         $(document.body).append(form);
-       var elem= document.getElementsByName(name);
-        if(elem.innerText == "Run")
-            elem.innerText="Pause";
-        else {
-            elem.innerText="Run";
-        }
+
         form.submit();
 
     }

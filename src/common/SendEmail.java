@@ -13,15 +13,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 
-
+// That 事件： 从指定qq邮箱发送邮件给其他邮箱
 public class SendEmail
 {
     // 参数表示：发送邮箱、目的邮箱、发送邮箱密码、发送邮件正文
     public SendEmail(String _from, String _to, String _password,String _emailContent) {
 
-
         String to = _to;
-
         String from = _from;
 
         String host = "smtp.qq.com"; 					 //QQ邮件服务器
@@ -55,8 +53,7 @@ public class SendEmail
             Transport.send(message);
 
         }catch (MessagingException mex) {
-       //     mex.printStackTrace();
-       //     System.out.println(_from+" "+_password);
+           mex.printStackTrace();
         }
     }
 

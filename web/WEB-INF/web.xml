@@ -30,11 +30,11 @@
         </init-param>
         <init-param>
             <param-name>dbUserName</param-name>
-            <param-value>Cloud</param-value>
+            <param-value>root</param-value>
         </init-param>
         <init-param>
             <param-name>dbPassword</param-name>
-            <param-value>2333</param-value>
+            <param-value>root</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -147,4 +147,12 @@
         <url-pattern>/user/taskDelete</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserConsumeRecordServlet</servlet-name>
+        <servlet-class>controller.user.UserConsumeRecordServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserConsumeRecordServlet</servlet-name>
+        <url-pattern>/user/consumeRecord</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -4,6 +4,6 @@
         刘越晗、高端开发
     </div>
     <div>
-        <strong>Copyright</strong> IFTTT Company &copy; 2014-2015
+        <strong>Copyright</strong> IFTTT Company &copy; 2015
     </div>
 </div>

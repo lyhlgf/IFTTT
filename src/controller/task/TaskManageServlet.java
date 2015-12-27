@@ -12,22 +12,18 @@ import java.io.IOException;
 import javax.servlet.http.HttpServlet;
 
 import common.ListenWeibo;
-import common.MainClass;
-import common.SendEmail;
+
+
+import model.Consume;
 import model.Database;
 import model.Task;
 import model.User;
-import sun.applet.Main;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
-import java.io.IOException;
+
 import java.sql.SQLException;
-import java.sql.Time;
+
 
 import java.util.*;
 
@@ -37,7 +33,7 @@ public class TaskManageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("navbarActive", "taskManage");
-   //     int size=MainClass.tasks.size();
+
         Database database = new Database();
         HttpSession session =  req.getSession() ;
         String userEmail = (String) String.valueOf(session.getAttribute("email"));
@@ -58,7 +54,6 @@ public class TaskManageServlet extends HttpServlet {
 
         int actualIndex=0;
         for(int i=0;actualIndex<size;i++) {
-         //   Task temp = MainClass.tasks.get(i);
             Task temp = new Task();
             try {
                 boolean ret= temp.getFromDatabase(i,userEmail);
@@ -79,7 +74,6 @@ public class TaskManageServlet extends HttpServlet {
             actualIndex++;
         }
 
-
         session.setAttribute("taskName", taskNames) ;
         session.setAttribute("This", taskThis) ;
         session.setAttribute("That", taskThat) ;
@@ -91,15 +85,16 @@ public class TaskManageServlet extends HttpServlet {
         if(session.getAttribute("balanceNotEnough")==null)
             session.setAttribute("balanceNotEnough",0);
         database.closeConnection();
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/taskManage.jsp");
-        dispatcher.forward(req, resp);
+
+        resp.sendRedirect("/user/taskManage");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("navbarActive", "taskManage");
         Task task=new Task();
-     //   System.out.println(req.getParameter("index"));
+
+        // 根据index从数据库中获取对应的任务内容
         int index=Integer.valueOf(req.getParameter("index"));
         HttpSession session =  req.getSession() ;
         String userEmail = (String) String.valueOf(session.getAttribute("email"));
@@ -110,8 +105,9 @@ public class TaskManageServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // 20: mail ; 10: date; 30: weibo;  // 40:mail; 50: weibo;
+        // 运行任务
         if(task.isRunning==false) {
+            // 20: mail ; 10: date; 30: weibo;  // 40:mail; 50: weibo;
             int totalConsume = (task.TimeOrMail+1)*10 + (task.MailOrWeibo+4)*10;
             User user=new User(userEmail,password);
             try {
@@ -120,24 +116,41 @@ public class TaskManageServlet extends HttpServlet {
                 e.printStackTrace();
             }
             totalConsume *= (User.MAX_RANK-(double)user.getRank()+1)/User.MAX_RANK;
+
+            // 余额不足
             if(user.getBalance() < totalConsume) {
                 session.setAttribute("balanceNotEnough",1);
             }
+            // 正式运行
             else {
+                // 更新任务状态
                 task.isRunning = true;
                 task.setTaskState(String.valueOf(index), userEmail, 1);
-                int newBalance=user.getBalance()-totalConsume;
 
+                // 更新用户余额和消费额
+                int newBalance=user.getBalance()-totalConsume;
                 user.setBalance(newBalance);
                 user.setConsumption(user.getConsumption()+totalConsume);
+
+                // 更新消费记录
+                String thisDesp =  (task.TimeOrMail==1)?"Receive mail from "+task.address:(task.TimeOrMail==0?"Time reach at "+task.strDate:"Listen weibo "+task.listenWeiBoID);
+                String thatDesp = (task.MailOrWeibo==1)?"Send weibo to "+task.weiboID+" with content: "+task.messageContent:"Send mail to "+task.mailToID+" with content: "+task.messageContent;
+                Consume consume =new Consume(thisDesp,thatDesp,totalConsume,userEmail);
+                consume.insert();
+
+                // 更新session中对应的值
                 session.setAttribute("balance",newBalance);
                 session.setAttribute("consumption",user.getConsumption());
                 session.setAttribute("balanceNotEnough",0);
-                task.listenWeibo = new ListenWeibo(task.currentTime,task.listenWeiBoMessage,task.listenWeiBoID,task.listenWeiBoPassword);
+
+                if(task.TimeOrMail==2)
+                    task.listenWeibo = new ListenWeibo(task.currentTime,task.listenWeiBoMessage,task.listenWeiBoID,task.listenWeiBoPassword);
+
                 task.timer = new Timer();
                 task.timer.schedule(task, 1000, 1000);
             }
         }
+        // 暂停任务
         else {
             task.isRunning=false;
             session.setAttribute("taskRunning["+index+"]",0);

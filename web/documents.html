@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html class="theme theme-white">
+<head>
+<meta charset="utf-8">
+<title>Java 第三次实习报告</title>
+<link href="https://www.zybuluo.com/static/assets/template-theme-white.css" rel="stylesheet" media="screen">
+</head>
+<body class="theme theme-white">
+
+<div id="wmd-preview" class="wmd-preview wmd-preview-full-reader"><div class="md-section-divider"><a href="./user/index.jsp">返回</a></div><div class="md-section-divider"></div><h1 data-anchor-id="2hox" id="java-第三次实习报告">Java 第三次实习报告</h1><p data-anchor-id="xqvn"><code>高端</code> <code>刘越晗</code></p><hr><div class="md-section-divider"></div><h1 data-anchor-id="8ew5" id="1-实验目的">1. 实验目的</h1><ul data-anchor-id="ihmg">
+<li>熟悉Java web 编程技术，包括B/S模式开发、数据库编程、前端开发等</li>
+<li>进一步熟悉Java语法， 掌握Java基础类库的使用</li>
+<li>体验团队编程，学习任务分配、版本控制等技巧</li>
+</ul><div class="md-section-divider"></div><h1 data-anchor-id="64s8" id="2-开发环境">2. 开发环境</h1><ul data-anchor-id="ahor">
+<li>操作系统：分别在Windows 和 Mac osX 上进行开发</li>
+<li>Java IDE: IntelliJ IDEA</li>
+<li>Java 版本： 1.8.0</li>
+<li>Tomcat 版本: 9.0.0</li>
+<li>测试使用浏览器: Google Chrome </li>
+<li>版本控制： git, 并且使用Github<a href="#fn:footnote" id="fnref:footnote" title="查看注脚" class="footnote">[1]</a>进行云端协作</li>
+<li>数据库版本: MySQL </li>
+<li>前端模版： Bootstrap<a href="#fn:footnote2" id="fnref:footnote2" title="查看注脚" class="footnote">[2]</a>.</li>
+</ul><div class="md-section-divider"></div><h1 data-anchor-id="v48a" id="3-需求整理">3. 需求整理</h1><div class="md-section-divider"></div><h2 data-anchor-id="6xzt" id="31-会员功能">3.1 会员功能</h2><div class="md-section-divider"></div><h3 data-anchor-id="ahkk" id="311-登陆注册功能">3.1.1 登陆注册功能</h3><ul data-anchor-id="9wsc">
+<li>用户在register界面使用邮箱账号和密码进行注册；</li>
+<li>用户在login界面使用注册好的账号和密码进行登陆；</li>
+<li>管理员账号后台建立，不可以直接注册。</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="urd0" id="312-任务功能">3.1.2 任务功能</h3><ul data-anchor-id="obi1">
+<li>新建任务</li>
+</ul><blockquote data-anchor-id="x2n8" class="white-blockquote">
+  <p>登陆成功的会员在首页新建任务</p>
+</blockquote><ul data-anchor-id="pxey">
+<li>查看、修改、删除任务</li>
+</ul><blockquote data-anchor-id="k7k2" class="white-blockquote">
+  <p>任务管理界面可以查看当前用户建立的所有任务，并且可以修改、删除某个任务</p>
+</blockquote><ul data-anchor-id="plwu">
+<li>运行、暂停任务</li>
+</ul><blockquote data-anchor-id="wiz3" class="white-blockquote">
+  <p>和上述功能在同一个界面。</p>
+</blockquote><div class="md-section-divider"></div><h3 data-anchor-id="rxcv" id="313-资料功能">3.1.3 资料功能</h3><div class="md-section-divider"></div><h2 data-anchor-id="0zcs" id="32-管理员功能">3.2 管理员功能</h2><blockquote data-anchor-id="6qk7" class="white-blockquote">
+  <p>管理员登陆后跳转到admin界面,拥有下面的功能。</p>
+</blockquote><div class="md-section-divider"></div><h3 data-anchor-id="ke6q" id="321-查看修改会员资料">3.2.1 查看、修改会员资料</h3><div class="md-section-divider"></div><h3 data-anchor-id="inx2" id="322-添加删除新的this事件that事件">3.2.2 添加(删除)新的This事件、That事件</h3><div class="md-section-divider"></div><h3 data-anchor-id="ralu" id="323-查看修改删除消息">3.2.3 查看、修改、删除消息</h3><div class="md-section-divider"></div><h2 data-anchor-id="okhd" id="33消息通知">3.3消息通知</h2><ul data-anchor-id="ur8z">
+<li>公共消息</li>
+<li>私人消息</li>
+</ul><div class="md-section-divider"></div><h2 data-anchor-id="fzbx" id="34-this-that事件">3.4 This That事件</h2><table data-anchor-id="7fdt" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:left;">This</th>
+ <th style="text-align:center;">That</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:left;">定时</td>
+ <td style="text-align:center;">给指定账户发布邮件</td>
+</tr>
+<tr>
+ <td style="text-align:left;">监听指定账户收到邮件</td>
+ <td style="text-align:center;">指定账户发布微博</td>
+</tr>
+<tr>
+ <td style="text-align:left;">监听指定微博账号发布指定内容微博</td>
+ <td style="text-align:center;"></td>
+</tr>
+</tbody></table><blockquote data-anchor-id="qwp4" class="white-blockquote">
+  <p>This和That事件可以自由组合</p>
+</blockquote><div class="md-section-divider"></div><h1 data-anchor-id="c7t0" id="4-实现细节">4. 实现细节</h1><div class="md-section-divider"></div><h2 data-anchor-id="fspk" id="41-框架流程">4.1 框架流程</h2><div class="md-section-divider"></div><h3 data-anchor-id="0nhq" id="411sequence-diagram">4.1.1Sequence diagram</h3><p data-anchor-id="4lfe"><img src="http://static.zybuluo.com/duangao/o1vhapc20sptw70nn2oliwzr/IFTTT.png" alt="IFTTT.png-97.5kB" title=""></p><div class="md-section-divider"></div><h3 data-anchor-id="kfs8" id="412项目代码结构">4.1.2项目代码结构</h3><p data-anchor-id="q2s7"><img src="http://static.zybuluo.com/duangao/89f561seq65hh9l4sjv457ht/1.jpg" alt="1.jpg-9.9kB" title=""></p><ul data-anchor-id="9hzo">
+<li>lib目录下存放项目用到的jar包；</li>
+<li><p>src目录上存放所有的java 源码，包括Servlet和其它公共类； <br>
+</p><ul><li>Common子目录 <br>
+包含邮件监听、邮件发送、微博监听、微博发送等类。</li>
+<li>Controller 子目录</li>
+<li>Login、Register、Init等Servlet；</li>
+<li>用户有关的所有Servlet</li>
+<li>任务有关的所有Servelt；</li>
+<li>model 子目录</li>
+<li>Database类封装数据库访问操作；</li>
+<li>User类、Task类分别提供用户和任务对象创建、和数据库交互等； </li>
+<li>weibo4j 子目录 <br>
+微博提供的SDK；</li>
+<li>1.py文件 <br><p></p>
+
+<blockquote class="white-blockquote">
+  <p>用于根据微博账号和密码自动获取Code；</p></blockquote></li></ul><p></p>
+</li>
+<li><p>web 目录下存放Bootstrap模版代码以及项目中所有的jsp和html文件；</p></li>
+</ul><div class="md-section-divider"></div><h2 data-anchor-id="ohhj" id="42-前端模版">4.2 前端模版</h2><p data-anchor-id="uapq">Bootsrap 是一套快速开发的响应式的前端框架，有丰富的组件和极好的组织方式。</p><p data-anchor-id="q1ik">本次实验中使用了Unify、Inspinia两个主题：</p><ul data-anchor-id="hrlj">
+<li>Login Register页面采用Unify主题</li>
+<li>登陆之后的所有界面采用Insinia主题</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="lrmr" id="421-截图展示">4.2.1 截图展示</h3><p data-anchor-id="yi27"><img src="http://static.zybuluo.com/duangao/gp6ekod6z2mbtkaysscs5mdu/login.png" alt="login.png-30.2kB" title=""> <br>
+<img src="http://static.zybuluo.com/duangao/oqben2fcc9iyoed3cx67nwq0/index.png" alt="index.png-71kB" title=""> <br>
+<img src="http://static.zybuluo.com/duangao/7azwhzvq27hlx06rc9uvnd8a/newTask.png" alt="newTask.png-78.6kB" title=""> <br>
+<img src="http://static.zybuluo.com/duangao/mdiut45yszpj139c8c1byikf/taskManage.png" alt="taskManage.png-94.9kB" title=""> <br>
+<img src="http://static.zybuluo.com/duangao/hq4yipocb1amw43j6ntcecs4/cosumeRecord.png" alt="cosumeRecord.png-160.2kB" title=""></p><div class="md-section-divider"></div><h3 data-anchor-id="ydeq" id="422-主要页面">4.2.2 主要页面</h3><p data-anchor-id="dht8"><img src="http://static.zybuluo.com/duangao/6j2dbqv67x4h11puxqcg9t4j/pages.png" alt="pages.png-15.7kB" title=""></p><p data-anchor-id="qwwm">static目录下是模板； <br>
+user目录下存放主要的页面； <br>
+其它文件是辅助性的页面：登陆、注册、登陆失败等。</p><div class="md-section-divider"></div><h2 data-anchor-id="it8t" id="43-主要模块">4.3 主要模块</h2><div class="md-section-divider"></div><h3 data-anchor-id="zkig" id="431-辅助类">4.3.1 辅助类</h3><ul data-anchor-id="bowx">
+<li><p>ListenWeibo</p></li>
+<li><p>ReadEmail <br>
+<img src="http://static.zybuluo.com/duangao/jkjyw60bg0aqqggz8czkdd8n/diagram3.png" alt="diagram3.png-5.2kB" title=""> <br>
+负责监听指定邮件有无收到新邮件。</p></li>
+<li>SendEmail <br>
+<img src="http://static.zybuluo.com/duangao/d76k5aorxum46gpetiv1j6im/diagram2.png" alt="diagram2.png-3.9kB" title=""> <br>
+负责使用指定的QQ邮箱发送邮件给某邮箱。</li>
+<li>SendWeibo <br>
+<img src="http://static.zybuluo.com/duangao/1buc2p7z17smi5seyph22a2u/diagram.png" alt="diagram.png-4.1kB" title=""> <br>
+负责使用账户和密码发送微博。</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="g4ko" id="432-controller">4.3.2 Controller</h3><ul data-anchor-id="8dkl">
+<li>UserLoginFiter</li>
+</ul><div class="md-section-divider"></div><h4 data-anchor-id="i18d" id="task">Task</h4><blockquote data-anchor-id="b515" class="white-blockquote">
+  <p>这里只展示一个Servlet类图，其它完全类似</p>
+</blockquote><ul data-anchor-id="zcw1">
+<li><p>NewTaskServlet <br>
+<img src="http://static.zybuluo.com/duangao/lkmbqex7da463u4sbdbki9wn/diagram5.png" alt="diagram5.png-83.3kB" title=""></p>
+
+<p>doPost()负责新建任务的post数据处理和任务建立工作。 <br>
+具体的：任务建立不仅包括建立任务，还包括用户余额检测和扣取、消费额和积分额的增长以及消费记录的更新等。 <br>
+doGet()负责展示新建任务页面index.jsp</p></li>
+<li><p>TaskManageServlet <br>
+doGet()负责任务显示、修改、删除页面taskMange.jsp的显示 <br>
+doPost()负责任务的运行和暂停。</p></li>
+<li>TaskDeleteServlet <br>
+doPost()负责任务的删除操作；</li>
+<li>TaskModifyServelt <br>
+doPost()负责任务的修改操作； <br>
+这里需要根据任务的内容自动调整好修改时对应的this和that事件。</li>
+</ul><div class="md-section-divider"></div><h4 data-anchor-id="g3m2" id="user">User</h4><ul data-anchor-id="ru0d">
+<li>UserConsumeRecordServlet <br>
+负责用户消费记录的展示。</li>
+<li>UserIndexServlet <br>
+返回主页面。</li>
+<li>UserInfoServlet <br>
+负责展示用户信息。</li>
+<li>UserMailboxServlet <br>
+负责显示用户收到的消息。</li>
+<li>UserModifyPasswordServlet <br>
+负责修改用户密码并更新数据库。</li>
+<li>UserRechargeServlet <br>
+负责用户充值。</li>
+</ul><div class="md-section-divider"></div><h4 data-anchor-id="cgzw" id="其它">其它</h4><ul data-anchor-id="sn1w">
+<li>InitServlet <br>
+初始化数据库。</li>
+<li>LoginServlet <br>
+用户登录，根据数据库内容判断是否合法。</li>
+<li>LogoutServlet <br>
+用户登出事件处理。</li>
+<li>RegisterSevlet <br>
+负责用户的注册，以及根据内容生成新的用户。</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="mkbh" id="433-model">4.3.3 Model</h3><ul data-anchor-id="1ukd">
+<li>Database <br>
+<img src="http://static.zybuluo.com/duangao/3u7znwud9cm65mcfr7v48xpk/diagram7.png" alt="diagram7.png-9.2kB" title=""> <br>
+提供数据库访问的接口：初始化数据库、数据库查询、返回查询结果</li>
+<li>Consume <br>
+<img src="http://static.zybuluo.com/duangao/8gpw6obpbk765svgcf10zkmd/diagram6.png" alt="diagram6.png-7.3kB" title=""> <br>
+数据库表Consume对应的类。 <br>
+负责数据库和用到Consume的程序进行交互。</li>
+<li>PostMessage <br>
+<img src="http://static.zybuluo.com/duangao/kj0jdibq2tl664et6hv8bd4f/diagram8.png" alt="diagram8.png-10.4kB" title=""> <br>
+数据库表PostMessage对应的类。 <br>
+负责数据库和用到PostMessage的程序进行交互。</li>
+<li>Task <br>
+<img src="http://static.zybuluo.com/duangao/7ueczjvokjtj8pkbbuavxx8l/diagram9.png" alt="diagram9.png-18kB" title=""> <br>
+数据库表Task对应的类。 <br>
+负责数据库和用到Task的程序进行交互。</li>
+<li>User <br>
+<img src="http://static.zybuluo.com/duangao/hxjj8hc6osbiajqznog0onhh/diagram10.png" alt="diagram10.png-8.4kB" title=""> <br>
+数据库表User对应的类。 <br>
+负责数据库和用到User的程序进行交互。</li>
+</ul><div class="md-section-divider"></div><h2 data-anchor-id="8c4d" id="431-数据库细节">4.3.1 数据库细节</h2><p data-anchor-id="ya45">数据库名称为IFTTT <br>
+表名分别为User、Task、Consume、PostMessage</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="1wza"><ol class="linenums"><li class="L0"><code class="language-sql"><span class="pln">  </span><span class="com"># 建数据库</span></code></li><li class="L1"><code class="language-sql"><span class="pln">create database </span><span class="str">`IFTTT`</span><span class="pun">;</span></code></li><li class="L2"><code class="language-sql"></code></li><li class="L3"><code class="language-sql"><span class="pln">  </span><span class="com"># 表User</span></code></li><li class="L4"><code class="language-sql"><span class="pln">CREATE TABLE </span><span class="str">`IFTTT`</span><span class="pun">.</span><span class="str">`User`</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L5"><code class="language-sql"><span class="pln">  </span><span class="str">`Email`</span><span class="pln"> VARCHAR</span><span class="pun">(</span><span class="lit">45</span><span class="pun">)</span><span class="pln"> NOT NULL</span><span class="pun">,</span></code></li><li class="L6"><code class="language-sql"><span class="pln">  </span><span class="str">`Password`</span><span class="pln"> VARCHAR</span><span class="pun">(</span><span class="lit">45</span><span class="pun">)</span><span class="pln"> NOT NULL</span><span class="pun">,</span></code></li><li class="L7"><code class="language-sql"><span class="pln">  </span><span class="str">`Rank`</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> NOT NULL</span><span class="pun">,</span></code></li><li class="L8"><code class="language-sql"><span class="pln">  </span><span class="str">`Consumption`</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> </span><span class="pun">,</span></code></li><li class="L9"><code class="language-sql"><span class="pln">  </span><span class="str">`Balance`</span><span class="pln"> </span><span class="kwd">int</span><span class="pun">,</span></code></li><li class="L0"><code class="language-sql"><span class="pln">  </span><span class="str">`isAdmin`</span><span class="pln"> bit</span><span class="pun">,</span></code></li><li class="L1"><code class="language-sql"><span class="pln">   PRIMARY KEY </span><span class="pun">(</span><span class="str">`Email`</span><span class="pun">));</span></code></li><li class="L2"><code class="language-sql"></code></li><li class="L3"><code class="language-sql"><span class="pln">  </span><span class="com"># 表Task</span></code></li><li class="L4"><code class="language-sql"><span class="pln">CREATE TABLE </span><span class="str">`IFTTT`</span><span class="pun">.</span><span class="str">`Task`</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L5"><code class="language-sql"><span class="pln">    </span><span class="str">`taskName`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span></code></li><li class="L6"><code class="language-sql"><span class="pln">    </span><span class="str">`userEmail`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span></code></li><li class="L7"><code class="language-sql"><span class="pln">    </span><span class="str">`timeOrMail`</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span></code></li><li class="L8"><code class="language-sql"><span class="pln">    </span><span class="str">`receiveMail`</span><span class="pln"> VARCHAR</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L9"><code class="language-sql"><span class="pln">    </span><span class="str">`receiveMailPassword`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L0"><code class="language-sql"><span class="pln">    </span><span class="str">`sendEmail`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L1"><code class="language-sql"><span class="pln">    </span><span class="str">`sendEmailPassword`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L2"><code class="language-sql"><span class="pln">    </span><span class="str">`sendToEmail`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L3"><code class="language-sql"><span class="pln">    </span><span class="str">`date`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L4"><code class="language-sql"><span class="pln">    </span><span class="str">`mailOrWeibo`</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> </span><span class="kwd">not</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span></code></li><li class="L5"><code class="language-sql"><span class="pln">    </span><span class="str">`weiboAccount`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L6"><code class="language-sql"><span class="pln">    </span><span class="str">`weiboPassword`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L7"><code class="language-sql"><span class="pln">    </span><span class="str">`message`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">100</span><span class="pun">),</span></code></li><li class="L8"><code class="language-sql"><span class="pln">    </span><span class="str">`isRunning`</span><span class="pln"> bit</span><span class="pun">,</span></code></li><li class="L9"><code class="language-sql"><span class="pln">    </span><span class="str">`ListenWeiBoID`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L0"><code class="language-sql"><span class="pln">    </span><span class="str">`ListenWeiBoPassword`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L1"><code class="language-sql"><span class="pln">     </span><span class="str">`ListenWeiBoMessage`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">),</span></code></li><li class="L2"><code class="language-sql"><span class="pln">    PRIMARY KEY </span><span class="pun">(</span><span class="str">`userEmail`</span><span class="pun">,</span><span class="str">`taskName`</span><span class="pun">));</span></code></li><li class="L3"><code class="language-sql"></code></li><li class="L4"><code class="language-sql"><span class="pln">  </span><span class="com"># 表PostMessage</span></code></li><li class="L5"><code class="language-sql"><span class="pln">CREATE TABLE </span><span class="str">`IFTTT`</span><span class="pun">.</span><span class="str">`PostMessage`</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L6"><code class="language-sql"><span class="pln">  </span><span class="str">`ID`</span><span class="pln"> INT NOT NULL</span><span class="pun">,</span></code></li><li class="L7"><code class="language-sql"><span class="pln">  </span><span class="str">`Email`</span><span class="pln"> VARCHAR</span><span class="pun">(</span><span class="lit">45</span><span class="pun">)</span><span class="pln"> NOT NULL</span><span class="pun">,</span></code></li><li class="L8"><code class="language-sql"><span class="pln">  </span><span class="str">`Subject`</span><span class="pln"> VARCHAR</span><span class="pun">(</span><span class="lit">10897</span><span class="pun">)</span><span class="pln"> NOT NULL</span><span class="pun">,</span></code></li><li class="L9"><code class="language-sql"><span class="pln">  </span><span class="str">`Content`</span><span class="pln"> VARCHAR</span><span class="pun">(</span><span class="lit">10897</span><span class="pun">)</span><span class="pln"> NULL</span><span class="pun">,</span></code></li><li class="L0"><code class="language-sql"><span class="pln">  </span><span class="str">`Time`</span><span class="pln"> DATETIME NULL</span><span class="pun">,</span></code></li><li class="L1"><code class="language-sql"><span class="pln">  </span><span class="str">`Read`</span><span class="pln"> BIT</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)</span><span class="pln"> NULL</span><span class="pun">,</span></code></li><li class="L2"><code class="language-sql"><span class="pln">  </span><span class="str">`Important`</span><span class="pln"> BIT</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)</span><span class="pln"> NULL</span><span class="pun">,</span></code></li><li class="L3"><code class="language-sql"><span class="pln">  PRIMARY KEY </span><span class="pun">(</span><span class="str">`ID`</span><span class="pun">));</span></code></li><li class="L4"><code class="language-sql"></code></li><li class="L5"><code class="language-sql"><span class="pln">  </span><span class="com"># 表Consume</span></code></li><li class="L6"><code class="language-sql"><span class="pln">CREATE TABLE </span><span class="str">`IFTTT`</span><span class="pun">.</span><span class="str">`Consume`</span><span class="pln"> </span><span class="pun">(</span></code></li><li class="L7"><code class="language-sql"><span class="pln">  </span><span class="str">`ID`</span><span class="pln"> INT NOT NULL</span><span class="pun">,</span></code></li><li class="L8"><code class="language-sql"><span class="pln">  </span><span class="str">`ThisDesp`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">100</span><span class="pun">)</span><span class="pln"> NOT NULL</span><span class="pun">,</span></code></li><li class="L9"><code class="language-sql"><span class="pln">  </span><span class="str">`ThatDesp`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">100</span><span class="pun">)</span><span class="pln"> NOT NULL</span><span class="pun">,</span></code></li><li class="L0"><code class="language-sql"><span class="pln">  </span><span class="str">`ConsumeValue`</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> NULL</span><span class="pun">,</span></code></li><li class="L1"><code class="language-sql"><span class="pln">  </span><span class="str">`userEmail`</span><span class="pln"> varchar</span><span class="pun">(</span><span class="lit">45</span><span class="pun">)</span><span class="pln"> NULL</span><span class="pun">,</span></code></li><li class="L2"><code class="language-sql"><span class="pln">  PRIMARY KEY </span><span class="pun">(</span><span class="str">`ID`</span><span class="pun">));</span></code></li></ol></pre><div class="md-section-divider"></div><h1 data-anchor-id="7zrs" id="5-项目特色">5. 项目特色</h1><ul data-anchor-id="e4co">
+<li>采用Bootstrap响应式前端模版；</li>
+<li>项目采用MVC架构组织；</li>
+<li>微博的发送和监听增加了自动获取code的方式；</li>
+<li>使用Git进行版本控制，Github进行云端协作；</li>
+</ul><div class="md-section-divider"></div><h1 data-anchor-id="sm9r" id="6-分工详情">6. 分工详情</h1><p data-anchor-id="89i2">分工方式是按照功能来划分，每人分别负责对应功能的前端、后端开发。</p><table data-anchor-id="1hmz" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">表项</th>
+ <th style="text-align:left;">刘越晗</th>
+ <th style="text-align:center;">高端</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">任务内容</td>
+ <td style="text-align:left;">管理员功能，消息功能</td>
+ <td style="text-align:center;">会员功能，任务功能</td>
+</tr>
+<tr>
+ <td style="text-align:center;">打分评价（满分100）</td>
+ <td style="text-align:left;"></td>
+ <td style="text-align:center;"></td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h1 data-anchor-id="b0cr" id="7-参考">7. 参考</h1><div class="footnotes" data-anchor-id="3g5r">
+<hr>
+<small>
+
+<span id="fn:footnote">[1] </span><a href="http://getbootstrap.com/" target="_blank">http://getbootstrap.com/</a>;  <br>
+              <a href="http://wrapbootstrap.com/preview/WB0R5L90S" target="_blank">http://wrapbootstrap.com/preview/WB0R5L90S</a>; <br>
+              <a href="http://wrapbootstrap.com/preview/WB0412697" target="_blank">http://wrapbootstrap.com/preview/WB0412697</a> <a href="#fnref:footnote" title="回到文稿" class="reversefootnote">↩</a><br>
+
+<span id="fn:footnote2">[2] </span><a href="https://github.com/lyhlgf/IFTTT" target="_blank">https://github.com/lyhlgf/IFTTT</a> <br>
+               <a href="https://github.com/duangao/IFTTT" target="_blank">https://github.com/duangao/IFTTT</a> <a href="#fnref:footnote2" title="回到文稿" class="reversefootnote">↩</a><br>
+
+</small>
+</div></div>
+</body>
+</html>

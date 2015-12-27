@@ -11,21 +11,11 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServlet;
 
-import common.MainClass;
-import common.SendEmail;
-import model.Database;
 import model.Task;
-import model.User;
-import sun.applet.Main;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
-import java.io.IOException;
-import java.sql.SQLException;
+
 
 public class TaskModifyServlet extends HttpServlet {
     private int index;
@@ -48,6 +38,8 @@ public class TaskModifyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         HttpSession session = req.getSession();
+
+
         String userEmail = (String) String.valueOf(session.getAttribute("email"));
         String receive_mail = req.getParameter("receive_mail");
         String receive_mail_password = req.getParameter("receive_mail_password");
@@ -63,7 +55,7 @@ public class TaskModifyServlet extends HttpServlet {
         String listen_weibo_message=req.getParameter("listen_weibo_message");
 
         int timeOrMail = (listen_weibo_id != null)?2:((receive_mail==null)?0:1);      // 1: mail ; 0: date; 2: weibo;
-        int mailOrWeibo = (weibo_acount == null)?0:1;     // 0:mail; 1: weibo;
+        int mailOrWeibo = (weibo_acount == null)?0:1;                                // 0:mail; 1: weibo;
 
         System.out.println(receive_mail+"\n"+receive_mail_password+"\n"+date+"\n"+send_email+"\n"+send_email_password+
                 "\n"+weibo_acount+"\n"+weibo_password);
@@ -74,7 +66,6 @@ public class TaskModifyServlet extends HttpServlet {
         System.out.println(task.toString());
         task.update();
 
-        // String _taskName, int _TimeOrMail,String _address,String _password, String _mailFromID,String _mailPassword,String _mailToID,String _strDate,String _strTime,int    _MailOrWeibo,String _weiboID,String _weiboPassword,String _messageContent){
         resp.sendRedirect("/user/taskManage") ;
     }
 }

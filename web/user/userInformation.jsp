@@ -84,6 +84,7 @@
                                             <th>账户余额</th>
                                             <th>消费总额</th>
                                             <th>会员等级</th>
+                                            <th>积分</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -92,6 +93,7 @@
                                             <td><%=balance%></td>
                                             <td><%=consumption%></td>
                                             <td><%=rank%></td>
+                                            <td><%=(int)(Integer.parseInt(consumption)*0.1)%></td>
                                         </tr>
 
                                         </tbody>
