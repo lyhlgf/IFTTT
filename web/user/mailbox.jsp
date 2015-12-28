@@ -51,10 +51,10 @@
                 <h2>站内信</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="/user/index">Home</a>
+                        <a href="/user/index">主页</a>
                     </li>
                     <li class="active">
-                        <a>站内信</a>
+                        <strong>站内信</strong>
                     </li>
                 </ol>
             </div>
@@ -222,7 +222,7 @@
             ordering: false,//是否启用排序
             searching: true,//搜索
             language: {
-                lengthMenu: '<button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="刷新"><i class="fa fa-refresh"></i> </button> <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="标记为已读"><i class="fa fa-eye"></i> </button> <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="标记为重要"><i class="fa fa-exclamation"></i> </button> <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="移到垃圾箱"><i class="fa fa-trash-o"></i> </button>',
+                lengthMenu: '每页显示 _MENU_ 条记录',
                 search: '<button class="btn btn-sm btn-primary">搜索 </button>',//右上角的搜索文本，可以写html标签
 
                 paginate: {//分页的样式内容。

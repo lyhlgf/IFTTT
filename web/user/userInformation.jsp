@@ -6,8 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.User" %>
+<%@ page import="model.Bill" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
+
 <head>
 
     <meta charset="utf-8">
@@ -16,50 +21,45 @@
     <title>IFTTT | Dashboard</title>
 
     <link href="../static/INSPINIA/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/INSPINIA/css/bootstrap.min2.css" rel="stylesheet">
     <link href="../static/INSPINIA/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-    <!-- Toastr style -->
-    <link href="../static/INSPINIA/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-
-    <!-- Gritter -->
-    <link href="../static/INSPINIA/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
-
     <link href="../static/INSPINIA/css/animate.css" rel="stylesheet">
     <link href="../static/INSPINIA/css/style.css" rel="stylesheet">
 
+    <!-- Data Tables -->
+    <link href="../static/INSPINIA/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../static/INSPINIA/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+    <link href="../static/INSPINIA/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
 </head>
 
 <body>
+<%
+    User user = (User) session.getAttribute("user");
+    ArrayList<Bill> bills = (ArrayList<Bill>) session.getAttribute("bills");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+%>
 <div id="wrapper">
-    <%
-        String balance = String.valueOf(session.getAttribute("balance"));
-        String consumption = String.valueOf(session.getAttribute("consumption"));
-        String rank =String.valueOf(session.getAttribute("rank"));
-    %>
-
     <%@include file="navbar.jsp"%>
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <%@include file="header.jsp"%>
         <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
-                <h2>账户信息</h2>
+            <div class="col-lg-9">
+                <h2>用户详情</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.jsp">Home</a>
+                        <a href="/user/index">主页</a>
                     </li>
                     <li>
-                        <a>账户管理</a>
+                        <a href="#">账户管理</a>
                     </li>
                     <li class="active">
                         <strong>账户信息</strong>
                     </li>
                 </ol>
             </div>
-            <div class="col-lg-2">
-
-            </div>
         </div>
+<<<<<<< HEAD
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox-content">
                 <form class="reg-page" action="userInformation" method="get">
@@ -101,15 +101,75 @@
 
                                 </div>
                             </div>
+=======
+
+        <div class="wrapper wrapper-content">
+            <div class="row animated fadeInRight">
+                <div class="col-md-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>账户详情</h5>
+>>>>>>> upstream/master
                         </div>
+                        <div class="ibox-content">
+                            <h4><strong>Noodles</strong></h4>
+                            <p><i class="fa fa-envelope"></i> <%=user.getEmail()%></p>
+                            <table>
+                                <tr>
+                                    <td><strong>等级 : </strong><%=user.getRank()%></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td><strong>积分 : </strong><%=user.getPoint()%></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>折扣 : </strong><%=(int)(user.getDiscount()*100)%>%</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td><strong>余额 : </strong><%=user.getBalance()%></td>
+                                </tr>
+                            </table>
                         </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>消费记录</h5>
+                        </div>
+                        <div class="ibox-content">
 
+                            <table class="table table-striped table-bordered table-hover" >
+                                <thead>
+                                <tr>
+                                    <th>消费时间</th>
+                                    <th>消费金额</th>
+                                    <th>账户余额</th>
+                                    <th>获得积分</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <%
+                                    for (Bill bill : bills) {
 
-                </form>
+                                %>
+                                <tr>
+                                    <td><%=dateFormat.format(bill.getTime())%></td>
+                                    <td><%=bill.getConsume()%></td>
+                                    <td><%=bill.getBalance()%></td>
+                                    <td><%=bill.getPoint()%></td>
+                                </tr>
+                                <%
+                                    }
+                                %>
+                                </tbody>
+                            </table>
 
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
         <%@include file="footer.jsp"%>
+
     </div>
 </div>
 
@@ -123,11 +183,42 @@
 <script src="../static/INSPINIA/js/inspinia.js"></script>
 <script src="../static/INSPINIA/js/plugins/pace/pace.min.js"></script>
 
-<script>
-    $(document).ready(function() {
+<!-- Data Tables -->
+<script src="../static/INSPINIA/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="../static/INSPINIA/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="../static/INSPINIA/js/plugins/dataTables/dataTables.responsive.js"></script>
+<script src="../static/INSPINIA/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
 
+<script>
+    $(document).ready(function(){
+        $('.table').dataTable({
+            paging: true,//分页
+            ordering: false,//是否启用排序
+            searching: true,//搜索
+            language: {
+                lengthMenu: '每页显示 _MENU_ 条记录',
+                search: '搜索: ',//右上角的搜索文本，可以写html标签
+
+                paginate: {//分页的样式内容。
+                    previous: "上一页",
+                    next: "下一页",
+                    first: "第一页",
+                    last: "最后"
+                },
+
+                zeroRecords: "没有内容",//table tbody内容为空时，tbody的内容。
+                //下面三者构成了总体的左下角的内容。
+                info: "显示第_START_ 到第 _END_ ，共 _TOTAL_ 条",//左下角的信息显示，大写的词为关键字。
+                infoEmpty: "0条记录",//筛选为空时左下角的显示。
+                infoFiltered: ""//筛选之后的左下角筛选提示，
+            },
+            dom: 'lftp',
+            pagingType: "full_numbers"//分页样式的类型
+
+        });
     });
 </script>
+
 </body>
 </html>
 

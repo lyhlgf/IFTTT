@@ -28,21 +28,33 @@ public class UserMailboxServlet extends HttpServlet {
         } else {
             int id = Integer.parseInt(req.getParameter("ID"));
             PostMessage postMessage = PostMessage.getPostMessage(id);
-            if (type.equals("mailDetail")) {
-                PostMessage.mark(id, "Read", true);
-                session.setAttribute("messageDetail", postMessage);
-                dispatcher = req.getRequestDispatcher("/user/mailDetail.jsp");
-                dispatcher.forward(req, resp);
-            } else if (type.equals("important")) {
-                if (postMessage.isImportant()) {
-                    PostMessage.mark(id, "Important", false);
-                } else {
-                    PostMessage.mark(id, "Important", true);
-                }
-                resp.sendRedirect("/user/mailbox?ID="+id+"&type=mailDetail");
-            } else if (type.equals("delete")) {
-                PostMessage.delete(id);
-                resp.sendRedirect("/user/mailbox");
+            switch (type) {
+                case "mailDetail" :
+                    if (!postMessage.isRead()) {
+                        PostMessage.mark(id, "Read", true);
+                    }
+                    if (postMessage.getEmail().equals("public")) {
+                        session.setAttribute("hideButtons", "hide");
+                    } else {
+                        session.setAttribute("hideButtons", "");
+                    }
+                    session.setAttribute("messageDetail", postMessage);
+                    dispatcher = req.getRequestDispatcher("/user/mailDetail.jsp");
+                    dispatcher.forward(req, resp);
+                    break;
+                case "important" :
+                    if (postMessage.isImportant()) {
+                        PostMessage.mark(id, "Important", false);
+                    } else {
+                       PostMessage.mark(id, "Important", true);
+                    }
+                    resp.sendRedirect("/user/mailbox?ID="+id+"&type=mailDetail");
+                    break;
+                case "delete" :
+                    PostMessage.delete(id);
+                    resp.sendRedirect("/user/mailbox");
+                    break;
+                default : break;
             }
         }
     }

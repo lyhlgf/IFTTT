@@ -8,6 +8,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.PostMessage" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +35,8 @@
 <body>
 <%
     PostMessage postMessage = (PostMessage) session.getAttribute("messageDetail");
+    String hideButtons = (String) session.getAttribute("hideButtons");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 %>
 <div id="wrapper">
     <%@include file="navbar.jsp"%>
@@ -46,7 +49,7 @@
                 <h2>信件内容</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="/user/index">Home</a>
+                        <a href="/user/index">主页</a>
                     </li>
                     <li>
                         <a href="/user/mailbox">站内信</a>
@@ -65,18 +68,19 @@
                 </h2>
                 <div class="mail-tools tooltip-demo m-t-md">
                     <h5>
-                        <span class="font-noraml"><%=postMessage.getTime()%></span>
+                        <span class="font-noraml"><%=dateFormat.format(postMessage.getTime())%></span>
                     </h5>
                 </div>
             </div>
             <div class="mail-box">
                 <div class="mail-body">
-                    <%=postMessage.getContent()%>
+                    <textarea disabled class="textarea-noborder" rows="15"><%=postMessage.getContent()%></textarea>
                 </div>
-                <div class="mail-body text-right tooltip-demo">
+                <div class="mail-body text-right tooltip-demo <%=hideButtons%>">
                     <a class="btn btn-sm btn-white" href="/user/mailbox?ID=<%=postMessage.getId()%>&type=important"><i class="fa fa-exclamation"></i> 重要</a>
                     <a class="btn btn-sm btn-white" href="/user/mailbox?ID=<%=postMessage.getId()%>&type=delete"><i class="fa fa-trash-o"></i> 删除</a>
                 </div>
+                <!-- TODO: Show notifiction when click buttons -->
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -99,6 +103,19 @@
 
     });
 </script>
+
+
+<style type="text/css">
+    .textarea-noborder {
+        font-size: 14px;
+        background-color: #ffffff;
+        width:100%;
+        padding-right:5px;
+        padding-left:5px;
+        letter-spacing:0;
+        border-style:none;
+    }
+</style>
 
 </body>
 </html>

@@ -42,7 +42,13 @@
                 <h2>任务管理</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.jsp">修改任务</a>
+                        <a href="/user/index">主页</a>
+                    </li>
+                    <li>
+                        <a href="/user/taskManage">任务管理</a>
+                    </li>
+                    <li class="active">
+                        <strong>修改任务</strong>
                     </li>
                 </ol>
             </div>

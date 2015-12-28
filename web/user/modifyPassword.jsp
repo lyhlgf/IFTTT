@@ -44,7 +44,7 @@
                 <h2>修改密码</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.jsp">Home</a>
+                        <a href="/user/index">主页</a>
                     </li>
                     <li>
                         <a>账户管理</a>
@@ -61,14 +61,14 @@
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox-content">
-                <form class="reg-page" action="modifyPassword" method="post">
+                <form id="passwordModify" class="reg-page" action="/user/modifyPassword" method="post">
                     <div class="row">
                         <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">修改密码</h3>
                             <span id="alert"></span>
                             <p>修改密码需要先输入原密码</p>
                             <form role="form">
-                                <div class="form-group"><label>Origin Password</label> <input type="password" placeholder="Origin Password" class="form-control" name="old password"></div>
-                                <div class="form-group"><label>New Password</label><input type="password" placeholder="New Password" class ="form-control" name="new password"></div>
+                                <div class="form-group"><label>原密码</label> <input type="password" placeholder="Origin Password" class="form-control" name="old password"></div>
+                                <div class="form-group"><label>新密码</label><input type="password" placeholder="New Password" class ="form-control" name="new password" id="password"></div>
                                 <div>
                                     <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>确定修改</strong></button>
                                 </div>
@@ -94,6 +94,7 @@
 <!-- Custom and plugin javascript -->
 <script src="../static/INSPINIA/js/inspinia.js"></script>
 <script src="../static/INSPINIA/js/plugins/pace/pace.min.js"></script>
+<script type="text/javascript" src="static/INSPINIA/js/plugins/validate/jquery.validate.min.js"></script>
 
 <script>
     $(document).ready(function() {

@@ -12,9 +12,15 @@ import java.io.IOException;
 import javax.servlet.http.HttpServlet;
 
 import common.ListenWeibo;
+<<<<<<< HEAD
 
 
 import model.Consume;
+=======
+import common.MainClass;
+import common.SendEmail;
+import model.Bill;
+>>>>>>> upstream/master
 import model.Database;
 import model.Task;
 import model.User;
@@ -107,8 +113,12 @@ public class TaskManageServlet extends HttpServlet {
 
         // 运行任务
         if(task.isRunning==false) {
+<<<<<<< HEAD
             // 20: mail ; 10: date; 30: weibo;  // 40:mail; 50: weibo;
             int totalConsume = (task.TimeOrMail+1)*10 + (task.MailOrWeibo+4)*10;
+=======
+            int totalConsume = ((task.TimeOrMail+1)*10 + (task.MailOrWeibo+4)*10);
+>>>>>>> upstream/master
             User user=new User(userEmail,password);
             try {
                user.getUser();
@@ -126,6 +136,7 @@ public class TaskManageServlet extends HttpServlet {
                 // 更新任务状态
                 task.isRunning = true;
                 task.setTaskState(String.valueOf(index), userEmail, 1);
+<<<<<<< HEAD
 
                 // 更新用户余额和消费额
                 int newBalance=user.getBalance()-totalConsume;
@@ -139,6 +150,15 @@ public class TaskManageServlet extends HttpServlet {
                 consume.insert();
 
                 // 更新session中对应的值
+=======
+                int newBalance=user.getBalance()-totalConsume;
+                user.setPoint(user.getPoint()+totalConsume);
+                user.setRank(user.getPoint()/1000+1);
+                user.setBalance(newBalance);
+                user.setConsumption(user.getConsumption()+totalConsume);
+                Bill bill = new Bill(user.getEmail(), totalConsume, totalConsume, newBalance);
+                bill.insert();
+>>>>>>> upstream/master
                 session.setAttribute("balance",newBalance);
                 session.setAttribute("consumption",user.getConsumption());
                 session.setAttribute("balanceNotEnough",0);

@@ -31,7 +31,13 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("rank",String.valueOf(user.getRank()));
                 session.setAttribute("balance",String.valueOf(user.getBalance()));
                 session.setAttribute("consumption",String.valueOf(user.getConsumption()));
-                resp.sendRedirect("/user/index") ;
+                if (user.isAdmin()) {
+                    session.setAttribute("admin", true);
+                    resp.sendRedirect("/admin/index");
+                } else {
+                    session.setAttribute("admin", false);
+                    resp.sendRedirect("/user/index");
+                }
             } else {
                 session.setAttribute("message", "用户名或密码错误。");
                 session.setAttribute("isFail", true);
