@@ -8,22 +8,27 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by user on 2015/12/23.
  */
+
+// This事件: 监听微博在某个日期后有无发布指定内容的微博
 public class ListenWeibo {
-    private Calendar d;
-    private String t;
-    private String access_token=null;
+    private Calendar d;                             // 日期
+    private String t;                               // 文本
+    private String access_token=null;               // 微博账户的access token
+
+    public Calendar startTime;                      // 任务开始时间
+
+    // 使用Python脚本，根据账户和密码获取code
     public ListenWeibo(Calendar date, String text,String id,String password) {
+
         d=date;
         t=text;
-
-
-       String s = getClass().getName();
+        startTime=Calendar.getInstance();
+        String s = getClass().getName();
         int i = s.lastIndexOf(".");
         if(i > -1) s = s.substring(i + 1);
         s = s + ".class";
@@ -42,16 +47,17 @@ public class ListenWeibo {
         pp.redirectErrorStream(true);
         String line=null;
         try {
-            Process process=pp.start();
-            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
+            Process p=pp.start();
+            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
             line=in.readLine();
             in.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
          access_token = line;
     }
+
+    // 监听当前微博账户发送的微博
     public boolean hasThisWeibo(){
 
         if(access_token==null) {
@@ -62,11 +68,9 @@ public class ListenWeibo {
         try {
             List<Status> status=tm.getUserTimeline().getStatuses();
             for(Status i : status) {
-                System.out.println("!"+i.getText() + "!  "+i.getCreatedAt()+" "+d.getTime());
-                System.out.println(t);
-                System.out.println(i.getCreatedAt().after(d.getTime()));
+
                if(i.getCreatedAt().after(d.getTime()) && i.getText().equals(t)) {
-                   System.out.println("YES!!!!!!!!!");
+                    System.out.println("监听到指定微博！");
                     return true;
                }
             }
@@ -79,8 +83,11 @@ public class ListenWeibo {
             }
         }
 
-    return false;
+      return false;
     }
+
+
+    // 测试
     public static  void main(String []args) {
        // System.out.println(new ListenWeibo(new Date(),"").hasThisWeibo());
     }

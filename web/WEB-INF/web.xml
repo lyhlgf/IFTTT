@@ -39,11 +39,11 @@
         </init-param>
         <init-param>
             <param-name>dbUserName</param-name>
-            <param-value>Cloud</param-value>
+            <param-value>root</param-value>
         </init-param>
         <init-param>
             <param-name>dbPassword</param-name>
-            <param-value>2333</param-value>
+            <param-value>root</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -157,6 +157,14 @@
     </servlet-mapping>
 
     <servlet>
+<<<<<<< HEAD
+        <servlet-name>UserConsumeRecordServlet</servlet-name>
+        <servlet-class>controller.user.UserConsumeRecordServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserConsumeRecordServlet</servlet-name>
+        <url-pattern>/user/consumeRecord</url-pattern>
+=======
         <servlet-name>AdminIndexServlet</servlet-name>
         <servlet-class>controller.webAdmin.AdminIndexServlet</servlet-class>
     </servlet>
@@ -208,5 +216,6 @@
     <servlet-mapping>
         <servlet-name>UserDetailServlet</servlet-name>
         <url-pattern>/admin/userDetail</url-pattern>
+>>>>>>> upstream/master
     </servlet-mapping>
 </web-app>

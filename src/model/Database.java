@@ -1,11 +1,10 @@
 package model;
 
-import java.lang.Exception;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+// 数据库类
 public class Database {
     private static String dbUrl;
     private static String dbUserName;
@@ -87,6 +86,7 @@ public class Database {
         db.closeConnection();
         return result;
     }
+
     public int[] getIndex(String userEmail) throws SQLException {
         Database database=new Database();
 

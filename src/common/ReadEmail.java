@@ -9,6 +9,7 @@ import javax.mail.*;
 
 import javax.mail.search.*;
 
+// This 事件： 监听邮箱是否收到邮件
 public class ReadEmail {
 
     // 成员，存放信件
@@ -46,8 +47,7 @@ public class ReadEmail {
         if (messages.length == 0)
             System.out.println("No messages found.");
 
-        for (int i = 0; i < messages.length; i++) {								// 控制台输出邮件信息
-
+        for (int i = 0; i < messages.length; i++) {								// 控制台输出收到的邮件信息
             messages[i].setFlag(Flags.Flag.SEEN, true);
             System.out.println("Message " + (i + 1));
             System.out.println("From : " + messages[i].getFrom()[0]);

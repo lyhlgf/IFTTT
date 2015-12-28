@@ -62,6 +62,58 @@
         <div class="wrapper wrapper-content animated fadeInRight">
                 <form class="reg-page" action="taskManage" method="post">
                     <div class="row">
+<<<<<<< HEAD
+                        <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">任务列表</h3>
+                            <table class="table table-striped table-bordered table-hover dataTables-example" >
+                                <thead>
+                                <tr>
+                                    <th>任务名</th>
+                                    <th>This</th>
+                                    <th>That</th>
+                                    <th>Is Running</th>
+                                    <th>控制</th>
+                                    <th>修改</th>
+                                    <th>删除</th>
+                                </tr>
+                                </thead>
+
+                                <tbody  id="taskList">
+
+                                <%
+                                        try {
+                                            String[] taskNames = (String[]) session.getAttribute("taskName");
+                                            String[] taskThis = (String[]) session.getAttribute("This");
+                                            String[] taskThat = (String[]) session.getAttribute("That");
+                                            String[] taskRunning = (String[]) session.getAttribute("isRunning");
+                                            int[] taskThisEvents = (int[]) session.getAttribute("thisEvents");
+                                            int[] taskThatEvents = (int[]) session.getAttribute("thatEvents");
+
+                                            for (int i = 0; i < taskNames.length; i++) {
+                                                out.print("<tr>");
+                                                out.print("<td>" + taskNames[i] + "</td>");
+                                                out.print("<td>" + taskThis[i] + "</td>");
+                                                out.print("<td>" + taskThat[i] + "</td>");
+                                                out.print("<td>" + taskRunning[i] + "</td>");
+                                                String runtext = (taskRunning[i] == "Paused") ? "Run" : "Pause";
+
+
+                                                String ta = String.valueOf(taskThisEvents[i]);
+                                                String tb = String.valueOf(taskThatEvents[i]);
+
+                                                out.print("<td> <form action=\"taskManage\" method=\"post\">\n" +
+                                                        "<button class=\"btn btn-primary\" type=\"button\" name=\"" + taskNames[i] + "\" onclick=\"return mysubmit(this.name)\">" + runtext + "</button>\n" +
+                                                        "</form></td>");
+
+                                                out.print("<td>" +
+                                                        "<button class=\"btn btn-info\" type=\"button\" name=\"n" + taskNames[i] + "\" onclick=\"return mysubmit2(this.name" + "," + ta + "," + tb + ")\">Modify</button>\n" +
+                                                        "</td>");
+
+                                                out.print("<td>" +
+                                                        "<button class=\"btn btn-warning\" type=\"button\" name=\"d" + taskNames[i] + "\" onclick=\"return mysubmit3(this.name)\">Delete</button>\n" +
+                                                        "</td>");
+
+                                                out.print("</tr>");
+=======
                         <div class="col-sm-13">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
@@ -120,6 +172,7 @@
                                                 }
                                             }catch (Exception e) {
                                                 //  e.printStackTrace();
+>>>>>>> upstream/master
                                             }
 
                                         %>
@@ -196,12 +249,7 @@
 
         form.append(field);
         $(document.body).append(form);
-       var elem= document.getElementsByName(name);
-        if(elem.innerText == "Run")
-            elem.innerText="Pause";
-        else {
-            elem.innerText="Run";
-        }
+
         form.submit();
 
     }

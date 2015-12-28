@@ -59,6 +59,49 @@
                 </ol>
             </div>
         </div>
+<<<<<<< HEAD
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox-content">
+                <form class="reg-page" action="userInformation" method="get">
+                    <div class="row">
+                        <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">账户信息</h3>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>用户邮箱</th>
+                                            <th>账户余额</th>
+                                            <th>消费总额</th>
+                                            <th>会员等级</th>
+                                            <th>积分</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><%=email%></td>
+                                            <td><%=balance%></td>
+                                            <td><%=consumption%></td>
+                                            <td><%=rank%></td>
+                                            <td><%=(int)(Integer.parseInt(consumption)*0.1)%></td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+=======
 
         <div class="wrapper wrapper-content">
             <div class="row animated fadeInRight">
@@ -66,6 +109,7 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>账户详情</h5>
+>>>>>>> upstream/master
                         </div>
                         <div class="ibox-content">
                             <h4><strong>Noodles</strong></h4>

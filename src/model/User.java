@@ -61,6 +61,9 @@ public class User {
         this.email = email;
     }
 
+<<<<<<< HEAD
+    // 更新数据库中用户密码
+=======
     public void setPoint(int point) {
         this.point = point;
         Database db = new Database();
@@ -79,6 +82,7 @@ public class User {
         db.closeConnection();
     }
 
+>>>>>>> upstream/master
     public void setPassword(String password) {
         this.password = password;
         Database db = new Database();
@@ -109,15 +113,21 @@ public class User {
         db.closeConnection();
     }
 
+    // 更新数据库中的消费额
     public void setConsumption(int consumption) {
         this.consumption=consumption;
+        if((int)(consumption / (double)10000) > rank-1) {
+            rank=(int)(consumption / (double)10000)+1;
+        }
         Database db = new Database();
-        String sql = "update IFTTT.User set Consumption = '" + consumption + "' " +
+        String sql = "update IFTTT.User set Consumption = '" + consumption + "', Rank='" + rank + "' " +
                 "where email = '"+email+"'";
         boolean success = db.executeSQL(sql);
+
         db.closeConnection();
     }
 
+    // 更新数据库中的用户余额
     public void setBalance(int balance) {
         this.balance=balance;
         Database db = new Database();
@@ -127,10 +137,14 @@ public class User {
         db.closeConnection();
     }
 
+<<<<<<< HEAD
+    // 该用户插入数据库
+=======
     public boolean isAdmin() {
         return isAdmin;
     }
 
+>>>>>>> upstream/master
     public boolean insert() {
         Database db = new Database();
         String sql = "INSERT INTO IFTTT.User (Email, Password, Rank, Consumption, Balance) VALUE ('" + email + "'," +
@@ -140,6 +154,7 @@ public class User {
         return success;
     }
 
+    // 从数据库中获取User对象
     public boolean getUser() throws SQLException {
         Database db = new Database();
         String sql = "SELECT * FROM IFTTT.User WHERE Email = '" + email + "' AND Password = '" + password + "';";

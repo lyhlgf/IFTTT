@@ -1,7 +1,5 @@
-- This 任务目前仅邮件有效,缺少时间、监听微博
-- that 任务发送邮件和发送微博均有效
-- 任务管理页面目前可以查看、开始、暂停任务，缺少修改、删除任务。
-
+## 实验报告
+运行后，点集 侧栏 “文档”-“实验报告”，即可打开目前的报告；
 
 ## 数据库格式
 
@@ -27,8 +25,13 @@ CREATE TABLE `IFTTT`.`User` (
 CREATE TABLE `IFTTT`.`PostMessage` (
   `ID` INT NOT NULL,
   `Email` VARCHAR(45) NOT NULL,
+<<<<<<< HEAD
+  `Subject` VARCHAR(10897) NOT NULL,
+  `Content` VARCHAR(10897) NULL,
+=======
   `Subject` VARCHAR(10000) NOT NULL,
   `Content` VARCHAR(10000) NULL,
+>>>>>>> upstream/master
   `Time` DATETIME NULL,
   `Read` BIT(1) NULL,
   `Important` BIT(1) NULL,
@@ -60,6 +63,18 @@ alter table `IFTTT`.`Task` add `ListenWeiBoPassword` varchar(45);
 alter table `IFTTT`.`Task` add `ListenWeiBoMessage` varchar(45);
 ```
 
+<<<<<<< HEAD
++ 消费记录
+
+```sql
+CREATE TABLE `IFTTT`.`Consume` (
+  `ID` INT NOT NULL,
+  `ThisDesp` varchar(100) NOT NULL,
+  `ThatDesp` varchar(100) NOT NULL,
+  `ConsumeValue` int NULL,
+  `userEmail` varchar(45) NULL,
+  PRIMARY KEY (`ID`));
+=======
 + Bill表
 
 ```sql
@@ -81,4 +96,5 @@ CREATE TABLE `IFTTT`.`Thing` (
   `Type` VARCHAR(45) NOT NULL,
   `Stat` BIT(1) NOT NULL,
   PRIMARY KEY (`Name`));
+>>>>>>> upstream/master
 ```

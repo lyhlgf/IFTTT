@@ -35,7 +35,6 @@ public class UserModifyPasswordServlet extends HttpServlet {
 
         try {
             if (user.getUser()) {
-                //session.setAttribute("isFail",false);
                 user.setPassword(new_password);
                 session.setAttribute("password",new_password);              // update session value
                 resp.sendRedirect("/user/index") ;

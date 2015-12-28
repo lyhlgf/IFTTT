@@ -11,21 +11,11 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServlet;
 
-import common.MainClass;
-import common.SendEmail;
-import model.Database;
 import model.Task;
-import model.User;
-import sun.applet.Main;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
-import java.io.IOException;
-import java.sql.SQLException;
+
 
 public class TaskDeleteServlet extends HttpServlet {
 
@@ -34,10 +24,10 @@ public class TaskDeleteServlet extends HttpServlet {
         req.getSession().setAttribute("navbarActive", "taskManage");
         int index=Integer.valueOf(req.getParameter("index"));
         HttpSession session = req.getSession();
+
         String userEmail = (String) String.valueOf(session.getAttribute("email"));
         Task.deleteTask(index,userEmail);
-       // RequestDispatcher dispatcher = req.getRequestDispatcher("/user/taskManage.jsp");
-    //    dispatcher.forward(req, resp);
+
         resp.sendRedirect("/user/taskManage");
     }
 
