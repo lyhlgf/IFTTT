@@ -1,6 +1,5 @@
-package controller.user;
+package controller.webAdmin;
 
-import model.Bill;
 import model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -12,18 +11,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class UserInfoServlet extends HttpServlet{
+public class UserManageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        session.setAttribute("navbarActive", "accountInfo");
-        String email = (String) session.getAttribute("email");
-        User user = new User(email);
-        user.getUserDetail();
-        session.setAttribute("user", user);
-        ArrayList<Bill> bills = Bill.getAllBills(email);
-        session.setAttribute("bills", bills);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/userInformation.jsp");
+        session.setAttribute("navbarActive", "userManage");
+        ArrayList<User> users = User.getAllUser();
+        session.setAttribute("users", users);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/userManage.jsp");
         dispatcher.forward(req, resp);
     }
 }

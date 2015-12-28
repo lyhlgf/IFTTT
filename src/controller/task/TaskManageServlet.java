@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import common.ListenWeibo;
 import common.MainClass;
 import common.SendEmail;
+import model.Bill;
 import model.Database;
 import model.Task;
 import model.User;
@@ -112,7 +113,7 @@ public class TaskManageServlet extends HttpServlet {
 
         // 20: mail ; 10: date; 30: weibo;  // 40:mail; 50: weibo;
         if(task.isRunning==false) {
-            int totalConsume = (task.TimeOrMail+1)*10 + (task.MailOrWeibo+4)*10;
+            int totalConsume = ((task.TimeOrMail+1)*10 + (task.MailOrWeibo+4)*10);
             User user=new User(userEmail,password);
             try {
                user.getUser();
@@ -127,9 +128,12 @@ public class TaskManageServlet extends HttpServlet {
                 task.isRunning = true;
                 task.setTaskState(String.valueOf(index), userEmail, 1);
                 int newBalance=user.getBalance()-totalConsume;
-
+                user.setPoint(user.getPoint()+totalConsume);
+                user.setRank(user.getPoint()/1000+1);
                 user.setBalance(newBalance);
                 user.setConsumption(user.getConsumption()+totalConsume);
+                Bill bill = new Bill(user.getEmail(), totalConsume, totalConsume, newBalance);
+                bill.insert();
                 session.setAttribute("balance",newBalance);
                 session.setAttribute("consumption",user.getConsumption());
                 session.setAttribute("balanceNotEnough",0);

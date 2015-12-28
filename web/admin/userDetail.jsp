@@ -48,13 +48,13 @@
                 <h2>用户详情</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="/user/index">主页</a>
+                        <a href="/admin/index">主页</a>
                     </li>
                     <li>
-                        <a href="#">账户管理</a>
+                        <a href="/admin/index">用户管理</a>
                     </li>
                     <li class="active">
-                        <strong>账户信息</strong>
+                        <strong>用户详情</strong>
                     </li>
                 </ol>
             </div>
@@ -65,7 +65,7 @@
                 <div class="col-md-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>账户详情</h5>
+                            <h5>用户详情</h5>
                         </div>
                         <div class="ibox-content">
                             <h4><strong>Noodles</strong></h4>
@@ -82,6 +82,25 @@
                                     <td><strong>余额 : </strong><%=user.getBalance()%></td>
                                 </tr>
                             </table>
+                            <br>
+                            <form action="/admin/userDetail?email=<%=user.getEmail()%>" method="post">
+                                <label>修改等级: </label>
+                                <table>
+                                    <tr>
+                                        <td><input name="rank" type="number" class="form-control" style="width: 80px"></td>
+                                        <td>&nbsp;&nbsp;</td>
+                                        <td><button class="btn btn-outline btn-primary btn-sm" type="submit">提交</button></td>
+                                    </tr>
+                                </table>
+                            </form>
+                            <br>
+                            <div class="user-button">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <a href="/admin/newPostMessage?email=<%=user.getEmail()%>" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> 发送站内信</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

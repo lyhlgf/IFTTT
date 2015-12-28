@@ -1,21 +1,17 @@
-package controller.user;
+package controller.webAdmin;
 
-/**
- * Created by user on 2015/12/14.
- */
-
-import model.User;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-public class UserConsumeRecordServlet extends HttpServlet {
+
+public class AdminIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().setAttribute("navbarActive", "consumeRecord");
-        RequestDispatcher dispatcher = req.getRequestDispatcher("user/Account/consumeRecord.jsp");
+        req.getSession().setAttribute("navbarActive", "adminIndex");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/index.jsp");
         dispatcher.forward(req, resp);
     }
 }

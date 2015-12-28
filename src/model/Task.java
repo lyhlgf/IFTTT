@@ -114,7 +114,7 @@ public class Task extends java.util.TimerTask{
                 + "\""+mailPassword+"\","  + "\""+mailToID+"\","  + "\""+strDate+"\","  + "\""+MailOrWeibo+"\","
                 + "\""+weiboID+"\","  + "\""+weiboPassword+"\","  + "\""+messageContent+"\",0,"+"\""+userEmail+"\","+
                 "\""+listenWeiBoID+"\",\""+listenWeiBoPassword+"\",\""+listenWeiBoMessage+"\");";
-
+        System.err.println(messageContent+"117");
         boolean success = db.executeSQL(sql);
         db.closeConnection();
         return success;
@@ -128,7 +128,7 @@ public class Task extends java.util.TimerTask{
                 "\",isRunning=0"+",userEmail=\""+userEmail+"\",listenWeiBoID=\""+listenWeiBoID+"\",listenWeiBoPassword=\""
                 +listenWeiBoPassword +"\",listenWeiBoMessage=\""+listenWeiBoMessage+"\"  where taskName=\""+
                 taskName+"\" and userEmail=\""+userEmail+"\";";
-        System.out.println(sql);
+        System.err.println(messageContent+"131");
         boolean success = db.executeSQL(sql);
         db.closeConnection();
 
@@ -171,7 +171,7 @@ public class Task extends java.util.TimerTask{
             this.listenWeiBoID=resultSet.getString("listenWeiBoID");
             this.listenWeiBoPassword=resultSet.getString("listenWeiBoPassword");
             this.listenWeiBoMessage=resultSet.getString("listenWeiBoMessage");
-
+            System.err.println(messageContent+"174");
         }
         return success;
     }

@@ -35,7 +35,6 @@
 <body>
 <%
     PostMessage postMessage = (PostMessage) session.getAttribute("messageDetail");
-    String hideButtons = (String) session.getAttribute("hideButtons");
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 %>
 <div id="wrapper">
@@ -46,16 +45,16 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>信件内容</h2>
+                <h2>消息内容</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="/user/index">主页</a>
+                        <a href="/admin/index">主页</a>
                     </li>
                     <li>
-                        <a href="/user/mailbox">站内信</a>
+                        <a href="/admin/postMessageManage">消息管理</a>
                     </li>
                     <li class="active">
-                        <strong>信件内容</strong>
+                        <strong>消息内容</strong>
                     </li>
                 </ol>
             </div>
@@ -76,9 +75,9 @@
                 <div class="mail-body">
                     <textarea disabled class="textarea-noborder" rows="15"><%=postMessage.getContent()%></textarea>
                 </div>
-                <div class="mail-body text-right tooltip-demo <%=hideButtons%>">
-                    <a class="btn btn-sm btn-white" href="/user/mailbox?ID=<%=postMessage.getId()%>&type=important"><i class="fa fa-exclamation"></i> 重要</a>
-                    <a class="btn btn-sm btn-white" href="/user/mailbox?ID=<%=postMessage.getId()%>&type=delete"><i class="fa fa-trash-o"></i> 删除</a>
+                <div class="mail-body text-right tooltip-demo">
+                    <a class="btn btn-sm btn-white" href="/admin/postMessageManage?ID=<%=postMessage.getId()%>&type=edit"><i class="fa fa-pencil"></i> 编辑</a>
+                    <a class="btn btn-sm btn-white" href="/admin/postMessageManage?ID=<%=postMessage.getId()%>&type=delete"><i class="fa fa-trash-o"></i> 删除</a>
                 </div>
                 <!-- TODO: Show notifiction when click buttons -->
                 <div class="clearfix"></div>
@@ -103,7 +102,6 @@
 
     });
 </script>
-
 
 <style type="text/css">
     .textarea-noborder {

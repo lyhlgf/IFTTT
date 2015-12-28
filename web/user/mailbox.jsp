@@ -51,10 +51,10 @@
                 <h2>站内信</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="/user/index">Home</a>
+                        <a href="/user/index">主页</a>
                     </li>
                     <li class="active">
-                        <a>站内信</a>
+                        <strong>站内信</strong>
                     </li>
                 </ol>
             </div>

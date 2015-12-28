@@ -6,10 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="model.User" %>
-<%@ page import="model.Bill" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="model.Thing" %>
 <!DOCTYPE html>
 <html>
 
@@ -34,9 +32,7 @@
 
 <body>
 <%
-    User user = (User) session.getAttribute("user");
-    ArrayList<Bill> bills = (ArrayList<Bill>) session.getAttribute("bills");
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    ArrayList<Thing> things = (ArrayList<Thing>) session.getAttribute("things");
 %>
 <div id="wrapper">
     <%@include file="navbar.jsp"%>
@@ -45,82 +41,60 @@
         <%@include file="header.jsp"%>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-9">
-                <h2>用户详情</h2>
+                <h2>事件管理</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="/user/index">主页</a>
-                    </li>
-                    <li>
-                        <a href="#">账户管理</a>
+                        <a href="/admin/index">主页</a>
                     </li>
                     <li class="active">
-                        <strong>账户信息</strong>
+                        <strong>事件管理</strong>
                     </li>
                 </ol>
             </div>
         </div>
 
-        <div class="wrapper wrapper-content">
-            <div class="row animated fadeInRight">
-                <div class="col-md-4">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>账户详情</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h4><strong>Noodles</strong></h4>
-                            <p><i class="fa fa-envelope"></i> <%=user.getEmail()%></p>
-                            <table>
-                                <tr>
-                                    <td><strong>等级 : </strong><%=user.getRank()%></td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td><strong>积分 : </strong><%=user.getPoint()%></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>折扣 : </strong><%=(int)(user.getDiscount()*100)%>%</td>
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                    <td><strong>余额 : </strong><%=user.getBalance()%></td>
-                                </tr>
-                            </table>
-                        </div>
+        <div class="row">
+            <div class="col-lg-13">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>事件列表</h5>
                     </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>消费记录</h5>
-                        </div>
-                        <div class="ibox-content">
+                    <div class="ibox-content">
 
-                            <table class="table table-striped table-bordered table-hover" >
-                                <thead>
-                                <tr>
-                                    <th>消费时间</th>
-                                    <th>消费金额</th>
-                                    <th>账户余额</th>
-                                    <th>获得积分</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <%
-                                    for (Bill bill : bills) {
-
-                                %>
-                                <tr>
-                                    <td><%=dateFormat.format(bill.getTime())%></td>
-                                    <td><%=bill.getConsume()%></td>
-                                    <td><%=bill.getBalance()%></td>
-                                    <td><%=bill.getPoint()%></td>
-                                </tr>
-                                <%
+                        <table class="table table-striped table-bordered table-hover" >
+                            <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>类型</th>
+                                <th>状态</th>
+                                <th>选项</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%
+                                for (Thing thing : things) {
+                                    String enable = "启用";
+                                    String buttonType = "danger";
+                                    String buttonEnable = "禁用";
+                                    if (!thing.isEnable()) {
+                                        enable = "禁用";
+                                        buttonType = "primary";
+                                        buttonEnable = "启用";
                                     }
-                                %>
-                                </tbody>
-                            </table>
+                            %>
+                            <tr>
+                                <td><%=thing.getName()%></td>
+                                <td><%=thing.getType()%></td>
+                                <td><%=enable%></td>
+                                <td><a href="/admin/thingManage?name=<%=thing.getName()%>" class="btn btn-xs btn-<%=buttonType%>"><%=buttonEnable%></a></td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                            </tbody>
+                        </table>
 
-                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
