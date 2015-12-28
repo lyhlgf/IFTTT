@@ -121,3 +121,27 @@
 </body>
 </html>
 
+<!--
+<div class = "row" style="margin-top: 50px" >
+<div class ="col-md-4 col-md-offset-1">
+<img src="/static/img/if.png">
+</div>
+</div>
+<div class="row"  style="margin-top: 20px" >
+<div class="col-sm-6 col-md-2">
+<a href="#" class="thumbnail">
+<img src="/static/img/weibo.png" width="80" height="80"
+alt="通用的占位符缩略图">
+</a>
+</div>
+<div class="col-sm-6 col-md-2">
+<a href="#" class="thumbnail">
+<img src="/static/img/qqmail.jpg" width="80" height="80"
+alt="通用的占位符缩略图">
+</a>
+</div>
+
+
+</div>
+--!>
+

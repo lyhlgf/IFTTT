@@ -54,7 +54,7 @@ public class ListenWeibo {
         } catch (IOException e) {
             //e.printStackTrace();
         }
-         access_token = line;
+        access_token = line;
     }
 
     // 监听当前微博账户发送的微博
@@ -69,13 +69,13 @@ public class ListenWeibo {
             List<Status> status=tm.getUserTimeline().getStatuses();
             for(Status i : status) {
 
-               if(i.getCreatedAt().after(d.getTime()) && i.getText().equals(t)) {
+                if(i.getCreatedAt().after(d.getTime()) && i.getText().equals(t)) {
                     System.out.println("监听到指定微博！");
                     return true;
-               }
+                }
             }
         } catch (WeiboException e) {
-          //  e.printStackTrace();
+            //  e.printStackTrace();
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e1) {
@@ -83,12 +83,12 @@ public class ListenWeibo {
             }
         }
 
-      return false;
+        return false;
     }
 
 
     // 测试
     public static  void main(String []args) {
-       // System.out.println(new ListenWeibo(new Date(),"").hasThisWeibo());
+        // System.out.println(new ListenWeibo(new Date(),"").hasThisWeibo());
     }
 }

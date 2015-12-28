@@ -1,16 +1,19 @@
 package common;
 
-
+import weibo4j.Oauth;
 import weibo4j.Timeline;
 
+import weibo4j.Weibo;
+import weibo4j.http.AccessToken;
 import weibo4j.model.Status;
-
+import weibo4j.model.StatusWapper;
+import weibo4j.model.User;
 import weibo4j.model.WeiboException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.util.List;
 
 // That 事件： 给指定微博账号发布微博
 public class SendWeiBo {

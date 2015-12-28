@@ -17,6 +17,15 @@
         <url-pattern>/user/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>AdminLoginFilter</filter-name>
+        <filter-class>controller.filter.AdminLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminLoginFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>InitServlet</servlet-name>
         <servlet-class>controller.InitServlet</servlet-class>
@@ -148,11 +157,56 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UserConsumeRecordServlet</servlet-name>
-        <servlet-class>controller.user.UserConsumeRecordServlet</servlet-class>
+        <servlet-name>AdminIndexServlet</servlet-name>
+        <servlet-class>controller.webAdmin.AdminIndexServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserConsumeRecordServlet</servlet-name>
-        <url-pattern>/user/consumeRecord</url-pattern>
+        <servlet-name>AdminIndexServlet</servlet-name>
+        <url-pattern>/admin/index</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PostMessageManageServlet</servlet-name>
+        <servlet-class>controller.webAdmin.PostMessageManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostMessageManageServlet</servlet-name>
+        <url-pattern>/admin/postMessageManage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>NewPostMessageServlet</servlet-name>
+        <servlet-class>controller.webAdmin.NewPostMessageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewPostMessageServlet</servlet-name>
+        <url-pattern>/admin/newPostMessage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ThingManageServlet</servlet-name>
+        <servlet-class>controller.webAdmin.ThingManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ThingManageServlet</servlet-name>
+        <url-pattern>/admin/thingManage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserManageServlet</servlet-name>
+        <servlet-class>controller.webAdmin.UserManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserManageServlet</servlet-name>
+        <url-pattern>/admin/userManage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserDetailServlet</servlet-name>
+        <servlet-class>controller.webAdmin.UserDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserDetailServlet</servlet-name>
+        <url-pattern>/admin/userDetail</url-pattern>
     </servlet-mapping>
 </web-app>

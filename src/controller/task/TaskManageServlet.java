@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServlet;
 
 import common.ListenWeibo;
 
-
-import model.Consume;
+import model.Bill;
 import model.Database;
 import model.Task;
 import model.User;
@@ -74,6 +73,7 @@ public class TaskManageServlet extends HttpServlet {
             actualIndex++;
         }
 
+
         session.setAttribute("taskName", taskNames) ;
         session.setAttribute("This", taskThis) ;
         session.setAttribute("That", taskThat) ;
@@ -86,8 +86,8 @@ public class TaskManageServlet extends HttpServlet {
             session.setAttribute("balanceNotEnough",0);
         database.closeConnection();
 
-        resp.sendRedirect("/user/taskManage");
-    }
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/taskManage.jsp");
+        dispatcher.forward(req, resp);    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -104,11 +104,10 @@ public class TaskManageServlet extends HttpServlet {
         }catch (Exception e) {
             e.printStackTrace();
         }
-
         // 运行任务
         if(task.isRunning==false) {
             // 20: mail ; 10: date; 30: weibo;  // 40:mail; 50: weibo;
-            int totalConsume = (task.TimeOrMail+1)*10 + (task.MailOrWeibo+4)*10;
+            int totalConsume = ((task.TimeOrMail+1)*10 + (task.MailOrWeibo+4)*10);
             User user=new User(userEmail,password);
             try {
                user.getUser();
@@ -129,14 +128,14 @@ public class TaskManageServlet extends HttpServlet {
 
                 // 更新用户余额和消费额
                 int newBalance=user.getBalance()-totalConsume;
+                user.setPoint(user.getPoint()+totalConsume);
+                user.setRank(user.getPoint()/1000+1);
                 user.setBalance(newBalance);
                 user.setConsumption(user.getConsumption()+totalConsume);
 
                 // 更新消费记录
-                String thisDesp =  (task.TimeOrMail==1)?"Receive mail from "+task.address:(task.TimeOrMail==0?"Time reach at "+task.strDate:"Listen weibo "+task.listenWeiBoID);
-                String thatDesp = (task.MailOrWeibo==1)?"Send weibo to "+task.weiboID+" with content: "+task.messageContent:"Send mail to "+task.mailToID+" with content: "+task.messageContent;
-                Consume consume =new Consume(thisDesp,thatDesp,totalConsume,userEmail);
-                consume.insert();
+                Bill bill = new Bill(user.getEmail(), totalConsume, totalConsume, newBalance);
+                bill.insert();
 
                 // 更新session中对应的值
                 session.setAttribute("balance",newBalance);
@@ -150,7 +149,6 @@ public class TaskManageServlet extends HttpServlet {
                 task.timer.schedule(task, 1000, 1000);
             }
         }
-        // 暂停任务
         else {
             task.isRunning=false;
             session.setAttribute("taskRunning["+index+"]",0);

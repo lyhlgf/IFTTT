@@ -5,8 +5,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <p>
-                        2015 &copy; All Rights Reserved.
-                        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                        刘越晗、高端开发
                     </p>
                 </div>
 

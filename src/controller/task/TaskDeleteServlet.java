@@ -4,7 +4,6 @@ package controller.task;
  * Created by user on 2015/12/18.
  */
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -24,7 +23,6 @@ public class TaskDeleteServlet extends HttpServlet {
         req.getSession().setAttribute("navbarActive", "taskManage");
         int index=Integer.valueOf(req.getParameter("index"));
         HttpSession session = req.getSession();
-
         String userEmail = (String) String.valueOf(session.getAttribute("email"));
         Task.deleteTask(index,userEmail);
 

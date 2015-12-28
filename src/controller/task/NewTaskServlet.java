@@ -2,7 +2,6 @@ package controller.task;
 
 import javax.servlet.http.*;
 
-
 import model.Database;
 import model.Task;
 
@@ -42,7 +41,7 @@ public class NewTaskServlet extends HttpServlet {
         String listen_weibo_message=req.getParameter("listen_weibo_message");
 
         int timeOrMail = (listen_weibo_id != null)?2:((receive_mail==null)?0:1);      // 1: mail ; 0: date; 2: weibo;
-        int mailOrWeibo = (weibo_acount == null)?0:1;                                // 0:mail; 1: weibo;
+        int mailOrWeibo = (weibo_acount == null)?0:1;     // 0:mail; 1: weibo;
 
         Database database=new Database();
         int[] indexs= null;
@@ -64,15 +63,15 @@ public class NewTaskServlet extends HttpServlet {
             if(count==0) {
                 count=indexs.length;
             }
-           // System.out.println("index: "+indexs.length+" "+count);
+          //  System.out.println("index: "+indexs.length+" "+count);
         }
+
 
         Task task  = new Task(userEmail,String.valueOf(count),timeOrMail,receive_mail,receive_mail_password,send_email,
                 send_email_password,send_to_email,date,"time",mailOrWeibo,weibo_acount,weibo_password,message,
                 listen_weibo_id,listen_weibo_password,listen_weibo_message);
 
         task.insert();
-
         resp.sendRedirect("/user/index") ;
     }
 }

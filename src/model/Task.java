@@ -7,23 +7,26 @@ import common.ReadEmail;
 import common.SendEmail;
 import common.SendWeiBo;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+import java.util.Date;
 import java.util.Timer;
 
-// 任务类
+
 public class Task extends java.util.TimerTask{
     public String userEmail;
-    public String taskName;		    // 任务名称
-    public int TimeOrMail;		    // 触发事件是时间或者邮件或者监听微博
+    public String taskName;		// 任务名称
+    public int TimeOrMail;		// 触发事件是时间或者邮件
 
-    public String address;		    // 接收邮箱
-    public String password;		    // 接受邮箱密码
+    public String address;		// 接收邮箱
+    public String password;		// 接受邮箱密码
 
     public String mailFromID;		// 发送邮箱ID
     public String mailPassword;		// 发送邮箱密码
@@ -32,9 +35,9 @@ public class Task extends java.util.TimerTask{
     public Calendar currentTime;	// 事件触发的时间
 
     public String strDate;			// 日期
-    public String strTime;
+    public String strTime;			// 时间
 
-    public int MailOrWeibo;		    // 邮件或者微博
+    public int MailOrWeibo;		// 邮件或者微博
 
     public String weiboID;			// 微博登录名
     public String weiboPassword;	// 微博密码
@@ -43,21 +46,16 @@ public class Task extends java.util.TimerTask{
     public String messageContent;	// 邮件或者微博内容
 
     public String detailInformation;	// 详细描述
-    public boolean isRunning;           // 任务状态
-
-    public String listenWeiBoID;        // 监听微博账户
-    public String listenWeiBoPassword;  // 监听微博密码
-    public String listenWeiBoMessage;   // 监听微博内容
+    public boolean isRunning;
+    public String listenWeiBoID;
+    public String listenWeiBoPassword;
+    public String listenWeiBoMessage;
 
     public Timer timer;
 
-    private static Database db=new Database();      // 数据库对象
-
+    private static Database db=new Database();
     public ListenWeibo listenWeibo;
-
-
-    // 无参构造器
-    public Task(){
+    public Task(){					// 无参构造器
         super();
         taskName="";
         TimeOrMail=0;MailOrWeibo=0;
@@ -93,6 +91,7 @@ public class Task extends java.util.TimerTask{
     }
 
     public static Calendar StringToCalender(String _date){			// 从字符串到时间的转换
+
         Calendar date = Calendar.getInstance();
         if(_date==null) {
             return date;
@@ -105,8 +104,6 @@ public class Task extends java.util.TimerTask{
         }
         return date;
     }
-
-    // 向数据库中插入该任务
     public boolean insert() {
         Database db = new Database();
 
@@ -121,8 +118,6 @@ public class Task extends java.util.TimerTask{
         db.closeConnection();
         return success;
     }
-
-    // 更新制定任务
     public  boolean update() {
         Database db = new Database();
         String sql = "update IFTTT.Task set timeOrMail=\""+TimeOrMail+"\",receiveMail=\""+address+
@@ -132,14 +127,11 @@ public class Task extends java.util.TimerTask{
                 "\",isRunning=0"+",userEmail=\""+userEmail+"\",listenWeiBoID=\""+listenWeiBoID+"\",listenWeiBoPassword=\""
                 +listenWeiBoPassword +"\",listenWeiBoMessage=\""+listenWeiBoMessage+"\"  where taskName=\""+
                 taskName+"\" and userEmail=\""+userEmail+"\";";
-        System.out.println(sql);
         boolean success = db.executeSQL(sql);
         db.closeConnection();
 
         return success;
     }
-
-    // 删除指定任务
     public static boolean deleteTask(int index,String userEmail) {
         Database db = new Database();
         String sql = "delete from IFTTT.Task where taskName=\""+String.valueOf(index)+"\" and userEmail=\""+userEmail+"\";";
@@ -148,8 +140,6 @@ public class Task extends java.util.TimerTask{
         db.closeConnection();
         return success;
     }
-
-    // 从数据库中获取指定任务内容
     public boolean getFromDatabase(int index,String userEmail) throws SQLException{
 
         String sql = "select taskName,timeOrMail,receiveMail,receiveMailPassword,sendEmail," +
@@ -179,12 +169,10 @@ public class Task extends java.util.TimerTask{
             this.listenWeiBoID=resultSet.getString("listenWeiBoID");
             this.listenWeiBoPassword=resultSet.getString("listenWeiBoPassword");
             this.listenWeiBoMessage=resultSet.getString("listenWeiBoMessage");
-
         }
         return success;
     }
 
-    // 获取当前时间
     public static Calendar GetCurrentTime(){					// 获取当前时间
         Calendar date=Calendar.getInstance();
         return date;
@@ -195,15 +183,17 @@ public class Task extends java.util.TimerTask{
         System.out.println(currentTime);
         long a=currentTime.getTimeInMillis();               // 设定的时间
         long b = date.getTimeInMillis();                    // 当前时间
+      // System.out.println(a+" "+b);
         if(Math.abs(a-b) < 1000) {
+            return true;
+        }
+        else if(b > a) {
             return true;
         }
         else  {
             return false;
         }
     }
-
-    // 数据库中更新任务状态
     public void setTaskState(String index,String userEmail,int state) {
         Database database=new Database();
         String sql = "update `IFTTT`.`Task`\n" +
@@ -211,6 +201,7 @@ public class Task extends java.util.TimerTask{
                 "where taskName=\""+index+"\" and userEmail=\""+userEmail+"\";";
         database.executeSQL(sql);
         database.closeConnection();
+
     }
 
 
@@ -238,9 +229,9 @@ public class Task extends java.util.TimerTask{
     @Override
     public void run() {
 
-        if (isRunning) {                                                                // 任务在运行
+        if (isRunning) {
             try {
-                this.getFromDatabase(Integer.valueOf(this.taskName),this.userEmail);    // 获取该任务内容
+                this.getFromDatabase(Integer.valueOf(this.taskName),this.userEmail);
                 if(this.isRunning==false) {
                     this.timer.cancel();this.timer.purge();
                     this.timer=null;
@@ -250,15 +241,20 @@ public class Task extends java.util.TimerTask{
                 e.printStackTrace();
             }
 
-            // This事件是时间
-            if (TimeOrMail == 0) {
-                if (equal(GetCurrentTime())) {                                  // 条件满足
-                    if (MailOrWeibo == 0) {                                     // send email
+            if (TimeOrMail == 0) {        // time
+              //  System.out.println(currentTime);
+                if (equal(GetCurrentTime())) {        //
+                    if (MailOrWeibo == 0) {            // send email
                         new SendEmail(mailFromID, mailToID, mailPassword, messageContent);
                         setTaskState(taskName,userEmail,0);
-                    } else if (MailOrWeibo == 1) {                              // send weibo
+
+
+                    } else if (MailOrWeibo == 1) {        // send weibo
+
                         new SendWeiBo(weiboID,weiboPassword,messageContent);
                         setTaskState(taskName,userEmail,0);
+
+
                     } else {
                         System.out.println("Not equal until now!");
                     }
@@ -270,27 +266,30 @@ public class Task extends java.util.TimerTask{
                         setTaskState(taskName,userEmail,0);
                 }
 
-            }
-            // This 时间是接受邮件
-            else if (TimeOrMail == 1) {    // receive mail
+            } else if (TimeOrMail == 1) {    // receive mail
                 try {
                     if (new ReadEmail(address, password).ReceiveMail()) {
+
                         if (MailOrWeibo == 0) {
                             new SendEmail(mailFromID, mailToID, mailPassword, messageContent);
+
+
                         } else if (MailOrWeibo == 1) {
                             new SendWeiBo(weiboID,weiboPassword,messageContent);
+
+
                         }
                     }
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
             }
-            // This 事件是监听微博
             else if (TimeOrMail == 2) {
                 try {
                     if (listenWeibo.hasThisWeibo()) {
                         if (MailOrWeibo == 0) {
                             new SendEmail(mailFromID, mailToID, mailPassword, messageContent);
+
                             setTaskState(taskName,userEmail,0);
                         } else if (MailOrWeibo == 1) {
                             new SendWeiBo(weiboID,weiboPassword,messageContent); setTaskState(taskName,userEmail,0);
@@ -305,9 +304,11 @@ public class Task extends java.util.TimerTask{
                 }
             }
         }
-        else {                                              // 任务结束后删除该timer对应的线程
+        else {
             this.timer.cancel();this.timer.purge();
             this.timer=null;
         }
+
     }
+
 }

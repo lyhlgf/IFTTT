@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 
 import model.Task;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,7 +40,6 @@ public class TaskModifyServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         HttpSession session = req.getSession();
 
-
         String userEmail = (String) String.valueOf(session.getAttribute("email"));
         String receive_mail = req.getParameter("receive_mail");
         String receive_mail_password = req.getParameter("receive_mail_password");
@@ -55,7 +55,7 @@ public class TaskModifyServlet extends HttpServlet {
         String listen_weibo_message=req.getParameter("listen_weibo_message");
 
         int timeOrMail = (listen_weibo_id != null)?2:((receive_mail==null)?0:1);      // 1: mail ; 0: date; 2: weibo;
-        int mailOrWeibo = (weibo_acount == null)?0:1;                                // 0:mail; 1: weibo;
+        int mailOrWeibo = (weibo_acount == null)?0:1;     // 0:mail; 1: weibo;
 
         System.out.println(receive_mail+"\n"+receive_mail_password+"\n"+date+"\n"+send_email+"\n"+send_email_password+
                 "\n"+weibo_acount+"\n"+weibo_password);

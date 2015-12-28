@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.Thing" %>
 <!DOCTYPE html>
 <html>
 
@@ -32,21 +34,52 @@
 </head>
 
 <body>
+<%
+    ArrayList<Thing> things = (ArrayList<Thing>) session.getAttribute("things");
+    String readEmail = "";
+    String timer = "";
+    String listenWeibo = "";
+    String sendEmail = "";
+    String sendWeibo = "";
+    for (Thing thing : things) {
+        if (!thing.isEnable()) {
+            switch (thing.getName()) {
+                case "ReadEmail":
+                    readEmail = "hide";
+                    break;
+                case "Timer":
+                    timer = "hide";
+                    break;
+                case "ListenWeibo":
+                    listenWeibo = "hide";
+                    break;
+                case "SendEmail":
+                    sendEmail = "hide";
+                    break;
+                case "SendWeibo":
+                    sendWeibo = "hide";
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+%>
 <div id="wrapper">
     <%@include file="navbar.jsp"%>
 
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <%@include file="header.jsp"%>
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-9">
-                    <h2>主页</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.jsp">Home</a>
-                        </li>
-                    </ol>
-                </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-9">
+                <h2>主页</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/user/index">主页</a>
+                    </li>
+                </ol>
             </div>
+        </div>
 
 
 
@@ -57,17 +90,17 @@
                     <h3>新任务</h3>
                 </div>
                 <div class="ibox-content">
-                    <form role=\"form\"  action="newTask" method="post">
+                    <form role="form"  action="/user/newTask" method="post">
                     <h3 class="font-bold">IF</h3>
-                        <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_receive_mail()"><img src="../static/Unify/img/mail.png" width="80" height="80" ></button>
-                        <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_time()"><img src="../static/Unify/img/clock.png" width="80" height="80" ></button>
-                        <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_listen_weibo()"><img src="../static/Unify/img/weibo.png" width="80" height="80" ></button>
+                        <button class="btn btn-primary  dim btn-dim <%=readEmail%>" type="button" onclick="myclick_receive_mail()"><img src="../static/Unify/img/mail.png" width="80" height="80" ></button>
+                        <button class="btn btn-primary  dim btn-dim <%=timer%>" type="button" onclick="myclick_time()"><img src="../static/Unify/img/clock.png" width="80" height="80" ></button>
+                        <button class="btn btn-primary  dim btn-dim <%=listenWeibo%>" type="button" onclick="myclick_listen_weibo()"><img src="../static/Unify/img/weibo.png" width="80" height="80" ></button>
                         <span id="region1">
                         </span>
 
                     <h3 class="font-bold">THEN</h3>
-                        <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_send_mail()"><img src="../static/Unify/img/sendmail.png" width="80" height="80" ></button>
-                        <button class="btn btn-primary  dim btn-dim" type="button" onclick="myclick_send_weibo()"><img src="../static/Unify/img/weibo.png" width="80" height="80" ></button>
+                        <button class="btn btn-primary  dim btn-dim <%=sendEmail%>" type="button" onclick="myclick_send_mail()"><img src="../static/Unify/img/sendmail.png" width="80" height="80" ></button>
+                        <button class="btn btn-primary  dim btn-dim <%=sendWeibo%>" type="button" onclick="myclick_send_weibo()"><img src="../static/Unify/img/weibo.png" width="80" height="80" ></button>
                         <span id="region2">
                         </span>
                         </br>
@@ -81,7 +114,6 @@
             </div>
 
         </div>
-    </div>
         <%@include file="footer.jsp"%>
 
     </div>
@@ -97,17 +129,9 @@
 <script src="../static/INSPINIA/js/inspinia.js"></script>
 <script src="../static/INSPINIA/js/plugins/pace/pace.min.js"></script>
 <script src="../static/INSPINIA/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-<script src="../static/INSPINIA/js/jquery-1.8.3.min.js"></script>
 <script src="../static/INSPINIA/js/bootstrap-datetimepicker.js"></script>
 <script src="../static/INSPINIA/js/bootstrap-datetimepicker.zh-CN.js"></script>
 
-<script>
-    $(document).ready(function() {
-
-    });
-
-
-</script>
 <script>
     var receive_mail_clicked=false;
     var time_clicked=false;

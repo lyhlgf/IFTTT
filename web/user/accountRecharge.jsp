@@ -44,7 +44,7 @@
                 <h2>账户充值</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.jsp">Home</a>
+                        <a href="/user/index">主页</a>
                     </li>
                     <li>
                         <a>账户管理</a>

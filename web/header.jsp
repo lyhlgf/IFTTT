@@ -8,10 +8,20 @@
         <!-- End Logo -->
         <!-- Topbar -->
         <div class="topbar">
-            <ul class="loginbar pull-right">
-                <li><a href="login">登录</a></li>
-                <li class="topbar-devider"></li>
-                <li><a href="register">注册</a></li>
+            <ul class="nav navbar-nav">
+                <!-- Home -->
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                <!-- End Home -->
+
+                <li>
+                    <a href="/login">登录</a>
+                </li>
+
+                <li>
+                    <a href="/register">注册</a>
+                </li>
             </ul>
         </div>
         <!-- End Topbar -->
@@ -30,27 +40,9 @@
             <ul class="nav navbar-nav">
                 <!-- Home -->
                 <li>
-                    <a href="/">主页</a>
+                    <a href="/">&nbsp;</a>
                 </li>
                 <!-- End Home -->
-
-                <li>
-                    <a href="/">产品</a>
-                </li>
-
-                <!-- Search Block -->
-                <li>
-                    <i class="search fa fa-search search-btn"></i>
-                    <div class="search-open">
-                        <div class="input-group animated fadeInDown">
-                            <input type="text" class="form-control" placeholder="搜索">
-                                <span class="input-group-btn">
-                                    <button class="btn-u" type="button">搜索</button>
-                                </span>
-                        </div>
-                    </div>
-                </li>
-                <!-- End Search Block -->
             </ul>
         </div><!--/end container-->
     </div><!--/navbar-collapse-->
