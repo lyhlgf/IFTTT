@@ -34,7 +34,7 @@
                 <h2>主页</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.jsp">Home</a>
+                        <a href="/admin/index">主页</a>
                     </li>
                 </ol>
             </div>

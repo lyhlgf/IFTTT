@@ -49,6 +49,10 @@
 <body>
 
 <div class="wrapper">
+    <%
+        Boolean isFail = (Boolean)session.getAttribute("isFail");
+        String message = (String)session.getAttribute("message");
+    %>
     <!--=== Header ===-->
     <%@include file="header.jsp"%>
     <!--=== End Header ===-->
@@ -57,19 +61,19 @@
     <div class="container content">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                <form class="reg-page" action="register" method="post">
+                <form id="registerform" class="reg-page" action="register" method="post">
                     <div class="reg-header">
                         <h2>注册新用户</h2>
                         <p>已经拥有账号？<a href="login" class="color-green">直接登录</a></p>
                     </div>
-
+                    <span id="alert"></span>
                     <label>邮箱 <span class="color-red">*</span></label>
                     <input type="email" class="form-control margin-bottom-20" name="email">
 
                     <div class="row">
                         <div class="col-sm-6">
                             <label>密码 <span class="color-red">*</span></label>
-                            <input type="password" class="form-control margin-bottom-20" name="password">
+                            <input type="password" class="form-control margin-bottom-20" name="password" id="password">
                         </div>
                         <div class="col-sm-6">
                             <label>重复密码 <span class="color-red">*</span></label>
@@ -83,7 +87,7 @@
                         <div class="col-lg-6 checkbox">
                             <label>
                                 <input type="checkbox">
-                                我已经阅读并同意 <a href="page_terms.html" class="color-green">使用协议</a>
+                                我已经阅读并同意 <a href="#" class="color-green">使用协议</a>
                             </label>
                         </div>
                         <div class="col-lg-6 text-right">
@@ -108,6 +112,7 @@
 <!-- JS Implementing Plugins -->
 <script type="text/javascript" src="static/Unify/plugins/back-to-top.js"></script>
 <script type="text/javascript" src="static/Unify/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="static/INSPINIA/js/plugins/validate/jquery.validate.min.js"></script>
 <!-- JS Customization -->
 <script type="text/javascript" src="static/Unify/js/custom.js"></script>
 <!-- JS Page Level -->
@@ -115,7 +120,32 @@
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
+        function failMessage(n) {
+            if(n) {
+                document.getElementById("alert").innerHTML+="<div id=\"myAlert\" class=\"alert alert-danger\">\
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a> \
+            <strong><%=message%></strong> </div>";
+            }
+            <%
+                session.setAttribute("isFail", false);
+            %>
+        }
+        failMessage(<%=isFail%>)
 
+        $('#registerform').validate({
+            rules: {
+                email: {
+                    required: true,
+                    minlength: 1
+                },
+                password: {
+                    required: true
+                },
+                passwordCheck: {
+                    equalTo: "#password"
+                }
+            },
+        });
     });
 </script>
 <!--[if lt IE 9]>

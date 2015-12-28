@@ -3,7 +3,6 @@
     String navbarActive = (String)session.getAttribute("navbarActive");
     String email = (String)session.getAttribute("email");
     String userIndex = "";
-    String product = "";
     String taskManage = "";
     String accountManager = "";
     String accountInfo = "";
@@ -12,7 +11,6 @@
     String mailbox = "";
     switch (navbarActive) {
         case "userIndex" : userIndex = "active";break;
-        case "product" : product = "active";break;
         case "taskManage" : taskManage = "active";break;
         case "accountInfo" : accountManager = "active";accountInfo = "active";break;
         case "accountRecharge" : accountManager = "active";accountRecharge = "active";break;
@@ -39,9 +37,6 @@
             </li>
             <li class=<%=userIndex%>>
                 <a href="/user/index"><i class="fa fa-th-large"></i> <span class="nav-label">主页</span></a>
-            </li>
-            <li class=<%=product%>>
-                <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">产品</span></a>
             </li>
             <li class=<%=taskManage%>>
                 <a href="/user/taskManage"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">任务管理</span></a>
