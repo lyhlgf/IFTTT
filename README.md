@@ -16,6 +16,9 @@ CREATE TABLE `IFTTT`.`User` (
   `Balance` INT NULL,
   `isAdmin` BIT(1) NULL,
   PRIMARY KEY (`Email`));
+  
+  alter table `IFTTT`.`User` add `Point` INT(11);
+  alter table `IFTTT`.`User` add `Discount` DOUBLE;
 ```
 
 + PostMessage表
@@ -24,17 +27,17 @@ CREATE TABLE `IFTTT`.`User` (
 CREATE TABLE `IFTTT`.`PostMessage` (
   `ID` INT NOT NULL,
   `Email` VARCHAR(45) NOT NULL,
-  `Subject` VARCHAR(21845) NOT NULL,
-  `Content` VARCHAR(21845) NULL,
+  `Subject` VARCHAR(10000) NOT NULL,
+  `Content` VARCHAR(10000) NULL,
   `Time` DATETIME NULL,
   `Read` BIT(1) NULL,
   `Important` BIT(1) NULL,
   PRIMARY KEY (`ID`));
 ```
 
-+ 数据库
++ Task表
 
-```
+```sql
 CREATE TABLE `IFTTT`.`Task` (
 	`taskName` varchar(45) not null,
     `userEmail` varchar(45) not null,
@@ -55,4 +58,27 @@ CREATE TABLE `IFTTT`.`Task` (
 alter table `IFTTT`.`Task` add `ListenWeiBoID` varchar(45);
 alter table `IFTTT`.`Task` add `ListenWeiBoPassword` varchar(45);
 alter table `IFTTT`.`Task` add `ListenWeiBoMessage` varchar(45);
+```
+
++ Bill表
+
+```sql
+CREATE TABLE `IFTTT`.`Bill` (
+  `ID` INT NOT NULL,
+  `Emial` VARCHAR(45) NOT NULL,
+  `Consume` INT NOT NULL,
+  `Time` DATETIME NULL,
+  `Point` INT NULL,
+  `Balance` INT NULL,
+  PRIMARY KEY (`ID`));
+```
+
++ Thing表
+
+```sql
+CREATE TABLE `IFTTT`.`Thing` (
+  `Name` VARCHAR(45) NOT NULL,
+  `Type` VARCHAR(45) NOT NULL,
+  `Stat` BIT(1) NOT NULL,
+  PRIMARY KEY (`Name`));
 ```
